@@ -15,9 +15,9 @@ public class MoveController : MonoBehaviour
     /// <summary>重力</summary>
     [SerializeField] private float _gravity = 20f;
     /// <summary>拡大率</summary>
-    [SerializeField,Range(1, 4)] private int _scale = 1;
+    [SerializeField,Range(1, 4)] private float _scale = 1;
     /// <summary>拡大率の一時保存</summary>
-    private int _registedScale;
+    private float _registedScale;
 
     /// <summary>プレイヤー移動のコントローラー</summary>
     [SerializeField] private CharacterController _characterController;
@@ -37,6 +37,13 @@ public class MoveController : MonoBehaviour
     /// <summary>スティック入力（縦）の保存</summary>
     private float _registedVertical;
 
+    /// <summary>ジャンプ力の設定値</summary>
+    [SerializeField,Range(130,230)] private float _jumpPower = 130f;
+    /// <summary>ジャンプ制御値</summary>
+    [SerializeField] private float _jumpScale;
+    /// <summary>ジャンプ中の判定フラグ</summary>
+    private bool _jumpAction;
+
     void Start()
     {
         _transform = this.transform;
@@ -45,6 +52,7 @@ public class MoveController : MonoBehaviour
 
         _registedHorizontal = 0f;
         _registedVertical = 0f;
+        _jumpScale = _jumpPower;
         if (Camera.main != null)
         {
             _mainCameraTransform = Camera.main.transform;
@@ -58,10 +66,100 @@ public class MoveController : MonoBehaviour
 
     private void Update()
     {
+        if (_characterController.isGrounded && _jumpAction != true)
+        {
+            _jumpAction = CrossPlatformInputManager.GetButtonDown("Jump");
+        }
+
+        ScaleChangeForController();
+        ScaleChangeForMouse();
+
         if (_registedScale != _scale)
         {
+            _registedScale = _scale;
             _transform.localScale = new Vector3(1, 1, 1) * _scale;
             _moveSpeed = _offSetMoveSpeed * _scale;
+        }
+
+        if (1 < _scale)
+        {
+            _jumpScale = _jumpPower + (25 * _scale);
+        }
+        else
+        {
+            _jumpScale = _jumpPower;
+        }
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.gameObject.tag.Equals("Wall"))
+        {
+            _registedHorizontal = 0f;
+            _registedVertical = 0f;
+        }
+    }
+
+    /// <summary>
+    /// コントーローラーによる拡大・縮小
+    /// </summary>
+    private void ScaleChangeForController()
+    {
+        // 拡大
+        if (CrossPlatformInputManager.GetButton("ScaleUp") == true && CrossPlatformInputManager.GetButton("ScaleDown") == false)
+        {
+            if (_scale < 4.01f)
+            {
+                _scale += 0.01f;
+            }
+            else
+            {
+                _scale = 4.0f;
+            }
+        }
+        // 縮小
+        else if (CrossPlatformInputManager.GetButton("ScaleDown") == true && CrossPlatformInputManager.GetButton("ScaleUp") == false)
+        {
+            if (0.99f < _scale)
+            {
+                _scale -= 0.01f;
+            }
+            else
+            {
+                _scale = 1.0f;
+            }
+        }
+    }
+
+    /// <summary>
+    /// マウスホイールによる拡大・縮小
+    /// </summary>
+    private void ScaleChangeForMouse()
+    {
+        var m_scroll = CrossPlatformInputManager.GetAxis("Mouse ScrollWheel");
+        // 拡大
+        if (0.0f < m_scroll)
+        {
+            if (_scale + m_scroll < 4.01f)
+            {
+                _scale += m_scroll;
+            }
+            else
+            {
+                _scale = 4.0f;
+            }
+        }
+        // 縮小
+        else if (m_scroll < 0.0f)
+        {
+            if (0.99f < _scale + m_scroll)
+            {
+                _scale += m_scroll;
+            }
+            else
+            {
+                _scale = 1.0f;
+            }
         }
     }
 
@@ -96,13 +194,11 @@ public class MoveController : MonoBehaviour
             _moveVelocity = _moveVelocity.z * Vector3.forward + _moveVelocity.x * Vector3.right;
         }
 
-        if (_characterController.isGrounded)
+        if (_characterController.isGrounded && _jumpAction == true)
         {
-            //if (Input.GetButtonDown("Jump"))
-            //{
-            //    // ジャンプ処理
-            //    _moveVelocity.y = _jumpPower; // ジャンプの際は上方向に移動させる
-            //}
+            // ジャンプ処理
+            _moveVelocity.y = _jumpScale; // ジャンプの際は上方向に移動させる
+            _jumpAction = false;
         }
         else
         {
