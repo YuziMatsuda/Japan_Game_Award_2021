@@ -6,14 +6,12 @@ using UnityStandardAssets.CrossPlatformInput;
 /// <summary>
 /// プレイヤー操作スクリプトクラス
 /// </summary>
-public class MoveController : MonoBehaviour
+public class NenchakMoveController : MonoBehaviour
 {
     /// <summary>移動速度</summary>
     [SerializeField] private float _moveSpeed = 3f;
     /// <summary>移動速度の初期値</summary>
     [SerializeField] private float _groundSetMoveSpeed;
-    /// <summary>移動速度の初期値</summary>
-    private float _airSetMoveSpeed;
 
     /// <summary>拡大率</summary>
     [SerializeField,Range(1, 4)] private float _scale = 1;
@@ -33,37 +31,37 @@ public class MoveController : MonoBehaviour
     /// <summary>カメラの正面補正</summary>
     private Vector3 _mainCameraForward;
 
-    /// <summary>スティック入力（横）の保存</summary>
-    private float _registedHorizontal;
-    /// <summary>スティック入力（縦）の保存</summary>
-    private float _registedVertical;
-
-    /// <summary>ジャンプ力の設定値</summary>
-    [SerializeField] private float _jumpPower = 5f;
     /// <summary>ジャンプ制御値</summary>
     private float _jumpVelocity;
-    /// <summary>ジャンプ制御の最大値</summary>
-    [SerializeField] private float _jumpMax = 35f;
     /// <summary>ジャンプ制御の最大値の一時保存</summary>
     private float _registedJumpMax;
     /// <summary>ジャンプ中の判定フラグ</summary>
     private bool _jumpAction;
 
-    /// <summary>重力値の加速度</summary>
-    private float _gravityAcceleration;
-
     /// <summary>位置フラグを一時保存</summary>
     [SerializeField] private bool _positionCashDebugOff;
+
+    /// <summary>耐久ゲージ</summary>
+    [SerializeField] private DurableValue _value;
+
+    /// <summary>アニメーション</summary>
+    private float _movedSpeedToAnimator;
+
+    /// <summary>重力値の加速度</summary>
+    private float _gravityAcceleration;
+    /// <summary>重力値の角度</summary>
+    [SerializeField] private Vector3 _wallPosition;
+
+    /// <summary>壁走り</summary>
+    [SerializeField] private bool _wallRun = false;
 
     void Start()
     {
         _transform = this.transform;
         _registedScale = _scale;
         _groundSetMoveSpeed = _moveSpeed;
-
-        _registedHorizontal = 0f;
-        _registedVertical = 0f;
         _gravityAcceleration = 0f;
+
         if (Camera.main != null)
         {
             _mainCameraTransform = Camera.main.transform;
@@ -72,7 +70,10 @@ public class MoveController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        CharacterMovement();
+        if (_wallRun == true)
+        {
+            CharacterMovement();
+        }
     }
 
     private void Update()
@@ -85,29 +86,11 @@ public class MoveController : MonoBehaviour
         ScaleChangeForController();
         ScaleChangeForMouse();
 
-        if (_registedScale != _scale)
-        {
-            _registedScale = _scale;
-            _transform.localScale = new Vector3(1, 1, 1) * _scale;
-            // 大きさに合わせて速度を計算
-            var x = _scale - 1f;
-            //x = 1f * (x / 3);
-            //var speed = ((3 - x) / 3);
-            //_groundSetMoveSpeed *= speed;
-            x = _moveSpeed + (1f * (x / 3));
-            _groundSetMoveSpeed = x;
-
-            // 大きさに合わせてジャンプを計算
-            var y = _scale - 1f;
-            y = _jumpMax + (10f * (y / 3));
-            _registedJumpMax = y;
-        }
-
-        // 空中の移動速度補正
-        if (_characterController.isGrounded == false)
-        {
-            _airSetMoveSpeed = 2f;
-        }
+        _transform.localScale = new Vector3(1, 1, 1) * _scale;
+        // 大きさに合わせて速度を計算
+        var x = _scale - 1f;
+        x = _moveSpeed + (1f * (x / 3));
+        _groundSetMoveSpeed = x;
 
         // デバッグ：移動計測のコルーチンを起動する
         if (Input.GetKeyDown(KeyCode.T))
@@ -140,9 +123,23 @@ public class MoveController : MonoBehaviour
     {
         if (other.gameObject.tag.Equals("Wall"))
         {
-            _registedHorizontal = 0f;
-            _registedVertical = 0f;
+            _wallRun = true;
+            var r = other.gameObject.transform.position;
+            _wallPosition = new Vector3(r.x, r.y, r.z);
         }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.tag.Equals("Wall"))
+        {
+            _wallRun = false;
+        }
+    }
+
+    private void OnEnable()
+    {
+        _wallRun = false;
     }
 
     /// <summary>
@@ -216,57 +213,14 @@ public class MoveController : MonoBehaviour
         var h = CrossPlatformInputManager.GetAxis("Horizontal");
         var v = CrossPlatformInputManager.GetAxis("Vertical");
 
-        // 入力されたスティック入力をゼロにしない
-        if (Mathf.Abs(_registedHorizontal) < Mathf.Abs(h))
+        if (0 < _value._parameter && _value._adhesive == true)
         {
-            _registedHorizontal = h;
-        }
-        if (Mathf.Abs(_registedVertical) < Mathf.Abs(v))
-        {
-            _registedVertical = v;
-        }
-
-        var speed = 0f;
-        if (_characterController.isGrounded == true)
-        {
-            speed = _groundSetMoveSpeed;
+            _moveVelocity.x = h * _groundSetMoveSpeed;
+            _moveVelocity.y = v * _groundSetMoveSpeed;
         }
         else
         {
-            speed = _airSetMoveSpeed;
-        }
-
-        _moveVelocity.x = _registedHorizontal * speed;
-        _moveVelocity.z = _registedVertical * speed;
-
-        if (_mainCameraTransform != null)
-        {
-            _mainCameraForward = Vector3.Scale(_mainCameraTransform.forward, new Vector3(1, 0, 1)).normalized;
-            _moveVelocity = _moveVelocity.z * _mainCameraForward + _moveVelocity.x * _mainCameraTransform.right;
-        }
-        else
-        {
-            _moveVelocity = _moveVelocity.z * Vector3.forward + _moveVelocity.x * Vector3.right;
-        }
-
-        if (_characterController.isGrounded == true && _jumpAction == true)
-        {
-            // ジャンプ処理
-            _jumpVelocity += _jumpPower;
-            _moveVelocity.y = _jumpVelocity; // ジャンプの際は上方向に移動させる
-            _gravityAcceleration = 0f;
-        }
-        else if (_characterController.isGrounded == false && _jumpAction == true && _jumpVelocity < _registedJumpMax)
-        {
-            // ジャンプ処理
-            _jumpVelocity += _jumpPower;
-            _moveVelocity.y = _jumpVelocity; // ジャンプの際は上方向に移動させる
-            _gravityAcceleration = 0f;
-        }
-        else
-        {
-            _jumpAction = false;
-            _jumpVelocity = 0f;
+            _moveVelocity.x = 0f;
             // 重力による加速
             _gravityAcceleration += Time.deltaTime;
             _moveVelocity.y = Physics.gravity.y * _gravityAcceleration;
@@ -281,20 +235,32 @@ public class MoveController : MonoBehaviour
     private void MoveAndAnimation()
     {
         // 移動方向に向く
-        _transform.LookAt(_transform.position + new Vector3(_moveVelocity.x, 0, _moveVelocity.z));
+        _transform.LookAt(_transform.position + new Vector3(_moveVelocity.x, 0, _moveVelocity.y));
 
         // オブジェクトを動かす
         _characterController.Move(_moveVelocity * Time.deltaTime);
 
         // デバッグ：移動計測のコルーチンを起動する
-        if (_positionCashDebugOff == false && (0 < _moveVelocity.x || 0 < _moveVelocity.z))
+        if (_positionCashDebugOff == false && (0 < _moveVelocity.x || 0 < _moveVelocity.y))
         {
             _positionCashDebugOff = true;
             StartCoroutine(PositionCash());
         }
 
         // 移動スピードをanimatorに反映
-        //_movedSpeedToAnimator = new Vector3(_moveVelocity.x, 0, _moveVelocity.z).magnitude;
+        _movedSpeedToAnimator = new Vector3(_moveVelocity.x, 0, _moveVelocity.z).magnitude;
         //_animator.SetFloat("MoveSpeed", _movedSpeedToAnimator);
+
+        if (0 < _movedSpeedToAnimator && 0 < _value._parameter && _value._adhesive == true)
+        {
+            _value._parameter -= Time.deltaTime;
+            Debug.Log("耐久値：" + _value._parameter);
+            if (_value._parameter <= 0)
+            {
+                _value._parameter = 0f;
+                _value._adhesive = false;
+                Debug.Log("耐久値無し");
+            }
+        }
     }
 }

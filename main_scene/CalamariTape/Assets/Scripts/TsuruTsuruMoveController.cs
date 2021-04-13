@@ -6,12 +6,12 @@ using UnityStandardAssets.CrossPlatformInput;
 /// <summary>
 /// プレイヤー操作スクリプトクラス
 /// </summary>
-public class MoveController : MonoBehaviour
+public class TsuruTsuruMoveController : MonoBehaviour
 {
     /// <summary>移動速度</summary>
     [SerializeField] private float _moveSpeed = 3f;
     /// <summary>移動速度の初期値</summary>
-    [SerializeField] private float _groundSetMoveSpeed;
+    private float _groundSetMoveSpeed;
     /// <summary>移動速度の初期値</summary>
     private float _airSetMoveSpeed;
 

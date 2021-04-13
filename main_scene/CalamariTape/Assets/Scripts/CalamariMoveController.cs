@@ -6,7 +6,7 @@ using UnityStandardAssets.CrossPlatformInput;
 /// <summary>
 /// プレイヤー操作スクリプトクラス
 /// </summary>
-public class MoveController : MonoBehaviour
+public class CalamariMoveController : MonoBehaviour
 {
     /// <summary>移動速度</summary>
     [SerializeField] private float _moveSpeed = 3f;
@@ -33,11 +33,6 @@ public class MoveController : MonoBehaviour
     /// <summary>カメラの正面補正</summary>
     private Vector3 _mainCameraForward;
 
-    /// <summary>スティック入力（横）の保存</summary>
-    private float _registedHorizontal;
-    /// <summary>スティック入力（縦）の保存</summary>
-    private float _registedVertical;
-
     /// <summary>ジャンプ力の設定値</summary>
     [SerializeField] private float _jumpPower = 5f;
     /// <summary>ジャンプ制御値</summary>
@@ -55,19 +50,21 @@ public class MoveController : MonoBehaviour
     /// <summary>位置フラグを一時保存</summary>
     [SerializeField] private bool _positionCashDebugOff;
 
+    /// <summary>移動速度を一時停止する制御フラグ</summary>
+    [SerializeField] private bool _calamariStop;
+
     void Start()
     {
         _transform = this.transform;
         _registedScale = _scale;
         _groundSetMoveSpeed = _moveSpeed;
 
-        _registedHorizontal = 0f;
-        _registedVertical = 0f;
         _gravityAcceleration = 0f;
         if (Camera.main != null)
         {
             _mainCameraTransform = Camera.main.transform;
         }
+        StartCoroutine(CalamariStop());
     }
 
     private void FixedUpdate()
@@ -91,9 +88,6 @@ public class MoveController : MonoBehaviour
             _transform.localScale = new Vector3(1, 1, 1) * _scale;
             // 大きさに合わせて速度を計算
             var x = _scale - 1f;
-            //x = 1f * (x / 3);
-            //var speed = ((3 - x) / 3);
-            //_groundSetMoveSpeed *= speed;
             x = _moveSpeed + (1f * (x / 3));
             _groundSetMoveSpeed = x;
 
@@ -125,7 +119,7 @@ public class MoveController : MonoBehaviour
         Debug.Log("計測開始");
         var pos1 = new Vector2(_transform.position.x, _transform.position.z);
 
-        yield return new WaitForSeconds(1f/* * Time.deltaTime*/);
+        yield return new WaitForSeconds(1f);
 
         // 距離を計測
         var pos2 = new Vector2(_transform.position.x, _transform.position.z);
@@ -134,15 +128,6 @@ public class MoveController : MonoBehaviour
         Debug.Log("計測終了");
 
         StopCoroutine(PositionCash());
-    }
-
-    private void OnTriggerStay(Collider other)
-    {
-        if (other.gameObject.tag.Equals("Wall"))
-        {
-            _registedHorizontal = 0f;
-            _registedVertical = 0f;
-        }
     }
 
     /// <summary>
@@ -209,22 +194,30 @@ public class MoveController : MonoBehaviour
     }
 
     /// <summary>
+    /// 移動を断続的に停止
+    /// </summary>
+    /// <returns></returns>
+    private IEnumerator CalamariStop()
+    {
+        yield return new WaitForSeconds(1f);
+        if (_calamariStop == false)
+        {
+            _calamariStop = true;
+        }
+        else
+        {
+            _calamariStop = false;
+        }
+        StartCoroutine(CalamariStop());
+    }
+
+    /// <summary>
     /// キャラクターの操作制御
     /// </summary>
     private void CharacterMovement()
     {
         var h = CrossPlatformInputManager.GetAxis("Horizontal");
         var v = CrossPlatformInputManager.GetAxis("Vertical");
-
-        // 入力されたスティック入力をゼロにしない
-        if (Mathf.Abs(_registedHorizontal) < Mathf.Abs(h))
-        {
-            _registedHorizontal = h;
-        }
-        if (Mathf.Abs(_registedVertical) < Mathf.Abs(v))
-        {
-            _registedVertical = v;
-        }
 
         var speed = 0f;
         if (_characterController.isGrounded == true)
@@ -236,8 +229,14 @@ public class MoveController : MonoBehaviour
             speed = _airSetMoveSpeed;
         }
 
-        _moveVelocity.x = _registedHorizontal * speed;
-        _moveVelocity.z = _registedVertical * speed;
+        // 移動速度を断続的にする制御
+        if (_calamariStop == false)
+        {
+            h = 0;
+            v = 0;
+        }
+        _moveVelocity.x = h * speed;
+        _moveVelocity.z = v * speed;
 
         if (_mainCameraTransform != null)
         {
