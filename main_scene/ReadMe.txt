@@ -1,3 +1,102 @@
+2021/04/17 14:19
+★ポーズ画面
+　STARTボタン入力でポーズ画面を表示
+　ゲームに戻るのロゴ表示
+　ポーズのロゴ表示
+　やりなおすのロゴ表示
+　遊び方確認のロゴ表示
+　ステージセレクトに戻るのロゴ表示
+　上下入力で選択
+　上下入力でゲーム中のメニューSE再生
+　Bボタン入力で決定
+　Bボタン入力時に決定SE再生
+
+・ポーズ画面用のUIオブジェクト配置
+main_scene\CalamariTape\Assets\Scenes\main.unity
+・決定音、ゲーム中のメニューの音、ゲーム中のメニューを閉じる音を再生する処理を追加
+main_scene\CalamariTape\Assets\Scripts\SfxPlay.cs
+・2D Sprite設定を追加
+main_scene\CalamariTape\Packages\manifest.json
+main_scene\CalamariTape\Packages\packages-lock.json
+・メニュー内の操作にて上下選択、決定の設定を追加と変更
+main_scene\CalamariTape\ProjectSettings\InputManager.asset
+・UIオブジェクトへの2D Sprite仮素材
+main_scene\CalamariTape\Assets\Images\game_back_logo.png
+main_scene\CalamariTape\Assets\Images\game_check_logo.png
+main_scene\CalamariTape\Assets\Images\game_frame.png
+main_scene\CalamariTape\Assets\Images\game_pause_logo.png
+main_scene\CalamariTape\Assets\Images\game_redo_logo.png
+main_scene\CalamariTape\Assets\Images\game_select_logo.png
+・ポーズ画面にてメニュー選択枠オブジェクトのPrefabを作成
+main_scene\CalamariTape\Assets\Prefabs\GameFrame.prefab
+・ゲームに戻る実行スクリプトクラスを仮作成
+main_scene\CalamariTape\Assets\Scripts\GameBack.cs
+・遊び方の確認実行スクリプトクラスを仮作成
+main_scene\CalamariTape\Assets\Scripts\GameCheck.cs
+・ステージをやりなおす実行スクリプトクラスを仮作成
+main_scene\CalamariTape\Assets\Scripts\GameRedo.cs
+・他のステージを選ぶ実行スクリプトクラスを仮作成
+main_scene\CalamariTape\Assets\Scripts\GameSelect.cs
+・メニュー画面制御スクリプトクラスを作成
+main_scene\CalamariTape\Assets\Scripts\Menu.cs
+・ポーズ画面全体制御のスクリプトクラスを作成
+main_scene\CalamariTape\Assets\Scripts\PauseWindowManager.cs
+・UI操作のスクリプトクラスを作成
+main_scene\CalamariTape\Assets\Scripts\UIController.cs
+
+2021/04/17 4:15
+★移動(カラマリモード)の実装
+ジャンプの実装
+　ジャンプした時のSEを再生
+★ツルツルモードの実装
+ジャンプの実装
+　ジャンプした時のSEを再生
+
+・効果音制御ゲームオブジェクトの作成やプレイヤーへコンポネントセットなど
+main_scene\CalamariTape\Assets\Scenes\main.unity
+・カラマリモードにてジャンプ（サイズ小～中）SE再生とハイジャンプ（サイズ中～最大）SE再生処理を追加
+main_scene\CalamariTape\Assets\Scripts\CalamariMoveController.cs
+・ツルツルモードにてジャンプ（サイズ小～中）SE再生とハイジャンプ（サイズ中～最大）SE再生処理を追加かつ、
+サイズ調整に合わせてジャンプ力調整の不具合修正。
+main_scene\CalamariTape\Assets\Scripts\TsuruTsuruMoveController.cs
+・ジャンプ（サイズ小～中）SEファイルを追加
+main_scene\CalamariTape\Assets\Audio\SFX\jump_1.wav
+・ハイジャンプ（サイズ中～最大）SEファイルを追加
+main_scene\CalamariTape\Assets\Audio\SFX\jump_2.wav
+・効果音再生スクリプトクラスを作成
+main_scene\CalamariTape\Assets\Scripts\SfxPlay.cs
+
+2021/04/17 2:40
+★移動(カラマリモード)の実装
+空中移動の実装
+　スティック入力を取得
+　入力された方向に速さ100で設定 等速で2マス/1秒移動[要調整]
+　スティックで入力される割合（-1~1）
+他、移動処理にて、移動←→止まるのサイクル基準を距離にするよう修正。
+
+・カラマリモードゲームオブジェクトへ耐久ゲージゲームオブジェクトをサブオブジェクトとして配置
+main_scene\CalamariTape\Assets\Scenes\main.unity
+・2点間の距離を測りながら、移動←→止まるを繰り返す処理を追加
+main_scene\CalamariTape\Assets\Scripts\CalamariMoveController.cs
+・耐久ゲージゲームオブジェクトのPrefab作成
+main_scene\CalamariTape\Assets\Prefabs\DurableValue.prefab
+
+2021/04/13 21:57
+★ネンチャクモードの実装
+テープ長さに関する縮小・拡大処理の実装
+　L2ボタン長押しでテープのサイズを縮小
+　最小のテープサイズを設定（要調整）
+
+・ネンチャクモードのスクリプトクラスにて拡大する時に壁に埋もれる不具合修正
+main_scene\CalamariTape\Assets\Scripts\NenchakMoveController.cs
+
+2021/04/13 21:25
+★移動(カラマリモード)の実装
+ジャンプの実装
+　Ａ/スペースの入力の取得
+　高さ(プレイヤー最小サイズ)２.５マス分（２マス登れる分）移動
+　空中にいる場合はジャンプ不可
+
 2021/04/13 21:15
 ★移動(カラマリモード)の実装
 移動の実装
