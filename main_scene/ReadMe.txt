@@ -1,3 +1,54 @@
+2021/04/24 5:30
+★ポーズ画面
+　ゲームに戻るを選択で0.5秒後（要調整）にゲームプレイに戻る
+　Aボタン入力で0.5秒後（要調整）にゲームプレイに戻る
+　ステージセレクトに戻るを選択でフェードアウト（※シーン先をmainで仮実装）
+　フェードアウト終了後ステージセレクトレベルに遷移（※シーン先をmainで仮実装）
+
+・やりなおすとゲームに戻るとステージセレクトに戻るのUI設定変更、フェードの設定変更
+main_scene\CalamariTape\Assets\Scenes\main.unity
+・ゲームに戻るが何度も実行されないように修正
+main_scene\CalamariTape\Assets\Scripts\GameBack.cs
+・ステージをやりなおすでmainシーンを再読み込み処理追加
+main_scene\CalamariTape\Assets\Scripts\GameRedo.cs
+・他のステージを遊ぶを選択する処理にて、mainシーンを再読み込み処理追加
+main_scene\CalamariTape\Assets\Scripts\GameSelect.cs
+・ゲームに戻る際に0.5秒の待機時間を用意するよう処理を追加
+main_scene\CalamariTape\Assets\Scripts\PauseWindowManager.cs
+・フェードアウト処理内からシーン制御を切り離し
+main_scene\CalamariTape\Assets\Scripts\UIFadeOut.cs
+・シーン制御用のスクリプトクラスを作成
+main_scene\CalamariTape\Assets\Scripts\SceneMove.cs
+
+2021/04/24 3:52
+★ポーズ画面
+　遊び方確認を選択で遊び方を確認する表を表示
+　遊び方を確認する表が表示されているときにAボタン入力で表示を消す
+　遊び方を確認する表が表示されているときにAボタン入力でキャンセルSE再生
+
+・遊び方を確認の際に表示される操作方法UIオブジェクトを追加
+main_scene\CalamariTape\Assets\Scenes\main.unity
+・遊び方マニュアルの表示と非表示切り替えるよう変更
+main_scene\CalamariTape\Assets\Scripts\GameCheck.cs
+・PC操作方法とコントーラー操作方法の仮画像
+main_scene\CalamariTape\Assets\Images\game_manual_pc.png
+main_scene\CalamariTape\Assets\Images\game_manual_xbox.png
+
+2021/04/24 1:53
+★ポーズ画面
+　やりなおすを選択でフェードアウト
+　フェードアウト終了後現在のステージを初期状態に戻す
+　ステージ初期状態に戻した後フェードイン開始
+
+・フェード処理用のCanvas配置など
+main_scene\CalamariTape\Assets\Scenes\main.unity
+・やりなおすメニュー選択時にフェードアウト演出開始処理を追加
+main_scene\CalamariTape\Assets\Scripts\GameRedo.cs
+・UIフェードイン演出スクリプトクラスを作成
+main_scene\CalamariTape\Assets\Scripts\UIFadeIn.cs
+・UIフェードアウト演出スクリプトクラスを作成
+main_scene\CalamariTape\Assets\Scripts\UIFadeOut.cs
+
 2021/04/17 14:19
 ★ポーズ画面
 　STARTボタン入力でポーズ画面を表示
