@@ -1,3 +1,72 @@
+2021/05/01 14:03
+★マージ前の対応
+
+2021/04/25 15:06
+★ステージ
+チュートリアル
+　モルモットのアドバイス中はボタン入力を行ってもプレイヤーが動かないようにする
+　モルモットのアドバイス中はボタン入力を行うとアドバイスを全て表示させる
+　アドバイスが全て表示されたらプレイヤーが動けるようにする
+
+・チュートリアル画面のUIを配置
+main_scene\CalamariTape\Assets\Scenes\main.unity
+・プレイヤー管理スクリプトへ各モード操作情報を定義
+main_scene\CalamariTape\Assets\Scripts\PlayerManager.cs
+・メッセージ1（サンプル）のアニメーションを作成
+main_scene\CalamariTape\Assets\Animations\Message001.anim
+main_scene\CalamariTape\Assets\Animations\Message001.controller
+main_scene\CalamariTape\Assets\Animations\MessageComplete001.anim
+・チュートリアルメッセージとメッセージ枠とメッセージ1（サンプル）の画像ファイルを作成
+main_scene\CalamariTape\Assets\Images\game_tutorial_message.png
+main_scene\CalamariTape\Assets\Images\game_tutorial_serit.png
+main_scene\CalamariTape\Assets\Images\game_tutorial_serit001.png
+・プレイヤー接触時のメッセージ制御スクリプトクラスを作成
+main_scene\CalamariTape\Assets\Scripts\MessageManager.cs
+・メッセージスクロールアニメーション制御スクリプトクラスを作成
+main_scene\CalamariTape\Assets\Scripts\MessageScroll.cs
+
+2021/04/24 21:37
+★クリア画面
+３秒後
+　上下入力で選択
+　Bボタン入力で決定
+　決定するとフェードイン
+　もう一度遊ぶで同じステージ
+　次のステージを遊ぶで次のステージ（※mainシーン遷移で仮対応）
+　他のステージを遊ぶでステージセレクトレベルに遷移（※mainシーン遷移で仮対応）
+
+・クリア画面にて各メニュー設定を変更
+main_scene\CalamariTape\Assets\Scenes\main.unity
+・クリア画面の各メニュー選択制御を修正
+main_scene\CalamariTape\Assets\Scripts\ClearManager.cs
+・不要な処理を削除
+main_scene\CalamariTape\Assets\Scripts\GameRedo.cs
+・メニュー画面の各メニュー選択制御を修正
+main_scene\CalamariTape\Assets\Scripts\Menu.cs
+
+2021/04/24 17:25
+★ポーズ画面
+ゲームクリアロゴ表示
+３秒後
+　もう一度遊ぶ表示
+　他のステージを遊ぶ表示
+　最終ステージ以外の時は次のステージを遊ぶを表示
+
+・クリア画面にて、各メニュー表示UIを追加
+main_scene\CalamariTape\Assets\Scenes\main.unity
+・ゴール判定処理にて、プレイヤー操作を禁止にしてクリア画面を表示する処理を追加
+main_scene\CalamariTape\Assets\Scripts\GoalEvent.cs
+・クリア画面のメニューUI画像を追加
+main_scene\CalamariTape\Assets\Images\game_clear_logo.png
+main_scene\CalamariTape\Assets\Images\game_proceed.png
+main_scene\CalamariTape\Assets\Images\game_retry.png
+・メニュー画面とクリア画面で使用するUIをPrefab化
+main_scene\CalamariTape\Assets\Prefabs\ClearScreen.prefab
+main_scene\CalamariTape\Assets\Prefabs\GameRedo.prefab
+main_scene\CalamariTape\Assets\Prefabs\GameSelect.prefab
+・クリア画面のメニューUI表示制御用のスクリプトクラスを作成
+main_scene\CalamariTape\Assets\Scripts\ClearManager.cs
+
 2021/04/24 5:30
 ★ポーズ画面
 　ゲームに戻るを選択で0.5秒後（要調整）にゲームプレイに戻る
