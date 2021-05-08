@@ -58,7 +58,7 @@ public class Select_Input_Controller : MonoBehaviour
     {
         if (Input.GetButtonDown("Decision"))
         {
-            player.getSence(Player.Character_Sence.NEXT_GAMEMAIN);
+            player.setSence(Player.Character_Sence.NEXT_GAMEMAIN);
         }
     }
 
@@ -66,7 +66,7 @@ public class Select_Input_Controller : MonoBehaviour
     {
         if (Input.GetButtonDown("Cancel"))
         {
-            player.getSence(Player.Character_Sence.NEXT_GAMETITLE);
+            player.setSence(Player.Character_Sence.NEXT_GAMETITLE);
         }
     }
 }
