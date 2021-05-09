@@ -40,6 +40,8 @@ public class Select_Draw_Controller : MonoBehaviour
         // プレイヤーのコンポーネントを取得
         player_Draw = GameObject.Find("Canvas");
         player = player_Draw.GetComponent<Player>();
+        // データをロードする。
+        player.load_Data();
         player.setSence(Player.Character_Sence.NEXT_STAGESELECT);
         // ステージアイコンのテクスチャのコンポーネントを追加。
         stage_image = select_stage_images.AddComponent<Image>();
