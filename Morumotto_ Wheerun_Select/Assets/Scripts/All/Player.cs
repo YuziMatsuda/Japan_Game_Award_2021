@@ -36,7 +36,6 @@ public class Player : MonoBehaviour
     public Player_Input input;
     public int select_stage_number;
 
-    [SerializeField] public static bool[] stage_clear_number;   // クリア取得
     [SerializeField] private bool game_datacomplete_flg;
 
     /** 
@@ -85,43 +84,6 @@ public class Player : MonoBehaviour
     {
         this.select_stage_number = select_stage_number;
     }
-
-    // ロード機能
-    public void load_Data()
-    {
-        string data = "";
-        StreamReader reader;
-        // ファイルパスを指定。
-        reader = new StreamReader(Application.dataPath + "/data/data.json");
-        // JSONファイルへ読み込み。
-        data = reader.ReadToEnd();
-        reader.Close();
-        JsonUtility.FromJson<Player>(data);
-    }
-
-    // セーブ機能
-    public void save_Data(Player player)
-    {
-        StreamWriter writer;
-        string json = JsonUtility.ToJson(player);
-        // ファイルパスを指定。
-        writer = new StreamWriter(Application.dataPath + "/data/data.json", false);
-        // JSONファイルへ書き込み
-        writer.Write(json);
-        writer.Flush();
-        writer.Close();
-    }
-
-    // ステージクリア記録消去(データ削除)
-    public void delete_Data(int max_stage)
-    {
-        // 最大のステージ数分だけfalseにする。
-        for(int i=0; i<max_stage; i++)
-        {
-            stage_clear_number[i] = false;
-        }
-    }
-
 
     // Start is called before the first frame update
     void Start()

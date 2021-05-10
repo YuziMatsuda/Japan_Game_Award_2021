@@ -24,6 +24,7 @@ public class Select_Draw_Controller : MonoBehaviour
     private RectTransform clear_rect;
     private GameObject player_Draw;                                 // プレイヤーオブジェクト
     private Player player;
+    private Player_Data player_data;
 
     [SerializeField] private int max_stage;                         // 最大ステージ数
 
@@ -40,8 +41,6 @@ public class Select_Draw_Controller : MonoBehaviour
         // プレイヤーのコンポーネントを取得
         player_Draw = GameObject.Find("Canvas");
         player = player_Draw.GetComponent<Player>();
-        // データをロードする。
-        player.load_Data();
         player.setSence(Player.Character_Sence.NEXT_STAGESELECT);
         // ステージアイコンのテクスチャのコンポーネントを追加。
         stage_image = select_stage_images.AddComponent<Image>();
@@ -155,6 +154,8 @@ public class Select_Draw_Controller : MonoBehaviour
         }
         else if (Next_Scene == Player.Character_Sence.NEXT_GAMETITLE)
         {
+            player.before_setSence(Player.Character_Sence.GAME_STAGESELECT);
+            // player_data.save();
             SceneManager.LoadScene("Title_Scene");
         }
     }
