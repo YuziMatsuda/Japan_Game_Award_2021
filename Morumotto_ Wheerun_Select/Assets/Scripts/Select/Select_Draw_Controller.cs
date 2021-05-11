@@ -40,6 +40,8 @@ public class Select_Draw_Controller : MonoBehaviour
     {
         // プレイヤーのコンポーネントを取得
         player_Draw = GameObject.Find("Canvas");
+        player_data = GameObject.Find("Canvas").GetComponent<Player_Data>();
+        player_data.Load_Data(player_data,player_data.datapath);
         player = player_Draw.GetComponent<Player>();
         player.setSence(Player.Character_Sence.NEXT_STAGESELECT);
         // ステージアイコンのテクスチャのコンポーネントを追加。
@@ -155,7 +157,11 @@ public class Select_Draw_Controller : MonoBehaviour
         else if (Next_Scene == Player.Character_Sence.NEXT_GAMETITLE)
         {
             player.before_setSence(Player.Character_Sence.GAME_STAGESELECT);
-            // player_data.save();
+            // セーブテスト
+            player_data.stage_clear_number[0] = false;
+            player_data.stage_clear_number[1] = true;
+            player_data.stage_clear_number[2] = true;
+            player_data.Save_Data(player_data);
             SceneManager.LoadScene("Title_Scene");
         }
     }
