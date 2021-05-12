@@ -15,9 +15,13 @@ public class Select_Draw_Controller : MonoBehaviour
     [SerializeField] private GameObject select_frame;               // 赤枠
     [SerializeField] private GameObject[] clear;                    // クリアー
 
-    [SerializeField] private GameObject select_stage_images;        // 各種ステージアイコン(大)
-    [SerializeField] private Sprite[] stage_image_sprite;           // 各種ステージアイコンのスプライト
-    public Image stage_image;                                       // ステージ
+    [SerializeField] private GameObject select_stage_object;        // 各種ステージアイコン(大)をまとめるオブジェクト
+    [SerializeField] private Sprite[] select_stage_sprite;          // 各種ステージアイコンのスプライト
+    [SerializeField] private Image select_stage_image;              // ステージのイメージ
+
+    [SerializeField] private GameObject select_back_object;         // 背景画像をまとめるオブジェクト
+    [SerializeField] private Sprite[] select_back_sprite;           // 背景画像のスプライト
+    [SerializeField] private Image select_back_image;               // 背景のイメージ
 
     private RectTransform load_now_rect;
     private RectTransform select_frame_rect;
@@ -45,7 +49,9 @@ public class Select_Draw_Controller : MonoBehaviour
         player = player_Draw.GetComponent<Player>();
         player.setSence(Player.Character_Sence.NEXT_STAGESELECT);
         // ステージアイコンのテクスチャのコンポーネントを追加。
-        stage_image = select_stage_images.AddComponent<Image>();
+        select_stage_image = select_stage_object.AddComponent<Image>();
+        // 背景のテクスチャのコンポーネントを追加。
+        select_back_image = select_back_object.AddComponent<Image>();
     }
 
     public void Texture_Draw_Init()
@@ -56,8 +62,11 @@ public class Select_Draw_Controller : MonoBehaviour
         icon.SetActive(true);
         load_now.SetActive(true);
         select_frame.SetActive(true);
-        select_stage_images.SetActive(true);
-        stage_image.sprite = stage_image_sprite[player.select_stage_number];
+        select_stage_object.SetActive(true);
+        select_back_object.SetActive(true);
+        // 各種スプライトをイメージに格納
+        select_stage_image.sprite = select_stage_sprite[player.select_stage_number];
+        select_back_image.sprite = select_back_sprite[player.select_stage_number];
         load_now_rect = load_now.GetComponent<RectTransform>();
         select_frame_rect = select_frame.GetComponent<RectTransform>();
         for (int i = 0; i < max_stage; i++)
@@ -102,20 +111,25 @@ public class Select_Draw_Controller : MonoBehaviour
         }
     }
 
+    // ステージセレクトシーンの画像描画処理
     public void Draw_StageSelect()
     {
-        //  ここでスクショした各種ステージアイコン(大)の切り替えを配列で行う。
-        stage_image.sprite = stage_image_sprite[player.select_stage_number];
-
+        //  スクショした各種ステージアイコン(大)の切り替えを配列で行う。
+        select_stage_image.sprite = select_stage_sprite[player.select_stage_number];
+        //　背景の切り替えを配列で行う。
+        select_back_image.sprite = select_back_sprite[player.select_stage_number];
         // 赤枠を表示し、左右移動する事で赤枠も移動する。
         select_frame_rect.anchoredPosition = new Vector2((370.0f * player.select_stage_number) - 750.0f, -286.0f);
-
         // クリアロゴを表示
         for (int i = 0; i < max_stage; i++)
         {
-            // ここでクリア条件を追加
-            clear[i].SetActive(true);
-            clear_rect.anchoredPosition = new Vector2((370.0f * i) - 750.0f, -286.0f);
+            // クリア条件を確認
+            if(player_data.stage_clear_number[i])
+            {
+                // クリア画面を表示
+                clear[i].SetActive(true);
+                clear_rect.anchoredPosition = new Vector2((370.0f * i) - 750.0f, -286.0f);
+            }
         }
     }
 
@@ -148,6 +162,7 @@ public class Select_Draw_Controller : MonoBehaviour
         }
     }
 
+    // シーン切り替え処理
     public void SenceChange(Player.Character_Sence Next_Scene)
     {
         if (Next_Scene == Player.Character_Sence.NEXT_GAMEMAIN)

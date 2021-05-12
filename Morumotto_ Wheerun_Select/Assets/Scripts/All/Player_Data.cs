@@ -12,6 +12,8 @@ public class Player_Data : MonoBehaviour
 
     public void Save_Data(Player_Data player_data)
     {
+        // ユーザごとに保管するディレクトリが異なる為、Pathを再度設定
+        datapath = Application.dataPath + "/data/data.json";
         // JSONに変換
         string json = JsonUtility.ToJson(player_data);
         // 保存先を開く
