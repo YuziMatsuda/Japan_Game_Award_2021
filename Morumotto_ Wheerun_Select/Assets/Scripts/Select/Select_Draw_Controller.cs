@@ -17,7 +17,7 @@ public class Select_Draw_Controller : MonoBehaviour
     [SerializeField] private GameObject[] clear = new GameObject[5];        // クリアー
     [SerializeField] private GameObject[] clear_prefab = new GameObject[5]; // クリアー用のプレハブ
     private GameObject player_Draw;                                         // プレイヤーオブジェクト
-    private Player player;
+    private Player player;                                                  // プレイヤー
     private Player_Data player_data;                                        // プレイヤーデータ
 
     [SerializeField] private GameObject select_stage_object;                // 各種ステージアイコン(大)をまとめるオブジェクト
@@ -58,6 +58,8 @@ public class Select_Draw_Controller : MonoBehaviour
         select_stage_image = select_stage_object.AddComponent<Image>();
         // 背景のテクスチャのコンポーネントを追加。
         select_back_image = select_back_object.AddComponent<Image>();
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
 
     public void Texture_Draw_Init()
@@ -110,25 +112,25 @@ public class Select_Draw_Controller : MonoBehaviour
         switch (player.sence)
         {
             case Player.Character_Sence.NEXT_STAGESELECT:
-                {
-                    Draw_LoadNow_FadeIn(Player.Character_Sence.GAME_STAGESELECT);
-                    break;
-                }
+            {
+                Draw_LoadNow_FadeIn(Player.Character_Sence.GAME_STAGESELECT);
+                break;
+            }
             case Player.Character_Sence.GAME_STAGESELECT:
-                {
-                    Draw_StageSelect();
-                    break;
-                }
+            {
+                Draw_StageSelect();
+                break;
+            }
             case Player.Character_Sence.NEXT_GAMEMAIN:
-                {
-                    Draw_LoadNow_FadeOut(Player.Character_Sence.NEXT_GAMEMAIN);
-                    break;
-                }
+            {
+                Draw_LoadNow_FadeOut(Player.Character_Sence.NEXT_GAMEMAIN);
+                break;
+            }
             case Player.Character_Sence.NEXT_GAMETITLE:
-                {
-                    Draw_LoadNow_FadeOut(Player.Character_Sence.NEXT_GAMETITLE);
-                    break;
-                }
+            {
+                Draw_LoadNow_FadeOut(Player.Character_Sence.NEXT_GAMETITLE);
+                break;
+            }
         }
     }
 
