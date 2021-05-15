@@ -60,6 +60,7 @@
     <Compile Include="Assets\Scripts\Title\Title_Input_Controller.cs" />
     <Compile Include="Assets\Scripts\Title\Title_Draw_Controller.cs" />
     <Compile Include="Assets\Scripts\All\Player.cs" />
+    <Compile Include="Assets\Scripts\All\Player_Data.cs" />
     <Compile Include="Assets\Scripts\Title\Title_Sound_Manager.cs" />
   </ItemGroup>
   <ItemGroup>
