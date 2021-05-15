@@ -1,3 +1,38 @@
+2021/05/15 14:05
+★リソースの差し替え
+　はさみ
+　ゴール
+
+・はさみオブジェクトの配置、ゴールオブジェクトの配置
+main_scene\CalamariTape\Assets\Scenes\main.unity
+・モードチェンジ実施する際にはさみがテープを切る動きを追加
+main_scene\CalamariTape\Assets\Scripts\ModeChanger.cs
+・ツルツルモードのスクリプトクラスにて不要な記述を削除
+main_scene\CalamariTape\Assets\Scripts\TsuruTsuruMoveController.cs
+・ゴールの3Dモデル追加
+main_scene\CalamariTape\Assets\Flag
+・はさみの3Dモデル追加
+main_scene\CalamariTape\Assets\Models\scissors.obj
+・はさみのプレハブを作成
+main_scene\CalamariTape\Assets\Prefabs\Scissors.prefab
+・はさみ挙動制御スクリプトクラスを作成
+main_scene\CalamariTape\Assets\Scripts\Scissors.cs
+・はさみ衝突挙動制御スクリプトクラスを作成
+main_scene\CalamariTape\Assets\Scripts\ScissorsCollision.cs
+
+2021/05/09 22:17
+★リソースの差し替え
+プレイヤー（ネンチャクモード、ツルツルモード）
+　モルモット
+　セロハンテープ
+
+・ネンチャクモード、ツルツルモードの設定変更
+main_scene\CalamariTape\Assets\Scenes\main.unity
+・ネンチャクモードにてスケール処理調整、接地判定の調整、登る壁の判定調整
+main_scene\CalamariTape\Assets\Scripts\NenchakMoveController.cs
+・ツルツルモードにてスケール処理調整、接地判定の調整、回転する動き実装
+main_scene\CalamariTape\Assets\Scripts\TsuruTsuruMoveController.cs
+
 2021/05/09 14:42
 ★リソースの差し替え
 プレイヤー（カラマリモード、ネンチャクモード（途中））
