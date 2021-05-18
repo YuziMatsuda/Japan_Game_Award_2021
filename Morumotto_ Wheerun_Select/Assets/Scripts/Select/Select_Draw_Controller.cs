@@ -13,6 +13,7 @@ public class Select_Draw_Controller : MonoBehaviour
     [SerializeField] private GameObject icon;                               // アイコン
     [SerializeField] private GameObject load_now;                           // ロード中
     [SerializeField] private GameObject select_frame;                       // 赤枠
+    [SerializeField] private GameObject select_coment_back;                 // コメント用の背景
     [SerializeField] private GameObject canvas;                             // キャンバス
     [SerializeField] private GameObject[] clear = new GameObject[5];        // クリアー
     [SerializeField] private GameObject[] clear_prefab = new GameObject[5]; // クリアー用のプレハブ
@@ -27,6 +28,10 @@ public class Select_Draw_Controller : MonoBehaviour
     [SerializeField] private GameObject select_back_object;                 // 背景画像をまとめるオブジェクト
     [SerializeField] private Sprite[] select_back_sprite;                   // 背景画像のスプライト
     [SerializeField] private Image select_back_image;                       // 背景のイメージ
+
+    [SerializeField] private GameObject select_coment_object;               // ステージのコメント画像をまとめるオブジェクト
+    [SerializeField] private Sprite[] select_coment_sprite;                 // ステージのコメント画像用のスプライト
+    [SerializeField] private Image select_coment_image;                     // ステージのコメント画像用のイメージ
 
     private RectTransform load_now_rect;
     private RectTransform select_frame_rect;
@@ -54,10 +59,7 @@ public class Select_Draw_Controller : MonoBehaviour
         player_data.Load_Data(player_data, player_data.datapath);
         player = player_Draw.GetComponent<Player>();
         player.setSence(Player.Character_Sence.NEXT_STAGESELECT);
-        // ステージアイコンのテクスチャのコンポーネントを追加。
-        select_stage_image = select_stage_object.AddComponent<Image>();
-        // 背景のテクスチャのコンポーネントを追加。
-        select_back_image = select_back_object.AddComponent<Image>();
+        
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
     }
@@ -72,9 +74,18 @@ public class Select_Draw_Controller : MonoBehaviour
         select_frame.SetActive(true);
         select_stage_object.SetActive(true);
         select_back_object.SetActive(true);
+        select_coment_back.SetActive(true);
+        select_coment_object.SetActive(true);
+        // ステージアイコンのテクスチャのコンポーネントを追加。
+        select_stage_image = select_stage_object.AddComponent<Image>();
+        // 背景のテクスチャのコンポーネントを追加。
+        select_back_image = select_back_object.AddComponent<Image>();
+        // ステージ用のコメントテクスチャのコンポーネントを追加。
+        select_coment_image = select_coment_object.AddComponent<Image>();
         // 各種スプライトをイメージに格納
         select_stage_image.sprite = select_stage_sprite[player.select_stage_number];
         select_back_image.sprite = select_back_sprite[player.select_stage_number];
+        select_coment_image.sprite = select_coment_sprite[player.select_stage_number];
         load_now_rect = load_now.GetComponent<RectTransform>();
         select_frame_rect = select_frame.GetComponent<RectTransform>();
         player.select_stage_number = 0;
@@ -143,6 +154,8 @@ public class Select_Draw_Controller : MonoBehaviour
         select_back_image.sprite = select_back_sprite[player.select_stage_number];
         // 赤枠を表示し、左右移動する事で赤枠も移動する。
         select_frame_rect.anchoredPosition = new Vector2((move_log_pos_x * player.select_stage_number) + criteria_log_pos_x, log_pos_y);
+        //  コメントの切り替えを配列で行う。
+        select_coment_image.sprite = select_coment_sprite[player.select_stage_number];
     }
 
     // フェードイン処理
