@@ -59,7 +59,7 @@ public class Select_Draw_Controller : MonoBehaviour
         player_data.Load_Data(player_data, player_data.datapath);
         player = player_Draw.GetComponent<Player>();
         player.setSence(Player.Character_Sence.NEXT_STAGESELECT);
-        
+        // マウスカーソル非表示
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
     }
@@ -192,15 +192,16 @@ public class Select_Draw_Controller : MonoBehaviour
     {
         if (Next_Scene == Player.Character_Sence.NEXT_GAMEMAIN)
         {
+            player.set_Stagenumber(player.select_stage_number);
             SceneManager.LoadScene("main");
         }
         else if (Next_Scene == Player.Character_Sence.NEXT_GAMETITLE)
         {
             player.before_setSence(Player.Character_Sence.GAME_STAGESELECT);
             // セーブテスト
-            player_data.stage_clear_number[0] = false;
-            player_data.stage_clear_number[1] = true;
-            player_data.stage_clear_number[2] = true;
+            // player_data.stage_clear_number[0] = false;
+            // player_data.stage_clear_number[1] = true;
+            // player_data.stage_clear_number[2] = true;
             player_data.Save_Data(player_data);
             SceneManager.LoadScene("Title_Scene");
         }

@@ -31,10 +31,11 @@ public class Player : MonoBehaviour
     }
 
     public Character_Sence sence;                   // 現在のシーン
-    public static Character_Sence before_sence;     // 以前のシーン
+    [SerializeField] public static Character_Sence before_sence;     // 以前のシーン
     public Character_Sence before_check_sence;      // 現在→以前のシーンに格納する為のシーン
     public Player_Input input;
-    public int select_stage_number;
+    public int select_stage_number;                 // 選択しているステージの番号
+    [SerializeField] public static int load_stage_number;            // ステージの番号を読み込む(メインシーン)
 
     [SerializeField] private bool game_datacomplete_flg;
 
@@ -54,6 +55,22 @@ public class Player : MonoBehaviour
     public Character_Sence brfore_getSence()
     {
         return before_sence;
+    }
+
+    /**
+     * ステージの読み込み(遷移前)
+     */
+    public void set_Stagenumber(int select_stage_number)
+    {
+        load_stage_number = select_stage_number;
+    }
+
+    /**
+     * ステージ読み込み(遷移後)(メインシーンのstart()に記載)
+     */
+    public int get_Stagenumber()
+    {
+        return load_stage_number;
     }
 
     public void setInput(Player_Input input)
