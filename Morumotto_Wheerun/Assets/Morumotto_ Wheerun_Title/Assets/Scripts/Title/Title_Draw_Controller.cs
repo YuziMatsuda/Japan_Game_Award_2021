@@ -43,6 +43,45 @@ public class Title_Draw_Controller : MonoBehaviour
         player.getSence(Player.Character_Sence.PUSH_GAME_START);
         player.getInput(Player.Player_Input.UP);
         player.set_Data_Complete_FalseFlg();
+<<<<<<< HEAD:Morumotto_Wheerun/Assets/Morumotto_ Wheerun_Title/Assets/Scripts/Title/Title_Draw_Controller.cs
+=======
+        player_data.max_stage = 5;
+        player_data.delete_start = false;
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+    }
+
+    public void Player_Sence_Check()
+    {
+
+        // player.before_check_sence = Player.Character_Sence.NEXT_GAMETITLE;
+        // 結合時に以下の処理に変更
+        // player.before_check_sence = player.brfore_getSence();
+
+        player.before_check_sence = player.brfore_getSence();
+
+        // 結合時に削除
+        /*
+        if (player.before_check_sence == null)
+        {
+            player.before_check_sence = Player.Character_Sence.OPENING_MOVIE;
+        }
+        */
+
+        // 以前のシーンを確認
+        if (player.before_check_sence == Player.Character_Sence.OPENING_MOVIE)
+        {
+            player.setSence(Player.Character_Sence.NEXT_GAMESTART);
+        }
+        else if (player.before_check_sence == Player.Character_Sence.GAME_STAGESELECT)
+        {
+            player.setSence(Player.Character_Sence.NEXT_GAMETITLE);
+        }
+        else
+        {
+            player.setSence(Player.Character_Sence.PUSH_GAME_START);
+        }
+>>>>>>> programmer/title_sence:Morumotto_ Wheerun_Title/Assets/Scripts/Title/Title_Draw_Controller.cs
     }
 
     public void Texture_Draw_Init()
@@ -164,8 +203,15 @@ public class Title_Draw_Controller : MonoBehaviour
         }
         else
         {
+<<<<<<< HEAD:Morumotto_Wheerun/Assets/Morumotto_ Wheerun_Title/Assets/Scripts/Title/Title_Draw_Controller.cs
             // セレクトシーンに切り替える処理を記載（a版の結合時実施）
             SceneManager.LoadScene("Select_Sence");
+=======
+            // 以前のシーンを格納
+            player.before_setSence(Player.Character_Sence.GAME_SELECT);
+            // セレクトシーンに切り替える処理を記載
+            SceneManager.LoadScene("Select_Scene");
+>>>>>>> programmer/title_sence:Morumotto_ Wheerun_Title/Assets/Scripts/Title/Title_Draw_Controller.cs
         }
     }
 
