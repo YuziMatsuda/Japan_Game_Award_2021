@@ -10,13 +10,13 @@ using Const.Layer;
 public class TsuruTsuruMoveController : MonoBehaviour
 {
     /// <summary>移動速度</summary>
-    [SerializeField] private float _moveSpeed = 3f;
+    [SerializeField] private float _moveSpeed = 7f;
     /// <summary>移動速度の初期値</summary>
     private float _groundSetMoveSpeed;
     /// <summary>移動速度の初期値</summary>
     private float _airSetMoveSpeed;
     /// <summary>移動速度（最大）</summary>
-    [SerializeField] private float _maxMoveSpeed = 4f;
+    [SerializeField] private float _maxMoveSpeed = 8f;
 
     /// <summary>拡大率</summary>
     [SerializeField,Range(1, 4)] private float _scale = 1;
@@ -87,6 +87,13 @@ public class TsuruTsuruMoveController : MonoBehaviour
 
     /// <summary>エフェクトのスクリプト</summary>
     [SerializeField] private TsuruTsuruEffectController _effectController;
+    /// <summary>プレイヤーの移動制御を停止するフラグ</summary>
+    public bool _characterStop { set; get; } = false;
+    /// <summary>プレイヤーのモードチェンジ有効フラグ</summary>
+    public bool _modeChangeEnable { set; get; } = true;
+
+    /// <summary>移動SE再生中フラグ</summary>
+    private bool _sfxPlayedMove;
 
     void Start()
     {
@@ -107,11 +114,15 @@ public class TsuruTsuruMoveController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        CharacterMovement();
+        if (_characterStop == false)
+        {
+            CharacterMovement();
+        }
         if (IsWallCollisitioned() == true)
         {
             _registedHorizontal = 0f;
             _registedVertical = 0f;
+            _modeChangeEnable = true;
         }
         else
         {
@@ -165,10 +176,12 @@ public class TsuruTsuruMoveController : MonoBehaviour
         if (Mathf.Abs(_registedHorizontal) < Mathf.Abs(h))
         {
             _registedHorizontal = h;
+            _modeChangeEnable = false;
         }
         if (Mathf.Abs(_registedVertical) < Mathf.Abs(v))
         {
             _registedVertical = v;
+            _modeChangeEnable = false;
         }
 
         var speed = 0f;
@@ -248,6 +261,14 @@ public class TsuruTsuruMoveController : MonoBehaviour
         // 移動スピードをanimatorに反映
         _movedSpeedToAnimator = new Vector3(_moveVelocity.x, 0, _moveVelocity.z).magnitude;
         _animator.SetFloat("MoveSpeed", _movedSpeedToAnimator);
+        if (0 < _movedSpeedToAnimator)
+        {
+            PlaySoundEffectMove();
+        }
+        else
+        {
+            _sfxPlayedMove = false;
+        }
 
         if (0 < _movedSpeedToAnimator)
         {
@@ -271,6 +292,18 @@ public class TsuruTsuruMoveController : MonoBehaviour
             {
                 _sfxPlay.PlaySFX("jump_2");
             }
+        }
+    }
+
+    /// <summary>
+    /// 移動効果音を再生する
+    /// </summary>
+    private void PlaySoundEffectMove()
+    {
+        if (_sfxPlayedMove == false)
+        {
+            _sfxPlayedMove = true;
+            _sfxPlay.PlaySFX("se_move");
         }
     }
 

@@ -12,13 +12,13 @@ using Const.Layer;
 public class CalamariMoveController : MonoBehaviour
 {
     /// <summary>移動速度</summary>
-    [SerializeField] private float _moveSpeed = 3f;
+    [SerializeField] private float _moveSpeed = 5f;
     /// <summary>移動速度の初期値</summary>
     private float _groundSetMoveSpeed;
     /// <summary>移動速度の初期値</summary>
     private float _airSetMoveSpeed;
     /// <summary>移動速度（最大）</summary>
-    [SerializeField] private float _maxMoveSpeed = 4f;
+    [SerializeField] private float _maxMoveSpeed = 6f;
 
     /// <summary>拡大率</summary>
     [SerializeField,Range(1, 4)] private float _scale = 1;
@@ -88,7 +88,7 @@ public class CalamariMoveController : MonoBehaviour
     /// <summary>SE再生用のゲームオブジェクト</summary>
     [SerializeField] private SfxPlay _sfxPlay;
     /// <summary>SE再生中フラグ</summary>
-    private bool _sfxPlayed;
+    private bool _sfxPlayedJump;
 
     /// <summary>
     /// 横にある壁に対して横方向へ入力すると登るモード<para/>
@@ -107,6 +107,16 @@ public class CalamariMoveController : MonoBehaviour
     /// <summary>回転スピード</summary>
     [SerializeField] private float _rollSpeed = 5f;
 
+    /// <summary>プレイヤーの移動制御を停止するフラグ</summary>
+    public bool _characterStop { set; get; } = false;
+    /// <summary>プレイヤーの移動入力の許可状態フラグ</summary>
+    public bool _characterControlInput { set; get; } = true;
+    /// <summary>慣性ありフラグ</summary>
+    private bool _inertia;
+
+    /// <summary>移動SE再生中フラグ</summary>
+    private bool _sfxPlayedMove;
+
     void Start()
     {
         _transform = this.transform;
@@ -123,7 +133,10 @@ public class CalamariMoveController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        CharacterMovement();
+        if (_characterStop == false)
+        {
+            CharacterMovement();
+        }
     }
 
     private void Update()
@@ -213,16 +226,21 @@ public class CalamariMoveController : MonoBehaviour
     {
         _wallRunVertical = false;
         _wallRunHorizontal = false;
+        _calamariStop = false;
     }
-
 
     /// <summary>
     /// キャラクターの操作制御
     /// </summary>
     private void CharacterMovement()
     {
-        var h = CrossPlatformInputManager.GetAxis("Horizontal");
-        var v = CrossPlatformInputManager.GetAxis("Vertical");
+        var h = 0f;
+        var v = 0f;
+        if (_characterControlInput == true)
+        {
+            h = CrossPlatformInputManager.GetAxis("Horizontal");
+            v = CrossPlatformInputManager.GetAxis("Vertical");
+        }
 
         var speed = 0f;
         if (IsGrounded() == true)
@@ -313,8 +331,29 @@ public class CalamariMoveController : MonoBehaviour
         // 壁を登らない
         else
         {
-            _moveVelocity.x = h * speed;
-            _moveVelocity.z = v * speed;
+            // 慣性あり
+            if ((0 < _moveVelocity.x && h < 0) || (_moveVelocity.x < 0 && 0 < h) || _inertia == true)
+            {
+                _inertia = true;
+                _moveVelocity.x = (_moveVelocity.x + h * 0.5f) * speed;
+            }
+            // 慣性なし
+            else
+            {
+                _moveVelocity.x = h * speed;
+            }
+
+            // 慣性あり
+            if ((0 < _moveVelocity.z && v < 0) || (_moveVelocity.z < 0 && 0 < v) || _inertia == true)
+            {
+                _inertia = true;
+                _moveVelocity.z = (_moveVelocity.z + v * 0.5f) * speed;
+            }
+            // 慣性なし
+            else
+            {
+                _moveVelocity.z = v * speed;
+            }
         }
 
         if (_wallRunVertical == false && _wallRunHorizontal == false)
@@ -340,7 +379,7 @@ public class CalamariMoveController : MonoBehaviour
                 _gravityAcceleration = 0f;
 
                 // 効果音を再生する
-                PlaySoundEffect();
+                PlaySoundEffectJump();
             }
             else if (IsGrounded() == false && _jumpAction == true && _jumpVelocity < _registedJumpMax)
             {
@@ -350,7 +389,7 @@ public class CalamariMoveController : MonoBehaviour
                 _gravityAcceleration = 0f;
 
                 // 効果音を再生する
-                PlaySoundEffect();
+                PlaySoundEffectJump();
             }
             else if (IsGrounded() == false)
             {
@@ -365,16 +404,31 @@ public class CalamariMoveController : MonoBehaviour
             else
             {
                 _jumpAction = false;
-                _sfxPlayed = false;
+                _sfxPlayedJump = false;
                 _jumpVelocity = 0f;
             }
         }
 
         MoveAndAnimation();
 
-        // 値を0へ戻す
-        _moveVelocity = Vector3.zero;
-        _movedSpeedToAnimator = 0f;
+        if (IsGrounded() == false || _inertia == true)
+        {
+            // 値を0へ戻す
+            _moveVelocity = Vector3.zero;
+            _movedSpeedToAnimator = 0f;
+            StartCoroutine(inertiaCancel());
+        }
+    }
+
+    /// <summary>
+    /// 一定時間後に移動入力を許可する
+    /// </summary>
+    /// <returns></returns>
+    private IEnumerator inertiaCancel()
+    {
+        yield return new WaitForSeconds(1.5f);
+        _inertia = false;
+        StopCoroutine(inertiaCancel());
     }
 
     /// <summary>
@@ -383,14 +437,7 @@ public class CalamariMoveController : MonoBehaviour
     private void MoveAndAnimation()
     {
         // 移動方向に向く
-        if (_wallRunVertical == true)
-        {
-            _transform.LookAt(_transform.position + new Vector3(_moveVelocity.x, 0, _moveVelocity.z), Vector3.forward);
-        }
-        else
-        {
-            _transform.LookAt(_transform.position + new Vector3(_moveVelocity.x, 0, _moveVelocity.z));
-        }
+        CharacterLookAt();
 
         // オブジェクトを動かす
         _characterController.Move(_moveVelocity * Time.deltaTime);
@@ -412,6 +459,14 @@ public class CalamariMoveController : MonoBehaviour
             _movedSpeedToAnimator = new Vector3(_moveVelocity.x, 0, _moveVelocity.z).magnitude;
         }
         _animator.SetFloat("MoveSpeed", _movedSpeedToAnimator);
+        if (0 < _movedSpeedToAnimator)
+        {
+            PlaySoundEffectMove();
+        }
+        else
+        {
+            _sfxPlayedMove = false;
+        }
 
         // 2点間の距離を測って一時的に停止する処理を呼び出す
         if (0 < _movedSpeedToAnimator)
@@ -445,7 +500,7 @@ public class CalamariMoveController : MonoBehaviour
                     point = new Vector2(_transform.position.x, _transform.position.y);
                 }
                 var distance = Vector2.Distance(_distancePoint, point);
-                if (2 < Mathf.Abs(distance) && _distanceFirstPointSaved == true)
+                if (4 < Mathf.Abs(distance) && _distanceFirstPointSaved == true)
                 {
                     _distanceFirstPointSaved = false;
                     StartCoroutine(CalamariStop());
@@ -464,6 +519,50 @@ public class CalamariMoveController : MonoBehaviour
                 _value._adhesive = false;
                 Debug.Log("耐久値無し");
             }
+        }
+    }
+
+    /// <summary>
+    /// キャラクターを動かす際の向きを調整する
+    /// ※各モードによって角度が異なるため注意
+    /// </summary>
+    private void CharacterLookAt()
+    {
+        if (_wallRunVertical == true)
+        {
+            if (0 < Mathf.Abs(_moveVelocity.y) || 0 < Mathf.Abs(_moveVelocity.x))
+            {
+                if (Mathf.Abs(_moveVelocity.x) < Mathf.Abs(_moveVelocity.y))
+                {
+                    // 上方向なら縦向き
+                    if (0f < _moveVelocity.y)
+                    {
+                        _transform.eulerAngles = new Vector3(_transform.eulerAngles.x, 180f, 0f);
+                    }
+                    // 下向きなら縦向き
+                    else if (_moveVelocity.y < 0f)
+                    {
+                        _transform.eulerAngles = new Vector3(_transform.eulerAngles.x, 0f, 0f);
+                    }
+                }
+                else
+                {
+                    // 左向きなら横向き
+                    if (0f < _moveVelocity.x)
+                    {
+                        _transform.eulerAngles = new Vector3(_transform.eulerAngles.x, 0f, 90f);
+                    }
+                    // 右向きなら横向き
+                    else if (_moveVelocity.x < 0f)
+                    {
+                        _transform.eulerAngles = new Vector3(_transform.eulerAngles.x, 0f, -90f);
+                    }
+                }
+            }
+        }
+        else
+        {
+            _transform.LookAt(_transform.position + new Vector3(_moveVelocity.x, 0, _moveVelocity.z));
         }
     }
 
@@ -496,13 +595,13 @@ public class CalamariMoveController : MonoBehaviour
     }
 
     /// <summary>
-    /// 効果音を再生する
+    /// ジャンプ効果音を再生する
     /// </summary>
-    private void PlaySoundEffect()
+    private void PlaySoundEffectJump()
     {
-        if (_sfxPlayed == false)
+        if (_sfxPlayedJump == false)
         {
-            _sfxPlayed = true;
+            _sfxPlayedJump = true;
             if (_registedJumpMax < 40)
             {
                 _sfxPlay.PlaySFX("jump_1");
@@ -511,6 +610,18 @@ public class CalamariMoveController : MonoBehaviour
             {
                 _sfxPlay.PlaySFX("jump_2");
             }
+        }
+    }
+
+    /// <summary>
+    /// 移動効果音を再生する
+    /// </summary>
+    private void PlaySoundEffectMove()
+    {
+        if (_sfxPlayedMove == false)
+        {
+            _sfxPlayedMove = true;
+            _sfxPlay.PlaySFX("se_move");
         }
     }
 
