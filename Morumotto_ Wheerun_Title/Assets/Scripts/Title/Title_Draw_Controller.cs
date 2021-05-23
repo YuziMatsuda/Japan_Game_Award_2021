@@ -283,7 +283,7 @@ public class Title_Draw_Controller : MonoBehaviour
             // 以前のシーンを格納
             player.before_setSence(Player.Character_Sence.GAME_SELECT);
             // セレクトシーンに切り替える処理を記載
-            SceneManager.LoadScene("Select_Sence");
+            SceneManager.LoadScene("Select_Scene");
         }
     }
 
