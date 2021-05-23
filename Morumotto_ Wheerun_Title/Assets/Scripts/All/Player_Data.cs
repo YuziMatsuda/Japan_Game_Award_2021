@@ -14,6 +14,8 @@ public class Player_Data : MonoBehaviour
 
     public void Save_Data(Player_Data player_data)
     {
+        // ユーザごとに保管するディレクトリが異なる為、Pathを再度設定
+        datapath = Application.dataPath + "/data/data.json";
         // JSONに変換
         string json = JsonUtility.ToJson(player_data);
         // 保存先を開く
@@ -28,6 +30,8 @@ public class Player_Data : MonoBehaviour
 
     public void Load_Data(Player_Data player_data,string datapath)
     {
+        // ユーザごとに保管するディレクトリが異なる為、Pathを再度設定
+        datapath = Application.dataPath + "/data/data.json";
         // パスを読み込む
         StreamReader reader = new StreamReader(datapath);
         // ファイルを読み込む

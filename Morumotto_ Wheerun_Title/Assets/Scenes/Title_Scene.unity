@@ -842,7 +842,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!82 &764801343
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1367,6 +1367,7 @@ MonoBehaviour:
   datapath: 
   stage_clear_number: 0000000000
   max_stage: 5
+  delete_start: 0
 --- !u!1 &1251361783
 GameObject:
   m_ObjectHideFlags: 0

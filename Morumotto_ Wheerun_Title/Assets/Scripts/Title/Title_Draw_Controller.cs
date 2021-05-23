@@ -63,10 +63,12 @@ public class Title_Draw_Controller : MonoBehaviour
         player.before_check_sence = player.brfore_getSence();
 
         // 結合時に削除
+        /*
         if (player.before_check_sence == null)
         {
             player.before_check_sence = Player.Character_Sence.OPENING_MOVIE;
         }
+        */
 
         // 以前のシーンを確認
         if (player.before_check_sence == Player.Character_Sence.OPENING_MOVIE)
