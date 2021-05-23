@@ -1,3 +1,49 @@
+2021/05/23 2:31
+★エフェクト
+　スタート時のエフェクトを実装
+　壁にぶつかったときのエフェクトを実装
+　ゴール時エフェクト実装
+
+・パーティクルエフェクトの配置
+main_scene\CalamariTape\Assets\Scenes\main.unity
+・ゴールスクリプトにて花火を発生される処理を追加
+main_scene\CalamariTape\Assets\Scripts\GoalEvent.cs
+・ゲームスタートスクリプトにてクラッカー演出処理を追加
+main_scene\CalamariTape\Assets\Scripts\ScreenDirectInOut.cs
+・ツルツルモードにて壁に衝突した際にエフェクトを出す処理を追加
+main_scene\CalamariTape\Assets\Scripts\TsuruTsuruMoveController.cs
+・ツルツルモード用のエフェクトスクリプトクラスを作成
+main_scene\CalamariTape\Assets\Scripts\TsuruTsuruEffectController.cs
+・花火（衝突）マテリアル
+main_scene\CalamariTape\Assets\Materials\Fireworks.mat
+・クラッカーの紙マテリアル
+main_scene\CalamariTape\Assets\Materials\Paper.mat
+・衝突演出のプレハブを作成
+main_scene\CalamariTape\Assets\Prefabs\Collision.prefab
+・花火のプレハブを作成
+main_scene\CalamariTape\Assets\Prefabs\Fireworks.prefab
+・クラッカーの紙のプレハブ
+main_scene\CalamariTape\Assets\Prefabs\Paper.prefab
+
+2021/05/15 21:20
+★セーブロード
+　ゲームクリア時セーブデータにクリア情報を書き込む
+
+・セーブデータ管理オブジェクトの配置とゴールイベントトリガーへセーブデータ書き込み処理を呼び出す
+main_scene\CalamariTape\Assets\Scenes\main.unity
+・ゴールイベントスクリプトにて、セーブ実行とプレイヤーの各モード操作停止処理の不具合修正。
+main_scene\CalamariTape\Assets\Scripts\GoalEvent.cs
+・セーブデータのjsonファイル配置
+main_scene\CalamariTape\Assets\data\data.json
+・プレイヤーデータの管理スクリプトクラスを配置（Selectシーン、Titleシーン同様）
+main_scene\CalamariTape\Assets\Scripts\Player_Data_Main.cs
+・セーブデータ操作を行うスクリプトクラスを作成
+main_scene\CalamariTape\Assets\Scripts\SaveControllerScene.cs
+・クリア状態管理するenumを作成
+main_scene\CalamariTape\Assets\Scripts\Common\StageClearNumber.cs
+・ステージ名を管理する定義クラスを作成
+main_scene\CalamariTape\Assets\Scripts\Common\StageNameManager.cs
+
 2021/05/15 14:05
 ★リソースの差し替え
 　はさみ
