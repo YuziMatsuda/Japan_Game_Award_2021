@@ -9,6 +9,8 @@ public class Player_Data : MonoBehaviour
     public string datapath;
 
     [SerializeField] public bool[] stage_clear_number;   // クリア取得
+    [SerializeField] public int max_stage;
+    [SerializeField] public bool delete_start;           // データ削除開始
 
     public void Save_Data(Player_Data player_data)
     {
