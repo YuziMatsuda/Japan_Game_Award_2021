@@ -58,10 +58,11 @@
   <ItemGroup>
     <Compile Include="Assets\Controller Tester\Scripts\DetectUnknownControllerMappings.cs" />
     <Compile Include="Assets\Scripts\Select\Select_Input_Controller.cs" />
+    <Compile Include="Assets\Scripts\Select\Select_Draw_Screenimage.cs" />
     <Compile Include="Assets\Scripts\All\Player.cs" />
+    <Compile Include="Assets\Scripts\All\Player_Data.cs" />
     <Compile Include="Assets\Scripts\Select\Select_Sound_Manager.cs" />
     <Compile Include="Assets\Scripts\Select\Select_Draw_Controller.cs" />
-    <Compile Include="Assets\Scripts\Select\Select_Draw_Screenimage.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
