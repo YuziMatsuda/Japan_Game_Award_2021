@@ -38,17 +38,18 @@ public class Title_Draw_Controller : MonoBehaviour
         Player_Init();
         Texture_Draw_Init();
     }
+
     public void Player_Init()
     {
         player_Draw = GameObject.Find("Canvas");
-        player_data = GameObject.Find("Canvas").GetComponent<Player_Data>();
-        player_data.Load_Data(player_data, player_data.datapath);
+        //  player_data = GameObject.Find("Canvas").GetComponent<Player_Data>();
+        //  player_data.Load_Data(player_data, player_data.datapath);
         player = player_Draw.GetComponent<Player>();
         Player_Sence_Check();
         player.setInput(Player.Player_Input.UP);
         player.set_Data_Complete_FalseFlg();
-        player_data.max_stage = 5;
-        player_data.delete_start = false;
+        // player_data.max_stage = 5;
+        // player_data.delete_start = false;
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
     }
@@ -149,22 +150,22 @@ public class Title_Draw_Controller : MonoBehaviour
             }
             case Player.Character_Sence.GAME_SELECT:
             {
-                GameSelect_Draw(player);
-                break;
+                 GameSelect_Draw(player);
+                 break;
             }
             case Player.Character_Sence.GAME_START:
             {
-                GameStart_Draw();
-                break;
+                 GameStart_Draw();
+                 break;
             }
             case Player.Character_Sence.GAME_DATADELETE_CHECK:
             {
-                GameDatadeleteCheck_Draw(player);
-                break;
+                 GameDatadeleteCheck_Draw(player);
+                 break;
             }
             case Player.Character_Sence.GAME_DATADELETE:
             {
-                break;
+                 break;
             }
             case Player.Character_Sence.GAME_END_CHECK:
             {
@@ -253,20 +254,20 @@ public class Title_Draw_Controller : MonoBehaviour
         switch (player.input)
         {
             case Player.Player_Input.UP:
-                {
-                    icon_rect.anchoredPosition = new Vector2(updown_tex_position_x, up_tex_position_y);
-                    break;
-                }
+            {
+                icon_rect.anchoredPosition = new Vector2(updown_tex_position_x, up_tex_position_y);
+                break;
+            }
             case Player.Player_Input.CENTER:
-                {
-                    icon_rect.anchoredPosition = new Vector2(center_tex_position_x, center_tex_position_y);
-                    break;
-                }
+            {
+                icon_rect.anchoredPosition = new Vector2(center_tex_position_x, center_tex_position_y);
+                break;
+            }
             case Player.Player_Input.DOWN:
-                {
-                    icon_rect.anchoredPosition = new Vector2(updown_tex_position_x, center_tex_position_z);
-                    break;
-                }
+            {
+                icon_rect.anchoredPosition = new Vector2(updown_tex_position_x, center_tex_position_z);
+                break;
+            }
         }
     }
 
@@ -300,6 +301,8 @@ public class Title_Draw_Controller : MonoBehaviour
     public void GameDatadelete_Draw()
     {
         data_dalete_complete.SetActive(true);
+        // player_data.Delete_Start_Data(player_data);
+        /*
         if (!player_data.delete_start)
         {
             // ƒf[ƒ^íœˆ—
@@ -308,6 +311,7 @@ public class Title_Draw_Controller : MonoBehaviour
             player_data.Save_Data(player_data);
             player_data.delete_start = true;
         }
+        */
         float max_rect_y = 490.0f;
         if (data_delete_complete_rect.anchoredPosition.y >= max_rect_y)
         {
@@ -349,16 +353,16 @@ public class Title_Draw_Controller : MonoBehaviour
         switch (player.input)
         {
             case Player.Player_Input.UP:
-                {
-                    icon_rect.anchoredPosition = new Vector2(yes_position_x, yes_position_y);
-                    break;
-                }
+            {
+                icon_rect.anchoredPosition = new Vector2(yes_position_x, yes_position_y);
+                break;
+            }
 
             case Player.Player_Input.DOWN:
-                {
-                    icon_rect.anchoredPosition = new Vector2(no_position_x, no_position_y);
-                    break;
-                }
+            {
+                icon_rect.anchoredPosition = new Vector2(no_position_x, no_position_y);
+                break;
+            }
         }
     }
 

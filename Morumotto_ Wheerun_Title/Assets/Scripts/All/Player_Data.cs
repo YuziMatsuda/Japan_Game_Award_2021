@@ -12,6 +12,9 @@ public class Player_Data : MonoBehaviour
     [SerializeField] public int max_stage;
     [SerializeField] public bool delete_start;           // データ削除開始
 
+    private Player player;
+    private Player_Data player_data;
+
     public void Save_Data(Player_Data player_data)
     {
         // ユーザごとに保管するディレクトリが異なる為、Pathを再度設定
@@ -28,7 +31,7 @@ public class Player_Data : MonoBehaviour
         writer.Close();
     }
 
-    public void Load_Data(Player_Data player_data,string datapath)
+    public void Load_Data(Player_Data player_data, string datapath)
     {
         // ユーザごとに保管するディレクトリが異なる為、Pathを再度設定
         datapath = Application.dataPath + "/data/data.json";
@@ -39,7 +42,7 @@ public class Player_Data : MonoBehaviour
         // ファイルを閉じる
         reader.Close();
 
-        JsonUtility.FromJsonOverwrite(data,player_data);
+        JsonUtility.FromJsonOverwrite(data, player_data);
     }
 
     private void Awake()
@@ -60,12 +63,36 @@ public class Player_Data : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Init();
+    }
 
+    public void Init()
+    {
+        player = GetComponent<Player>();
+        player_data = GameObject.Find("Canvas").GetComponent<Player_Data>();
+        Load_Data(player_data, player_data.datapath);
+        max_stage = 5;
+        player_data.delete_start = false;
     }
 
     // Update is called once per frame
     void Update()
     {
+        Title_DataDelete_Check();
+    }
 
+    public void Title_DataDelete_Check()
+    {
+        if (player.Data_Complete_FlgCheck())
+        {
+            if (!player_data.delete_start)
+            {
+                // データ削除処理
+                player_data.delete_Data(player_data.max_stage);
+                // セーブ処理
+                player_data.Save_Data(player_data);
+                player_data.delete_start = true;
+            }
+        }
     }
 }
