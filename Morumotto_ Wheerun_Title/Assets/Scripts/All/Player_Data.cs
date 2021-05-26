@@ -12,6 +12,14 @@ public class Player_Data : MonoBehaviour
     [SerializeField] public int max_stage;
     [SerializeField] public bool delete_start;           // データ削除開始
 
+    [SerializeField] private GameObject[] clear = new GameObject[5];        // クリアー
+    [SerializeField] private GameObject[] clear_prefab = new GameObject[5]; // クリアー用のプレハブ
+    [SerializeField] private GameObject canvas;                             // キャンバス
+
+    [SerializeField] private float criteria_log_pos_x;                      // クリアロゴと赤枠を表示する基準のX軸
+    [SerializeField] private float move_log_pos_x;                          // クリアロゴと赤枠を表示する際の間隔
+    [SerializeField] private float log_pos_y;                               // クリアロゴと赤枠を表示するY軸
+
     private Player player;
     private Player_Data player_data;
 
@@ -73,12 +81,47 @@ public class Player_Data : MonoBehaviour
         Load_Data(player_data, player_data.datapath);
         max_stage = 5;
         player_data.delete_start = false;
+        if (player.sence == Player.Character_Sence.NEXT_STAGESELECT)
+        {
+            Clear_Init();
+        }
+    }
+
+    public void Clear_Init()
+    {
+        for (int i = 0; i < max_stage; i++)
+        {
+            // プレハブを生成
+            clear_prefab[i] = (GameObject)Instantiate(clear[i]);
+            // キャンバス内に設定
+            clear_prefab[i].transform.SetParent(canvas.transform, false);
+            // ヒエラルキー内の表示順を変更
+            clear_prefab[i].transform.SetSiblingIndex(6);
+            // // クリア条件を確認
+            if (player_data.stage_clear_number[i])
+            {
+                clear_prefab[i].transform.localPosition = new Vector2((move_log_pos_x * i) + criteria_log_pos_x, log_pos_y);
+                clear_prefab[i].SetActive(true);
+            }
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        Title_DataDelete_Check();
+        switch (player.sence)
+        {
+            case Player.Character_Sence.GAME_DATADELETE:
+            {
+                Title_DataDelete_Check();
+                break;
+            }
+            case Player.Character_Sence.NEXT_GAMETITLE:
+            {
+                Select_Move_DataSave();
+                break;
+            }
+        }
     }
 
     public void Title_DataDelete_Check()
@@ -94,5 +137,14 @@ public class Player_Data : MonoBehaviour
                 player_data.delete_start = true;
             }
         }
+    }
+
+    public void Select_Move_DataSave()
+    {
+        // セーブテスト
+        player_data.stage_clear_number[0] = false;
+        player_data.stage_clear_number[1] = true;
+        player_data.stage_clear_number[2] = true;
+        player_data.Save_Data(player_data);
     }
 }
