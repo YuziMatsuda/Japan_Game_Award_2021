@@ -214,7 +214,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!82 &128507559
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1599,6 +1599,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   datapath: 
   stage_clear_number: 0000000000
+  max_stage: 0
+  delete_start: 0
+  clear:
+  - {fileID: 8311041941077567694, guid: 513c52369a92d9043975b6bbb60c8eb7, type: 3}
+  - {fileID: 8311041941077567694, guid: 513c52369a92d9043975b6bbb60c8eb7, type: 3}
+  - {fileID: 8311041941077567694, guid: 513c52369a92d9043975b6bbb60c8eb7, type: 3}
+  - {fileID: 8311041941077567694, guid: 513c52369a92d9043975b6bbb60c8eb7, type: 3}
+  - {fileID: 8311041941077567694, guid: 513c52369a92d9043975b6bbb60c8eb7, type: 3}
+  clear_prefab:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  canvas: {fileID: 1454927940}
+  criteria_log_pos_x: -750
+  move_log_pos_x: 370
+  log_pos_y: -286
 --- !u!1 &1684304381
 GameObject:
   m_ObjectHideFlags: 0

@@ -19,7 +19,7 @@ public class Select_Draw_Controller : MonoBehaviour
     [SerializeField] private GameObject[] clear_prefab = new GameObject[5]; // クリアー用のプレハブ
     private GameObject player_Draw;                                         // プレイヤーオブジェクト
     private Player player;                                                  // プレイヤー
-    private Player_Data player_data;                                        // プレイヤーデータ
+    // private Player_Data player_data;                                        // プレイヤーデータ
 
     [SerializeField] private GameObject select_stage_object;                // 各種ステージアイコン(大)をまとめるオブジェクト
     [SerializeField] private Sprite[] select_stage_sprite;                  // 各種ステージアイコンのスプライト
@@ -48,15 +48,15 @@ public class Select_Draw_Controller : MonoBehaviour
         // 各種初期化
         Player_Init();
         Texture_Draw_Init();
-        Clear_Init();
+        // Clear_Init();
     }
 
     public void Player_Init()
     {
         // プレイヤーのコンポーネントを取得
         player_Draw = GameObject.Find("Canvas");
-        player_data = GameObject.Find("Canvas").GetComponent<Player_Data>();
-        player_data.Load_Data(player_data, player_data.datapath);
+        // player_data = GameObject.Find("Canvas").GetComponent<Player_Data>();
+        // player_data.Load_Data(player_data, player_data.datapath);
         player = player_Draw.GetComponent<Player>();
         player.setSence(Player.Character_Sence.NEXT_STAGESELECT);
         // マウスカーソル非表示
@@ -91,6 +91,7 @@ public class Select_Draw_Controller : MonoBehaviour
         player.select_stage_number = 0;
     }
 
+    /*
     public void Clear_Init()
     {
         for (int i = 0; i < max_stage; i++)
@@ -109,6 +110,7 @@ public class Select_Draw_Controller : MonoBehaviour
             }
         }
     }
+    */
 
     // Update is called once per frame
     void Update()
@@ -202,7 +204,7 @@ public class Select_Draw_Controller : MonoBehaviour
             // player_data.stage_clear_number[0] = false;
             // player_data.stage_clear_number[1] = true;
             // player_data.stage_clear_number[2] = true;
-            player_data.Save_Data(player_data);
+            // player_data.Save_Data(player_data);
             SceneManager.LoadScene("Title_Scene");
         }
     }
