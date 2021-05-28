@@ -30,12 +30,12 @@ public class Player : MonoBehaviour
         DOWN,                  // 下
     }
 
-    public Character_Sence sence;                   // 現在のシーン
-    [SerializeField] public static Character_Sence before_sence;     // 以前のシーン
-    public Character_Sence before_check_sence;      // 現在→以前のシーンに格納する為のシーン
+    public Character_Sence sence;                                   // 現在のシーン
+    [SerializeField] public static Character_Sence before_sence;    // 以前のシーン
+    public Character_Sence before_check_sence;                      // 現在→以前のシーンに格納する為のシーン
     public Player_Input input;
-    public int select_stage_number;                 // 選択しているステージの番号
-    [SerializeField] public static int load_stage_number;            // ステージの番号を読み込む(メインシーン)
+    public int select_stage_number;                                 // 選択しているステージの番号
+    [SerializeField] public static int load_stage_number;           // ステージの番号を読み込む(メインシーン)
 
     [SerializeField] private bool game_datacomplete_flg;
 
@@ -73,11 +73,17 @@ public class Player : MonoBehaviour
         return load_stage_number;
     }
 
+    /**
+     * 入力の読み込み
+     */
     public void setInput(Player_Input input)
     {
         this.input = input;
     }
 
+    /**
+     * ゲームデータの削除状況
+     */
     public void set_Data_Complete_TrueFlg()
     {
         game_datacomplete_flg = true;
@@ -97,6 +103,9 @@ public class Player : MonoBehaviour
         return false;
     }
 
+    /**
+     * ステージ番号の読み込み
+     */
     public void set_stage_select_number(int select_stage_number)
     {
         this.select_stage_number = select_stage_number;

@@ -7,30 +7,30 @@ using UnityEngine.SceneManagement;
 public class Title_Draw_Controller : MonoBehaviour
 {
     // Start is called before the first frame update
-    [SerializeField] private GameObject title_background_object;
-    [SerializeField] private GameObject push_game_object;
-    [SerializeField] private GameObject select_object;
-    [SerializeField] private GameObject game_datadelete_check;
-    [SerializeField] private GameObject game_end_check;
-    [SerializeField] private GameObject icon;
-    [SerializeField] private GameObject load_now;
-    [SerializeField] private GameObject data_dalete_complete;
-    [SerializeField] private GameObject fade_in;
+    [SerializeField] private GameObject title_background_object;        // 背景
+    [SerializeField] private GameObject push_game_object;               // ゲーム開始時のオブジェクト
+    [SerializeField] private GameObject select_object;                  // ゲーム選択のオブジェクト
+    [SerializeField] private GameObject game_datadelete_check;          // ゲームデータ削除確認のオブジェクト
+    [SerializeField] private GameObject game_end_check;                 // ゲーム終了のオブジェクト
+    [SerializeField] private GameObject icon;                           // アイコン
+    [SerializeField] private GameObject load_now;                       // ロード中
+    [SerializeField] private GameObject data_dalete_complete;           // データ削除完了ロゴ
+    [SerializeField] private GameObject fade_in;                        // フェードイン
 
-    private RectTransform icon_rect;
-    private RectTransform load_now_rect;
-    private RectTransform data_delete_complete_rect;
-    private Image fade_Draw;
-    private GameObject player_Draw;
-    private Player player;
+    private RectTransform icon_rect;                                    // アイコン画像の座標
+    private RectTransform load_now_rect;                                // ロード中画像の座標
+    private RectTransform data_delete_complete_rect;                    // データ削除完了画像の座標
+    private Image fade_Draw;        
+    private GameObject player_Draw;                                     // プレイヤーオブジェクト
+    private Player player;                                              // プレイヤー
     private Player_Data player_data;
 
-    private float load_now_position_x;
-    private float data_delete_complete_position_y;
-    private float data_delete_complete_position_x;
-    private float timer;
-    [SerializeField] private float alpha;
-    private float alpha_speed;
+    private float load_now_position_x;                                  // ロード中画像のX軸
+    private float data_delete_complete_position_y;                      // データ削除完了画像のX軸
+    private float data_delete_complete_position_x;                      // データ削除完了画像のY軸
+    private float timer;                                                // フェード用のタイマー
+    [SerializeField] private float alpha;                               // フェードのα値
+    private float alpha_speed;                                          // フェードの速度
     float red, green, blue;
 
     void Start()
@@ -41,6 +41,7 @@ public class Title_Draw_Controller : MonoBehaviour
 
     public void Player_Init()
     {
+        // プレイヤーのコンポーネントを取得。
         player_Draw = GameObject.Find("Canvas");
         //  player_data = GameObject.Find("Canvas").GetComponent<Player_Data>();
         //  player_data.Load_Data(player_data, player_data.datapath);
@@ -61,6 +62,7 @@ public class Title_Draw_Controller : MonoBehaviour
         // 結合時に以下の処理に変更
         // player.before_check_sence = player.brfore_getSence();
 
+        // 前回のシーンを格納
         player.before_check_sence = player.brfore_getSence();
 
         // 結合時に削除
@@ -88,6 +90,7 @@ public class Title_Draw_Controller : MonoBehaviour
 
     public void Texture_Draw_Init()
     {
+        // 各種画像の表示・座標設定
         title_background_object.SetActive(true);
         load_now.SetActive(true);
         icon_rect = icon.GetComponent<RectTransform>();
@@ -95,6 +98,7 @@ public class Title_Draw_Controller : MonoBehaviour
         data_delete_complete_rect = data_dalete_complete.GetComponent<RectTransform>();
         fade_Draw = fade_in.GetComponent<Image>();
         Fade_Init();            // フェードの初期化メソッド
+        // 座標位置の設定
         data_delete_complete_position_x = 650.0f;
         data_delete_complete_position_y = 700.0f;
         alpha_speed = 0.5f;
@@ -102,6 +106,7 @@ public class Title_Draw_Controller : MonoBehaviour
 
     public void Fade_Init()
     {
+        // シーンチェック
         if (player.sence == Player.Character_Sence.NEXT_GAMESTART)
         {
             alpha = 1;
@@ -202,8 +207,9 @@ public class Title_Draw_Controller : MonoBehaviour
         {
             player.sence = Player.Character_Sence.PUSH_GAME_START;
         }
-
     }
+
+    // セレクトシーンからタイトルシーンに遷移した時の処理
     public void NextGameTitle_Draw()
     {
         push_game_object.SetActive(true);
@@ -224,6 +230,7 @@ public class Title_Draw_Controller : MonoBehaviour
         }
     }
 
+    // 「PushGameStart」の表示
     public void PushGameStart_Draw()
     {
         push_game_object.SetActive(true);
@@ -233,6 +240,7 @@ public class Title_Draw_Controller : MonoBehaviour
         icon.SetActive(false);
     }
 
+    //「ゲームモードを選択」を表示と入力後の処理
     public void GameSelect_Draw(Player player)
     {
         push_game_object.SetActive(false);
@@ -248,6 +256,7 @@ public class Title_Draw_Controller : MonoBehaviour
 
         if (player.Data_Complete_FlgCheck())
         {
+            // ゲームデータ削除完了
             GameDatadelete_Draw();
         }
 
@@ -271,6 +280,7 @@ public class Title_Draw_Controller : MonoBehaviour
         }
     }
 
+    // 「ロード中」のフェード処理
     public void GameStart_Draw()
     {
 
@@ -288,6 +298,7 @@ public class Title_Draw_Controller : MonoBehaviour
         }
     }
 
+    // 「ゲームデータ削除確認」の画像を表示
     public void GameDatadeleteCheck_Draw(Player player)
     {
         push_game_object.SetActive(false);
@@ -298,6 +309,7 @@ public class Title_Draw_Controller : MonoBehaviour
         YesNo_Draw(player);
     }
 
+    // 「ゲームデータを削除しました」の画像を表示
     public void GameDatadelete_Draw()
     {
         data_dalete_complete.SetActive(true);
@@ -334,6 +346,7 @@ public class Title_Draw_Controller : MonoBehaviour
 
     }
 
+    //「ゲーム終了確認」画像を表示
     public void GameEndCheck_Draw(Player player)
     {
         push_game_object.SetActive(false);
@@ -344,6 +357,7 @@ public class Title_Draw_Controller : MonoBehaviour
         YesNo_Draw(player);
     }
 
+    //「はい・いいえ」の画像表示と処理を実装
     public void YesNo_Draw(Player player)
     {
         float yes_position_x = -150.0f;
@@ -366,6 +380,7 @@ public class Title_Draw_Controller : MonoBehaviour
         }
     }
 
+    // ゲーム終了処理を実装
     public void GameEnd_Draw()
     {
         fade_in.SetActive(true);
