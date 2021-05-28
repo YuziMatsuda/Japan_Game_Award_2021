@@ -195,7 +195,7 @@ public class Select_Draw_Controller : MonoBehaviour
         if (Next_Scene == Player.Character_Sence.NEXT_GAMEMAIN)
         {
             player.set_Stagenumber(player.select_stage_number);
-            SceneManager.LoadScene("main");
+            Next_Stage_Number();
         }
         else if (Next_Scene == Player.Character_Sence.NEXT_GAMETITLE)
         {
@@ -206,6 +206,39 @@ public class Select_Draw_Controller : MonoBehaviour
             // player_data.stage_clear_number[2] = true;
             // player_data.Save_Data(player_data);
             SceneManager.LoadScene("Title_Scene");
+        }
+    }
+
+    // ステージの遷移先を指定
+    public void Next_Stage_Number()
+    {
+        switch (player.select_stage_number)
+        {
+            case 0:
+            {
+                SceneManager.LoadScene("main");
+                break;
+            }
+            case 1:
+            {
+                SceneManager.LoadScene("main");
+                break;
+            }
+            case 2:
+            {
+                SceneManager.LoadScene("main");
+                break;
+            }
+            case 3:
+            {
+                SceneManager.LoadScene("main");
+                break;
+            }
+            case 4:
+            {
+                SceneManager.LoadScene("main");
+                break;
+            }
         }
     }
 }

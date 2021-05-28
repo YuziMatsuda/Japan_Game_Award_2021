@@ -6,7 +6,6 @@ public class Select_Input_Controller : MonoBehaviour
 {
     private GameObject player_input;
     private Player player;
-    public Select_Draw_Screenimage screen_image;
 
     // Start is called before the first frame update
     void Start()
@@ -34,7 +33,7 @@ public class Select_Input_Controller : MonoBehaviour
 
     public void Left_Button_Input()
     {
-        if (Input.GetKeyDown(KeyCode.LeftArrow))
+        if (Input.GetButtonDown("Left_Input"))
         {
             if(player.select_stage_number > 0)
             {
@@ -45,7 +44,7 @@ public class Select_Input_Controller : MonoBehaviour
 
     public void Right_Button_Input()
     {
-        if (Input.GetKeyDown(KeyCode.RightArrow))
+        if (Input.GetButtonDown("Right_Input"))
         {
             if (player.select_stage_number < 4)
             {

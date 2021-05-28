@@ -38,7 +38,7 @@ public class Select_Sound_Manager : MonoBehaviour
 
     public void LeftRight_Button_Sound()
     {
-        if (Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.RightArrow))
+        if (Input.GetButtonDown("Left_Input") || Input.GetButtonDown("Right_Input"))
         {
             if(player.select_stage_number > 0 && player.select_stage_number < 4)
             {
