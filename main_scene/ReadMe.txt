@@ -1,3 +1,61 @@
+2021/05/29 21:26
+★落下時に自動復旧されない不具合を修正
+・ステージ１へゲームオーバーゾーンを追加
+main_scene\CalamariTape\Assets\Scenes\main.unity
+・ステージ２へゲームオーバーゾーンを追加
+main_scene\CalamariTape\Assets\Scenes\Stage2_Scene.unity
+・ステージ３へゲームオーバーゾーンを追加
+main_scene\CalamariTape\Assets\Scenes\Stage3_Scene.unity
+・ステージ４へゲームオーバーゾーンを追加
+main_scene\CalamariTape\Assets\Scenes\Stage4_Scene.unity
+・ステージ５へゲームオーバーゾーンを追加
+main_scene\CalamariTape\Assets\Scenes\Stage5_Scene.unity
+・ツルツルモードにて外部から速度を止める処理を追加
+main_scene\CalamariTape\Assets\Scripts\TsuruTsuruMoveController.cs
+・ゲームオーバーゾーンのプレハブ化
+main_scene\CalamariTape\Assets\Prefabs\GameOverLine.prefab
+・ゲームオーバーのスクリプトクラスを作成
+main_scene\CalamariTape\Assets\Scripts\GameOverLine.cs
+
+2021/05/29 17:18
+★ステージ５実装
+・ステージ１～４マウスポインタ非表示対応
+main_scene\CalamariTape\Assets\Scenes\main.unity
+main_scene\CalamariTape\Assets\Scenes\Stage2_Scene.unity
+main_scene\CalamariTape\Assets\Scenes\Stage3_Scene.unity
+main_scene\CalamariTape\Assets\Scenes\Stage4_Scene.unity
+・Stage5_Sceneの作成
+main_scene\CalamariTape\Assets\Scenes\Stage5_Scene.unity
+・コングラチュレーションロゴを追加
+main_scene\CalamariTape\Assets\Images\game_allclear_logo.png
+・カーソル非表示制御のオブジェクト追加
+main_scene\CalamariTape\Assets\Prefabs\CursorController.prefab
+・カーソル非表示制御のスクリプトクラスを作成
+main_scene\CalamariTape\Assets\Scripts\CursorManager.cs
+
+2021/05/29 13:00
+★ステージ５仮実装
+・Stage4_Sceneの作成
+main_scene\CalamariTape\Assets\Scenes\Stage5_Scene.unity
+
+2021/05/29 12:28
+★ステージ４実装
+・Stage4_Sceneの作成
+main_scene\CalamariTape\Assets\Scenes\Stage4_Scene.unity
+・ビルドへステージ５を追加
+main_scene\CalamariTape\ProjectSettings\EditorBuildSettings.asset
+・Stage5_Sceneを仮作成
+main_scene\CalamariTape\Assets\Scenes\Stage5_Scene.unity
+
+2021/05/29 11:35
+★ステージ３実装
+・Stage3_Sceneの作成
+main_scene\CalamariTape\Assets\Scenes\Stage3_Scene.unity
+・ビルドへステージ４を追加
+main_scene\CalamariTape\ProjectSettings\EditorBuildSettings.asset
+・Stage4_Sceneを仮作成
+main_scene\CalamariTape\Assets\Scenes\Stage4_Scene.unity
+
 2021/05/29 10:34
 ★ステージ２実装
 ・mainシーンを微調整
