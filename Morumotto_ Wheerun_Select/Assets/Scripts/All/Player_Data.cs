@@ -84,7 +84,7 @@ public class Player_Data : MonoBehaviour
         player_data.delete_start = false;
         if(player.sence == Player.Character_Sence.NEXT_STAGESELECT)
         {
-            Clear_Init();
+             Clear_Init();
         }
     }
 
@@ -93,7 +93,7 @@ public class Player_Data : MonoBehaviour
         for (int i = 0; i < max_stage; i++)
         {
             // プレハブを生成
-            clear_prefab[i] = (GameObject)Instantiate(clear[i]);
+            clear_prefab[max_stage] = (GameObject)Instantiate(clear[max_stage]);
             // キャンバス内に設定
             clear_prefab[i].transform.SetParent(canvas.transform, false);
             // ヒエラルキー内の表示順を変更
