@@ -93,7 +93,7 @@ public class Player_Data : MonoBehaviour
         for (int i = 0; i < max_stage; i++)
         {
             // プレハブを生成
-            clear_prefab[max_stage] = (GameObject)Instantiate(clear[max_stage]);
+            clear_prefab[i] = (GameObject)Instantiate(clear[i]);
             // キャンバス内に設定
             clear_prefab[i].transform.SetParent(canvas.transform, false);
             // ヒエラルキー内の表示順を変更

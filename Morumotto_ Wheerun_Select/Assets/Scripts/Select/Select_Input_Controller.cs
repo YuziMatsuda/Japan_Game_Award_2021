@@ -6,12 +6,15 @@ public class Select_Input_Controller : MonoBehaviour
 {
     private GameObject player_input;
     private Player player;
+    // bool button_flg;
+    float before_flame;
 
     // Start is called before the first frame update
     void Start()
     {
         player_input = GameObject.Find("Canvas");
         player = player_input.GetComponent<Player>();
+        //button_flg = false;
     }
 
     // Update is called once per frame
@@ -35,10 +38,10 @@ public class Select_Input_Controller : MonoBehaviour
     {
         if (Input.GetButtonDown("Left_Input"))
         {
-            if(player.select_stage_number > 0)
+            if (player.select_stage_number > 0)
             {
                 player.select_stage_number--;
-            }           
+            }
         }
     }
 
@@ -48,7 +51,7 @@ public class Select_Input_Controller : MonoBehaviour
         {
             if (player.select_stage_number < 4)
             {
-                 player.select_stage_number++;
+                player.select_stage_number++;
             }
         }
     }
