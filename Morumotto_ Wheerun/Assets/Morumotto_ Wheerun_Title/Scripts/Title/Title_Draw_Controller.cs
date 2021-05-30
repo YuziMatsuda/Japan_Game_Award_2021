@@ -218,10 +218,10 @@ public class Title_Draw_Controller : MonoBehaviour
         game_end_check.SetActive(false);
         icon.SetActive(false);
         load_now.SetActive(true);
-        float Load_Now_Min_Position = -1920.0f;
+        float Load_Now_Min_Position = -2000.0f;
         if (load_now_rect.anchoredPosition.x >= Load_Now_Min_Position)
         {
-            load_now_rect.anchoredPosition += new Vector2(-1000 * Time.deltaTime, 0);
+            load_now_rect.anchoredPosition += new Vector2(-1500 * Time.deltaTime, 0);
         }
         else
         {
@@ -287,7 +287,7 @@ public class Title_Draw_Controller : MonoBehaviour
         float Load_Now_Max_Position = 0.0f;
         if (load_now_rect.anchoredPosition.x <= Load_Now_Max_Position)
         {
-            load_now_rect.anchoredPosition -= new Vector2(load_now_position_x * Time.deltaTime, 0);
+            load_now_rect.anchoredPosition -= new Vector2(-1500 * Time.deltaTime, 0);
         }
         else
         {
