@@ -4,13 +4,5 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes:
-  - enabled: 1
-<<<<<<< HEAD:Morumotto_ Wheerun/ProjectSettings/EditorBuildSettings.asset
-    path: Assets/Scenes/Title_Scene.unity
-    guid: 195bce6ee72c8f943be7c33e3bc6e4e0
-=======
-    path: Assets/Scenes/Select_Scene.unity
-    guid: 6f5d7186cf3244f48b125147e3ef53d2
->>>>>>> programmer/select_sence:Morumotto_ Wheerun_Select/ProjectSettings/EditorBuildSettings.asset
+  m_Scenes: []
   m_configObjects: {}
