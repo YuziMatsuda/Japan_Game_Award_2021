@@ -76,7 +76,7 @@ public class Movie_Draw_Controller : MonoBehaviour
             // 以前のシーンを格納
             player.before_setSence(Player.Character_Sence.OPENING_MOVIE);
             // タイトルシーンに切り替える処理を記載
-            SceneManager.LoadScene("Title_Sence");
+            SceneManager.LoadScene("Title_Scene");
         }
     }
 }
