@@ -99,8 +99,8 @@ public class Title_Draw_Controller : MonoBehaviour
         fade_Draw = fade_in.GetComponent<Image>();
         Fade_Init();            // フェードの初期化メソッド
         // 座標位置の設定
-        data_delete_complete_position_x = 650.0f;
-        data_delete_complete_position_y = 700.0f;
+        data_delete_complete_position_x = 600.0f;
+        data_delete_complete_position_y = 450.0f;
         alpha_speed = 0.5f;
     }
 
@@ -324,10 +324,10 @@ public class Title_Draw_Controller : MonoBehaviour
             player_data.delete_start = true;
         }
         */
-        float max_rect_y = 490.0f;
+        float max_rect_y = 310.0f;
         if (data_delete_complete_rect.anchoredPosition.y >= max_rect_y)
         {
-            data_delete_complete_rect.anchoredPosition -= new Vector2(0.0f, data_delete_complete_position_y * Time.deltaTime * 0.5f);
+            data_delete_complete_rect.anchoredPosition -= new Vector2(0.0f, data_delete_complete_position_y * Time.deltaTime * 1.0f);
         }
         else
         {
@@ -339,7 +339,7 @@ public class Title_Draw_Controller : MonoBehaviour
                 timer = 0;
                 data_dalete_complete.SetActive(false);
                 player.set_Data_Complete_FalseFlg();
-                data_delete_complete_position_y = 600.0f;
+                data_delete_complete_position_y = 450.0f;
                 data_delete_complete_rect.anchoredPosition = new Vector2(data_delete_complete_position_x, data_delete_complete_position_y);
             }
         }
