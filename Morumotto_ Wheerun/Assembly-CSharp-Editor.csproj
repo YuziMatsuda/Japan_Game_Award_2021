@@ -62,6 +62,7 @@
     <Compile Include="Assets\main_scene\Standard Assets\Editor\Water\Water4\GerstnerDisplaceEditor.cs" />
     <Compile Include="Assets\main_scene\Standard Assets\Editor\Water\Water4\WaterBaseEditor.cs" />
     <Compile Include="Assets\main_scene\Standard Assets\Editor\Water\Water4\WaterEditorUtility.cs" />
+    <Compile Include="Assets\Morumotto_ Wheerun_Select\Controller Tester\Scripts\Editor\TestGamepadEditor.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
@@ -675,6 +676,12 @@
     </Reference>
     <Reference Include="UnityEngine.UI">
       <HintPath>Library\ScriptAssemblies\UnityEngine.UI.dll</HintPath>
+    </Reference>
+    <Reference Include="com.unity.cinemachine.editor">
+      <HintPath>Library\ScriptAssemblies\com.unity.cinemachine.editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Cinemachine">
+      <HintPath>Library\ScriptAssemblies\Cinemachine.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

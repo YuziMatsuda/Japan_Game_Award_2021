@@ -186,6 +186,24 @@
     <Compile Include="Assets\main_scene\Standard Assets\2D\Scripts\Platformer2DUserControl.cs" />
     <Compile Include="Assets\main_scene\Standard Assets\Utility\FPSCounter.cs" />
     <Compile Include="Assets\main_scene\Standard Assets\Utility\SimpleActivatorMenu.cs" />
+    <Compile Include="Assets\Morumotto_ Wheerun_Movie\Scripts\Movie\Movie_Draw_Controller.cs" />
+    <Compile Include="Assets\Morumotto_ Wheerun_Select\Scripts\All\Player.cs" />
+    <Compile Include="Assets\Morumotto_ Wheerun_Title\Scripts\Title\Title_Sound_Manager.cs" />
+    <Compile Include="Assets\Morumotto_ Wheerun_Title\Scripts\Title\Title_Draw_Controller.cs" />
+    <Compile Include="Assets\Morumotto_ Wheerun_Title\Scripts\Title\Title_Input_Controller.cs" />
+    <Compile Include="Assets\Morumotto_ Wheerun_Select\Scripts\All\Player_Data.cs" />
+    <Compile Include="Assets\Morumotto_ Wheerun_Select\Scripts\Select\Select_Sound_Manager.cs" />
+    <Compile Include="Assets\Morumotto_ Wheerun_Select\Controller Tester\Scripts\DetectUnknownControllerMappings.cs" />
+    <Compile Include="Assets\Morumotto_ Wheerun_Select\Scripts\Select\Select_Draw_Controller.cs" />
+    <Compile Include="Assets\Morumotto_ Wheerun_Select\Scripts\Select\Select_Input_Controller.cs" />
+    <Compile Include="Assets\main_scene\SampleScenes\Scripts\ParticleSceneControls.cs" />
+    <Compile Include="Assets\main_scene\SampleScenes\Scripts\CameraSwitch.cs" />
+    <Compile Include="Assets\main_scene\SampleScenes\Scripts\PlaceTargetWithMouse.cs" />
+    <Compile Include="Assets\main_scene\SampleScenes\Menu\Scripts\MenuSceneLoader.cs" />
+    <Compile Include="Assets\main_scene\SampleScenes\Scripts\SlowMoButton.cs" />
+    <Compile Include="Assets\main_scene\SampleScenes\Scripts\LevelReset.cs" />
+    <Compile Include="Assets\main_scene\SampleScenes\Menu\Scripts\SceneAndURLLoader.cs" />
+    <Compile Include="Assets\main_scene\SampleScenes\Menu\Scripts\PauseMenu.cs" />
   </ItemGroup>
   <ItemGroup>
      <None Include="Assets\main_scene\Standard Assets\Prototyping\Shaders\WorldCoordDiffuse.shader" />
@@ -196,6 +214,7 @@
      <None Include="Assets\main_scene\Standard Assets\CrossPlatformInput\CrossPlatformInputGuidelines.txt" />
      <None Include="Assets\main_scene\Standard Assets\Environment\Water\Water4\Shaders\WaterInclude.cginc" />
      <None Include="Assets\main_scene\Standard Assets\Effects\ToonShading\Shaders\ToonLitOutline.shader" />
+     <None Include="Assets\main_scene\SampleScenes\Shaders\Skybox-Procedural.shader" />
      <None Include="Assets\main_scene\Standard Assets\Vehicles\Car\CarGuidelines.txt" />
      <None Include="Assets\main_scene\Standard Assets\Vehicles\Aircraft\AircraftGuidelines.txt" />
      <None Include="Assets\main_scene\Standard Assets\Cameras\CameraGuidelines.txt" />
@@ -433,6 +452,9 @@
     </Reference>
     <Reference Include="Unity.Rider.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.Rider.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="com.unity.cinemachine.editor">
+      <HintPath>Library\ScriptAssemblies\com.unity.cinemachine.editor.dll</HintPath>
     </Reference>
     <Reference Include="netstandard">
       <HintPath>C:\Program Files\Unity\Hub\Editor\2019.4.16f1\Editor\Data\NetStandard\ref\2.0.0\netstandard.dll</HintPath>
@@ -787,6 +809,9 @@
     </Reference>
     <Reference Include="UnityEngine.UI">
       <HintPath>Library\ScriptAssemblies\UnityEngine.UI.dll</HintPath>
+    </Reference>
+    <Reference Include="Cinemachine">
+      <HintPath>Library\ScriptAssemblies\Cinemachine.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
