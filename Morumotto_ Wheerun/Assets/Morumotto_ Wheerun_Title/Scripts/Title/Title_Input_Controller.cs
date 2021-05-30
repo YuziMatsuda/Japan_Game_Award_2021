@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class Title_Input_Controller : MonoBehaviour
 {
     private GameObject player_input;
@@ -76,7 +77,7 @@ public class Title_Input_Controller : MonoBehaviour
         {
             case Player.Player_Input.UP:
             {
-                if (Input.GetKeyDown(KeyCode.DownArrow))
+                if (Input.GetButtonDown("Down_Input"))
                 {
                     player.setInput(Player.Player_Input.CENTER);
                 }
@@ -88,11 +89,11 @@ public class Title_Input_Controller : MonoBehaviour
             }
             case Player.Player_Input.CENTER:
             {
-                if(Input.GetKeyDown(KeyCode.UpArrow))
+                if(Input.GetButtonDown("Up_Input"))
                 {
                     player.setInput(Player.Player_Input.UP);
                 }
-                if(Input.GetKeyDown(KeyCode.DownArrow))
+                if(Input.GetButtonDown("Down_Input"))
                 {
                     player.setInput(Player.Player_Input.DOWN);
                 }
@@ -105,7 +106,7 @@ public class Title_Input_Controller : MonoBehaviour
             }
             case Player.Player_Input.DOWN:
             {
-                if(Input.GetKeyDown(KeyCode.UpArrow))
+                if(Input.GetButtonDown("Up_Input"))
                 {
                     player.setInput(Player.Player_Input.CENTER);
                 }
@@ -129,7 +130,7 @@ public class Title_Input_Controller : MonoBehaviour
         {
             case Player.Player_Input.UP:
             {
-                if(Input.GetKeyDown(KeyCode.DownArrow))
+                if(Input.GetButtonDown("Down_Input"))
                 {
                     player.setInput(Player.Player_Input.DOWN);
                 }
@@ -142,7 +143,7 @@ public class Title_Input_Controller : MonoBehaviour
             }
             case Player.Player_Input.DOWN:
             {
-                if(Input.GetKeyDown(KeyCode.UpArrow))
+                if(Input.GetButtonDown("Up_Input"))
                 {
                     player.setInput(Player.Player_Input.UP);
                 }
@@ -167,7 +168,7 @@ public class Title_Input_Controller : MonoBehaviour
         {
             case Player.Player_Input.UP:
             {
-                if(Input.GetKeyDown(KeyCode.DownArrow))
+                if(Input.GetButtonDown("Down_Input"))
                 {
                     player.setInput(Player.Player_Input.DOWN);
                 }
@@ -179,7 +180,7 @@ public class Title_Input_Controller : MonoBehaviour
             }
             case Player.Player_Input.DOWN:
             {
-                if(Input.GetKeyDown(KeyCode.UpArrow))
+                if(Input.GetButtonDown("Up_Input"))
                 {
                     player.setInput(Player.Player_Input.UP);
                 }
