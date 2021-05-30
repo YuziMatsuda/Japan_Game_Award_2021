@@ -6209,9 +6209,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fade_in_object: {fileID: 1587386115}
   alpha: 0
-  alpha_speed: 0
+  alpha_speed: 0.5
   timer: 0
-  fade_start_timer: 0
+  fade_start_timer: 17
 --- !u!114 &2059655882
 MonoBehaviour:
   m_ObjectHideFlags: 0
