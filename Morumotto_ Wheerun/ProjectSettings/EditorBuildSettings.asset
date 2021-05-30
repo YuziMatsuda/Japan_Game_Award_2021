@@ -4,5 +4,29 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Morumotto_ Wheerun_Movie/Scenes/Movie_Sence.unity
+    guid: 084c28bf6bee9fe4497092fb3f3927f3
+  - enabled: 1
+    path: Assets/Morumotto_ Wheerun_Title/Scenes/Title_Scene.unity
+    guid: 195bce6ee72c8f943be7c33e3bc6e4e0
+  - enabled: 1
+    path: Assets/Morumotto_ Wheerun_Select/Scenes/Select_Scene.unity
+    guid: 6f5d7186cf3244f48b125147e3ef53d2
+  - enabled: 1
+    path: Assets/main_scene/Scenes 1/main.unity
+    guid: 9fc0d4010bbf28b4594072e72b8655ab
+  - enabled: 1
+    path: Assets/main_scene/Scenes 1/Stage2_Scene.unity
+    guid: 9517b171bdae8fd42bea22414b02266a
+  - enabled: 1
+    path: Assets/main_scene/Scenes 1/Stage3_Scene.unity
+    guid: fef5f482a8579ce4790bd1d21888bf71
+  - enabled: 1
+    path: Assets/main_scene/Scenes 1/Stage4_Scene.unity
+    guid: 083d55ca2a512634c9065854d44c3916
+  - enabled: 1
+    path: Assets/main_scene/Scenes 1/Stage5_Scene.unity
+    guid: 6c3f9c8b96ed166429cb5738bf1e91a6
   m_configObjects: {}
