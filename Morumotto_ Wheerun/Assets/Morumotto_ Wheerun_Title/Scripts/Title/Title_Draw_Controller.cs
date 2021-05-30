@@ -248,11 +248,11 @@ public class Title_Draw_Controller : MonoBehaviour
         game_datadelete_check.SetActive(false);
         game_end_check.SetActive(false);
         icon.SetActive(true);
-        float updown_tex_position_x = -200.0f;
-        float center_tex_position_x = -310.0f;
+        float updown_tex_position_x = -210.0f;
+        float center_tex_position_x = -295.0f;
         float up_tex_position_y = -50.0f;
-        float center_tex_position_y = -230.0f;
-        float center_tex_position_z = -380.0f;
+        float center_tex_position_y = -235.0f;
+        float center_tex_position_z = -410.0f;
 
         if (player.Data_Complete_FlgCheck())
         {
@@ -360,10 +360,10 @@ public class Title_Draw_Controller : MonoBehaviour
     //「はい・いいえ」の画像表示と処理を実装
     public void YesNo_Draw(Player player)
     {
-        float yes_position_x = -150.0f;
+        float yes_position_x = -120.0f;
         float yes_position_y = -200.0f;
-        float no_position_x = -200.0f;
-        float no_position_y = -400.0f;
+        float no_position_x = -150.0f;
+        float no_position_y = -350.0f;
         switch (player.input)
         {
             case Player.Player_Input.UP:

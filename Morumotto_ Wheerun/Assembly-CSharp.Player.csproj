@@ -56,154 +56,154 @@
     <Analyzer Include="C:\Program Files (x86)\Microsoft Visual Studio Tools for Unity\16.0\Analyzers\Microsoft.Unity.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\main_scene\Standard Assets\Cameras\Scripts\AutoCam.cs" />
-    <Compile Include="Assets\main_scene\Standard Assets\Vehicles\Car\Scripts\CarAIControl.cs" />
-    <Compile Include="Assets\main_scene\Standard Assets\Utility\WaypointProgressTracker.cs" />
-    <Compile Include="Assets\main_scene\Standard Assets\Vehicles\Aircraft\Scripts\AeroplaneUserControl4Axis.cs" />
     <Compile Include="Assets\main_scene\Scripts\Common\TagManager.cs" />
+    <Compile Include="Assets\main_scene\SampleScenes\Scripts\ParticleSceneControls.cs" />
     <Compile Include="Assets\main_scene\Scripts\NenchakMoveController.cs" />
-    <Compile Include="Assets\main_scene\Scripts\Common\LayerManager.cs" />
-    <Compile Include="Assets\main_scene\Standard Assets\Utility\DragRigidbody.cs" />
     <Compile Include="Assets\main_scene\Scripts\GameSelect.cs" />
-    <Compile Include="Assets\main_scene\Standard Assets\CrossPlatformInput\Scripts\PlatformSpecific\StandaloneInput.cs" />
-    <Compile Include="Assets\main_scene\Standard Assets\Vehicles\Aircraft\Scripts\AeroplaneAudio.cs" />
-    <Compile Include="Assets\main_scene\Standard Assets\ParticleSystems\Scripts\FireLight.cs" />
-    <Compile Include="Assets\main_scene\Standard Assets\Vehicles\Car\Scripts\SkidTrail.cs" />
     <Compile Include="Assets\main_scene\Standard Assets\Characters\FirstPersonCharacter\Scripts\FirstPersonController.cs" />
     <Compile Include="Assets\main_scene\Standard Assets\Vehicles\Car\Scripts\WheelEffects.cs" />
     <Compile Include="Assets\main_scene\Standard Assets\Vehicles\Car\Scripts\CarSelfRighting.cs" />
     <Compile Include="Assets\main_scene\Standard Assets\Vehicles\Car\Scripts\Mudguard.cs" />
-    <Compile Include="Assets\main_scene\Standard Assets\Environment\Water\Water\Scripts\WaterBase.cs" />
+    <Compile Include="Assets\Morumotto_ Wheerun_Select\Controller Tester\Scripts\DetectUnknownControllerMappings.cs" />
+    <Compile Include="Assets\Morumotto_ Wheerun_Select\Scripts\Select\Select_Input_Controller.cs" />
     <Compile Include="Assets\main_scene\Standard Assets\ParticleSystems\Scripts\Explosive.cs" />
-    <Compile Include="Assets\main_scene\Standard Assets\Environment\Water\Water\Scripts\MeshContainer.cs" />
     <Compile Include="Assets\main_scene\Standard Assets\Cameras\Scripts\TargetFieldOfView.cs" />
     <Compile Include="Assets\main_scene\Standard Assets\Utility\DynamicShadowSettings.cs" />
     <Compile Include="Assets\main_scene\Scripts\Scissors.cs" />
-    <Compile Include="Assets\main_scene\Scripts\GameOverLine.cs" />
     <Compile Include="Assets\main_scene\Standard Assets\Utility\SimpleMouseRotator.cs" />
     <Compile Include="Assets\main_scene\Scripts\TsuruTsuruEffectController.cs" />
     <Compile Include="Assets\main_scene\Scripts\GameCheck.cs" />
-    <Compile Include="Assets\main_scene\Standard Assets\Utility\CurveControlledBob.cs" />
-    <Compile Include="Assets\main_scene\Standard Assets\Utility\FollowTarget.cs" />
     <Compile Include="Assets\main_scene\Standard Assets\CrossPlatformInput\Scripts\ButtonHandler.cs" />
     <Compile Include="Assets\main_scene\Standard Assets\Utility\LerpControlledBob.cs" />
-    <Compile Include="Assets\main_scene\Standard Assets\Vehicles\Aircraft\Scripts\AeroplaneAiControl.cs" />
-    <Compile Include="Assets\main_scene\Standard Assets\Characters\FirstPersonCharacter\Scripts\MouseLook.cs" />
-    <Compile Include="Assets\main_scene\Standard Assets\ParticleSystems\Scripts\ExtinguishableParticleSystem.cs" />
     <Compile Include="Assets\main_scene\Standard Assets\ParticleSystems\Scripts\ExplosionFireAndDebris.cs" />
     <Compile Include="Assets\main_scene\Standard Assets\Utility\PlatformSpecificContent.cs" />
+    <Compile Include="Assets\Morumotto_ Wheerun_Title\Scripts\Title\Title_Draw_Controller.cs" />
     <Compile Include="Assets\main_scene\Standard Assets\CrossPlatformInput\Scripts\VirtualInput.cs" />
-    <Compile Include="Assets\main_scene\Standard Assets\Utility\ForcedReset.cs" />
-    <Compile Include="Assets\main_scene\Standard Assets\Utility\ParticleSystemDestroyer.cs" />
-    <Compile Include="Assets\main_scene\Scripts\UIController.cs" />
-    <Compile Include="Assets\main_scene\Standard Assets\Vehicles\Aircraft\Scripts\LandingGear.cs" />
-    <Compile Include="Assets\main_scene\Standard Assets\ParticleSystems\Scripts\ParticleSystemMultiplier.cs" />
     <Compile Include="Assets\main_scene\Scripts\GameRedo.cs" />
-    <Compile Include="Assets\main_scene\Standard Assets\Utility\ObjectResetter.cs" />
+    <Compile Include="Assets\main_scene\SampleScenes\Scripts\SlowMoButton.cs" />
     <Compile Include="Assets\main_scene\Scripts\ModeChanger.cs" />
-    <Compile Include="Assets\main_scene\Standard Assets\Utility\AutoMobileShaderSwitch.cs" />
     <Compile Include="Assets\main_scene\Standard Assets\Cameras\Scripts\ProtectCameraFromWallClip.cs" />
-    <Compile Include="Assets\main_scene\Scripts\SfxPlay.cs" />
-    <Compile Include="Assets\main_scene\Scripts\Menu.cs" />
+    <Compile Include="Assets\main_scene\SampleScenes\Scripts\LevelReset.cs" />
+    <Compile Include="Assets\main_scene\SampleScenes\Menu\Scripts\SceneAndURLLoader.cs" />
     <Compile Include="Assets\main_scene\Scripts\DurableValue.cs" />
-    <Compile Include="Assets\main_scene\Standard Assets\2D\Scripts\Camera2DFollow.cs" />
-    <Compile Include="Assets\main_scene\Standard Assets\Characters\ThirdPersonCharacter\Scripts\AICharacterControl.cs" />
+    <Compile Include="Assets\main_scene\Standard Assets\Vehicles\Car\Scripts\Suspension.cs" />
     <Compile Include="Assets\main_scene\Standard Assets\Environment\Water\Water\Scripts\Displace.cs" />
-    <Compile Include="Assets\main_scene\Standard Assets\Vehicles\Aircraft\Scripts\AeroplaneControlSurfaceAnimator.cs" />
-    <Compile Include="Assets\main_scene\Standard Assets\Characters\FirstPersonCharacter\Scripts\RigidbodyFirstPersonController.cs" />
     <Compile Include="Assets\main_scene\Standard Assets\Cameras\Scripts\HandHeldCam.cs" />
     <Compile Include="Assets\main_scene\Standard Assets\Vehicles\Aircraft\Scripts\AeroplanePropellerAnimator.cs" />
-    <Compile Include="Assets\main_scene\Standard Assets\Vehicles\Car\Scripts\Suspension.cs" />
     <Compile Include="Assets\main_scene\Standard Assets\Cameras\Scripts\AbstractTargetFollower.cs" />
-    <Compile Include="Assets\main_scene\Standard Assets\Utility\AlphaButtonClickMask.cs" />
-    <Compile Include="Assets\main_scene\Standard Assets\Environment\Water\Water\Scripts\GerstnerDisplace.cs" />
-    <Compile Include="Assets\main_scene\Standard Assets\Cameras\Scripts\PivotBasedCameraRig.cs" />
     <Compile Include="Assets\main_scene\Standard Assets\Vehicles\Car\Scripts\CarController.cs" />
-    <Compile Include="Assets\main_scene\Scripts\Common\StageNameManager.cs" />
-    <Compile Include="Assets\main_scene\Scripts\MoveController.cs" />
     <Compile Include="Assets\main_scene\Scripts\MessageScrollText.cs" />
     <Compile Include="Assets\main_scene\Standard Assets\Utility\SmoothFollow.cs" />
     <Compile Include="Assets\main_scene\Standard Assets\Cameras\Scripts\FreeLookCam.cs" />
-    <Compile Include="Assets\main_scene\Standard Assets\Utility\AutoMoveAndRotate.cs" />
-    <Compile Include="Assets\main_scene\Standard Assets\Utility\FOVKick.cs" />
-    <Compile Include="Assets\main_scene\Scripts\ClearManager.cs" />
+    <Compile Include="Assets\Morumotto_ Wheerun_Movie\Scripts\Movie\Movie_Draw_Controller.cs" />
     <Compile Include="Assets\main_scene\Standard Assets\ParticleSystems\Scripts\AfterburnerPhysicsForce.cs" />
     <Compile Include="Assets\main_scene\Standard Assets\Vehicles\Aircraft\Scripts\AeroplaneController.cs" />
-    <Compile Include="Assets\main_scene\Standard Assets\2D\Scripts\Restarter.cs" />
     <Compile Include="Assets\main_scene\Standard Assets\ParticleSystems\Scripts\ExplosionPhysicsForce.cs" />
     <Compile Include="Assets\main_scene\Scripts\MessageScroll.cs" />
-    <Compile Include="Assets\main_scene\Scripts\Common\StageClearNumber.cs" />
     <Compile Include="Assets\main_scene\Standard Assets\Environment\Water\Water\Scripts\PlanarReflection.cs" />
-    <Compile Include="Assets\main_scene\Scripts\MessageManager.cs" />
     <Compile Include="Assets\main_scene\Scripts\ScissorsCollision.cs" />
-    <Compile Include="Assets\main_scene\Standard Assets\2D\Scripts\CameraFollow.cs" />
-    <Compile Include="Assets\main_scene\Standard Assets\ParticleSystems\Scripts\WaterHoseParticles.cs" />
     <Compile Include="Assets\main_scene\Standard Assets\Utility\TimedObjectActivator.cs" />
     <Compile Include="Assets\main_scene\Standard Assets\Vehicles\Car\Scripts\BrakeLight.cs" />
-    <Compile Include="Assets\main_scene\Scripts\PlayerManager.cs" />
     <Compile Include="Assets\main_scene\Standard Assets\Vehicles\Aircraft\Scripts\JetParticleEffect.cs" />
-    <Compile Include="Assets\main_scene\Standard Assets\Vehicles\Car\Scripts\CarUserControl.cs" />
     <Compile Include="Assets\main_scene\Standard Assets\Vehicles\Aircraft\Scripts\AeroplaneUserControl2Axis.cs" />
     <Compile Include="Assets\main_scene\Standard Assets\Environment\Water (Basic)\Scripts\WaterBasic.cs" />
-    <Compile Include="Assets\main_scene\Standard Assets\CrossPlatformInput\Scripts\CrossPlatformInputManager.cs" />
+    <Compile Include="Assets\Morumotto_ Wheerun_Select\Scripts\Select\Select_Sound_Manager.cs" />
     <Compile Include="Assets\main_scene\Scripts\Player_Data_Main.cs" />
-    <Compile Include="Assets\main_scene\Standard Assets\CrossPlatformInput\Scripts\InputAxisScrollbar.cs" />
-    <Compile Include="Assets\main_scene\Standard Assets\Utility\EventSystemChecker.cs" />
     <Compile Include="Assets\main_scene\Standard Assets\Utility\WaypointCircuit.cs" />
     <Compile Include="Assets\main_scene\Standard Assets\Utility\CameraRefocus.cs" />
-    <Compile Include="Assets\main_scene\Standard Assets\CrossPlatformInput\Scripts\PlatformSpecific\MobileInput.cs" />
-    <Compile Include="Assets\main_scene\Scripts\TsuruTsuruMoveController.cs" />
     <Compile Include="Assets\main_scene\Standard Assets\CrossPlatformInput\Scripts\TouchPad.cs" />
     <Compile Include="Assets\main_scene\Standard Assets\CrossPlatformInput\Scripts\Joystick.cs" />
     <Compile Include="Assets\main_scene\Standard Assets\Utility\TimedObjectDestructor.cs" />
+    <Compile Include="Assets\main_scene\Standard Assets\Characters\RollerBall\Scripts\Ball.cs" />
+    <Compile Include="Assets\main_scene\Standard Assets\Environment\Water\Water\Scripts\WaterTile.cs" />
+    <Compile Include="Assets\main_scene\Standard Assets\ParticleSystems\Scripts\SmokeParticles.cs" />
+    <Compile Include="Assets\main_scene\Standard Assets\Characters\ThirdPersonCharacter\Scripts\ThirdPersonUserControl.cs" />
+    <Compile Include="Assets\main_scene\Standard Assets\CrossPlatformInput\Scripts\TiltInput.cs" />
+    <Compile Include="Assets\main_scene\Scripts\CursorManager.cs" />
+    <Compile Include="Assets\main_scene\Scripts\CalamariMoveController.cs" />
+    <Compile Include="Assets\main_scene\Standard Assets\Environment\Water\Water\Scripts\SpecularLighting.cs" />
+    <Compile Include="Assets\main_scene\SampleScenes\Menu\Scripts\PauseMenu.cs" />
+    <Compile Include="Assets\main_scene\Standard Assets\2D\Scripts\Platformer2DUserControl.cs" />
+    <Compile Include="Assets\main_scene\Standard Assets\Cameras\Scripts\AutoCam.cs" />
+    <Compile Include="Assets\main_scene\Standard Assets\Vehicles\Car\Scripts\CarAIControl.cs" />
+    <Compile Include="Assets\main_scene\Standard Assets\Utility\WaypointProgressTracker.cs" />
+    <Compile Include="Assets\main_scene\Standard Assets\Vehicles\Aircraft\Scripts\AeroplaneUserControl4Axis.cs" />
+    <Compile Include="Assets\main_scene\Scripts\Common\LayerManager.cs" />
+    <Compile Include="Assets\main_scene\Standard Assets\Utility\DragRigidbody.cs" />
+    <Compile Include="Assets\main_scene\Standard Assets\CrossPlatformInput\Scripts\PlatformSpecific\StandaloneInput.cs" />
+    <Compile Include="Assets\main_scene\Standard Assets\Vehicles\Aircraft\Scripts\AeroplaneAudio.cs" />
+    <Compile Include="Assets\main_scene\Standard Assets\ParticleSystems\Scripts\FireLight.cs" />
+    <Compile Include="Assets\main_scene\Standard Assets\Vehicles\Car\Scripts\SkidTrail.cs" />
+    <Compile Include="Assets\main_scene\SampleScenes\Scripts\CameraSwitch.cs" />
+    <Compile Include="Assets\main_scene\Standard Assets\Environment\Water\Water\Scripts\WaterBase.cs" />
+    <Compile Include="Assets\main_scene\Standard Assets\Environment\Water\Water\Scripts\MeshContainer.cs" />
+    <Compile Include="Assets\main_scene\Scripts\GameOverLine.cs" />
+    <Compile Include="Assets\main_scene\Standard Assets\Utility\CurveControlledBob.cs" />
+    <Compile Include="Assets\main_scene\Standard Assets\Utility\FollowTarget.cs" />
+    <Compile Include="Assets\main_scene\Standard Assets\Characters\FirstPersonCharacter\Scripts\MouseLook.cs" />
+    <Compile Include="Assets\main_scene\Standard Assets\Vehicles\Aircraft\Scripts\AeroplaneAiControl.cs" />
+    <Compile Include="Assets\Morumotto_ Wheerun_Title\Scripts\Title\Title_Input_Controller.cs" />
+    <Compile Include="Assets\main_scene\Standard Assets\ParticleSystems\Scripts\ExtinguishableParticleSystem.cs" />
+    <Compile Include="Assets\main_scene\Standard Assets\Utility\ForcedReset.cs" />
+    <Compile Include="Assets\main_scene\Standard Assets\Utility\ParticleSystemDestroyer.cs" />
+    <Compile Include="Assets\main_scene\Scripts\UIController.cs" />
+    <Compile Include="Assets\main_scene\SampleScenes\Scripts\PlaceTargetWithMouse.cs" />
+    <Compile Include="Assets\main_scene\Standard Assets\Vehicles\Aircraft\Scripts\LandingGear.cs" />
+    <Compile Include="Assets\main_scene\Standard Assets\ParticleSystems\Scripts\ParticleSystemMultiplier.cs" />
+    <Compile Include="Assets\main_scene\Standard Assets\Utility\ObjectResetter.cs" />
+    <Compile Include="Assets\main_scene\SampleScenes\Menu\Scripts\MenuSceneLoader.cs" />
+    <Compile Include="Assets\main_scene\Standard Assets\Utility\AutoMobileShaderSwitch.cs" />
+    <Compile Include="Assets\main_scene\Scripts\SfxPlay.cs" />
+    <Compile Include="Assets\main_scene\Scripts\Menu.cs" />
+    <Compile Include="Assets\main_scene\Standard Assets\Vehicles\Aircraft\Scripts\AeroplaneControlSurfaceAnimator.cs" />
+    <Compile Include="Assets\main_scene\Standard Assets\2D\Scripts\Camera2DFollow.cs" />
+    <Compile Include="Assets\main_scene\Standard Assets\Characters\ThirdPersonCharacter\Scripts\AICharacterControl.cs" />
+    <Compile Include="Assets\main_scene\Standard Assets\Characters\FirstPersonCharacter\Scripts\RigidbodyFirstPersonController.cs" />
+    <Compile Include="Assets\main_scene\Standard Assets\Utility\AlphaButtonClickMask.cs" />
+    <Compile Include="Assets\main_scene\Standard Assets\Environment\Water\Water\Scripts\GerstnerDisplace.cs" />
+    <Compile Include="Assets\main_scene\Standard Assets\Cameras\Scripts\PivotBasedCameraRig.cs" />
+    <Compile Include="Assets\main_scene\Scripts\Common\StageNameManager.cs" />
+    <Compile Include="Assets\main_scene\Scripts\MoveController.cs" />
+    <Compile Include="Assets\main_scene\Standard Assets\Utility\AutoMoveAndRotate.cs" />
+    <Compile Include="Assets\main_scene\Standard Assets\Utility\FOVKick.cs" />
+    <Compile Include="Assets\main_scene\Scripts\ClearManager.cs" />
+    <Compile Include="Assets\main_scene\Standard Assets\2D\Scripts\Restarter.cs" />
+    <Compile Include="Assets\main_scene\Scripts\Common\StageClearNumber.cs" />
+    <Compile Include="Assets\main_scene\Scripts\MessageManager.cs" />
+    <Compile Include="Assets\Morumotto_ Wheerun_Select\Scripts\All\Player.cs" />
+    <Compile Include="Assets\Morumotto_ Wheerun_Select\Scripts\All\Player_Data.cs" />
+    <Compile Include="Assets\main_scene\Standard Assets\2D\Scripts\CameraFollow.cs" />
+    <Compile Include="Assets\main_scene\Standard Assets\ParticleSystems\Scripts\WaterHoseParticles.cs" />
+    <Compile Include="Assets\main_scene\Scripts\PlayerManager.cs" />
+    <Compile Include="Assets\main_scene\Standard Assets\Vehicles\Car\Scripts\CarUserControl.cs" />
+    <Compile Include="Assets\main_scene\Standard Assets\CrossPlatformInput\Scripts\CrossPlatformInputManager.cs" />
+    <Compile Include="Assets\main_scene\Standard Assets\CrossPlatformInput\Scripts\InputAxisScrollbar.cs" />
+    <Compile Include="Assets\main_scene\Standard Assets\Utility\EventSystemChecker.cs" />
+    <Compile Include="Assets\main_scene\Standard Assets\CrossPlatformInput\Scripts\PlatformSpecific\MobileInput.cs" />
+    <Compile Include="Assets\main_scene\Scripts\TsuruTsuruMoveController.cs" />
     <Compile Include="Assets\main_scene\Standard Assets\Utility\ActivateTrigger.cs" />
     <Compile Include="Assets\main_scene\Scripts\Common\WallRunHorizontalMode.cs" />
     <Compile Include="Assets\main_scene\Standard Assets\Environment\Water\Water\Scripts\Water.cs" />
-    <Compile Include="Assets\main_scene\Standard Assets\Characters\RollerBall\Scripts\Ball.cs" />
     <Compile Include="Assets\main_scene\Scripts\SaveControllerScene.cs" />
-    <Compile Include="Assets\main_scene\Standard Assets\Environment\Water\Water\Scripts\WaterTile.cs" />
-    <Compile Include="Assets\main_scene\Standard Assets\ParticleSystems\Scripts\SmokeParticles.cs" />
     <Compile Include="Assets\main_scene\Standard Assets\Characters\ThirdPersonCharacter\Scripts\ThirdPersonCharacter.cs" />
     <Compile Include="Assets\main_scene\Standard Assets\CrossPlatformInput\Scripts\MobileControlRig.cs" />
     <Compile Include="Assets\main_scene\Standard Assets\Characters\FirstPersonCharacter\Scripts\HeadBob.cs" />
     <Compile Include="Assets\main_scene\Standard Assets\Cameras\Scripts\LookatTarget.cs" />
-    <Compile Include="Assets\main_scene\Standard Assets\Characters\ThirdPersonCharacter\Scripts\ThirdPersonUserControl.cs" />
+    <Compile Include="Assets\Morumotto_ Wheerun_Title\Scripts\Title\Title_Sound_Manager.cs" />
     <Compile Include="Assets\main_scene\Scripts\SceneMove.cs" />
     <Compile Include="Assets\main_scene\Standard Assets\Vehicles\Car\Scripts\CarAudio.cs" />
-    <Compile Include="Assets\main_scene\Standard Assets\CrossPlatformInput\Scripts\TiltInput.cs" />
+    <Compile Include="Assets\Morumotto_ Wheerun_Select\Scripts\Select\Select_Draw_Controller.cs" />
     <Compile Include="Assets\main_scene\Standard Assets\Characters\RollerBall\Scripts\BallUserControl.cs" />
     <Compile Include="Assets\main_scene\Standard Assets\CrossPlatformInput\Scripts\AxisTouchButton.cs" />
     <Compile Include="Assets\main_scene\Scripts\GoalEvent.cs" />
-    <Compile Include="Assets\main_scene\Scripts\CursorManager.cs" />
     <Compile Include="Assets\main_scene\Standard Assets\ParticleSystems\Scripts\Hose.cs" />
-    <Compile Include="Assets\main_scene\Scripts\CalamariMoveController.cs" />
     <Compile Include="Assets\main_scene\Scripts\GameBack.cs" />
-    <Compile Include="Assets\main_scene\Standard Assets\Environment\Water\Water\Scripts\SpecularLighting.cs" />
     <Compile Include="Assets\main_scene\Scripts\ScreenDirectInOut.cs" />
     <Compile Include="Assets\main_scene\Scripts\CameraPointMove.cs" />
     <Compile Include="Assets\main_scene\Standard Assets\2D\Scripts\PlatformerCharacter2D.cs" />
     <Compile Include="Assets\main_scene\Scripts\PauseWindowManager.cs" />
-    <Compile Include="Assets\main_scene\Standard Assets\2D\Scripts\Platformer2DUserControl.cs" />
     <Compile Include="Assets\main_scene\Standard Assets\Utility\FPSCounter.cs" />
     <Compile Include="Assets\main_scene\Standard Assets\Utility\SimpleActivatorMenu.cs" />
-    <Compile Include="Assets\Morumotto_ Wheerun_Movie\Scripts\Movie\Movie_Draw_Controller.cs" />
-    <Compile Include="Assets\Morumotto_ Wheerun_Select\Scripts\All\Player.cs" />
-    <Compile Include="Assets\Morumotto_ Wheerun_Title\Scripts\Title\Title_Sound_Manager.cs" />
-    <Compile Include="Assets\Morumotto_ Wheerun_Title\Scripts\Title\Title_Draw_Controller.cs" />
-    <Compile Include="Assets\Morumotto_ Wheerun_Title\Scripts\Title\Title_Input_Controller.cs" />
-    <Compile Include="Assets\Morumotto_ Wheerun_Select\Scripts\All\Player_Data.cs" />
-    <Compile Include="Assets\Morumotto_ Wheerun_Select\Scripts\Select\Select_Sound_Manager.cs" />
-    <Compile Include="Assets\Morumotto_ Wheerun_Select\Controller Tester\Scripts\DetectUnknownControllerMappings.cs" />
-    <Compile Include="Assets\Morumotto_ Wheerun_Select\Scripts\Select\Select_Draw_Controller.cs" />
-    <Compile Include="Assets\Morumotto_ Wheerun_Select\Scripts\Select\Select_Input_Controller.cs" />
-    <Compile Include="Assets\main_scene\SampleScenes\Scripts\ParticleSceneControls.cs" />
-    <Compile Include="Assets\main_scene\SampleScenes\Scripts\CameraSwitch.cs" />
-    <Compile Include="Assets\main_scene\SampleScenes\Scripts\PlaceTargetWithMouse.cs" />
-    <Compile Include="Assets\main_scene\SampleScenes\Menu\Scripts\MenuSceneLoader.cs" />
-    <Compile Include="Assets\main_scene\SampleScenes\Scripts\SlowMoButton.cs" />
-    <Compile Include="Assets\main_scene\SampleScenes\Scripts\LevelReset.cs" />
-    <Compile Include="Assets\main_scene\SampleScenes\Menu\Scripts\SceneAndURLLoader.cs" />
-    <Compile Include="Assets\main_scene\SampleScenes\Menu\Scripts\PauseMenu.cs" />
   </ItemGroup>
   <ItemGroup>
      <None Include="Assets\main_scene\Standard Assets\Prototyping\Shaders\WorldCoordDiffuse.shader" />
@@ -438,6 +438,9 @@
     <Reference Include="Unity.VSCode.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.VSCode.Editor.dll</HintPath>
     </Reference>
+    <Reference Include="com.unity.cinemachine.editor">
+      <HintPath>Library\ScriptAssemblies\com.unity.cinemachine.editor.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.TextMeshPro.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.TextMeshPro.Editor.dll</HintPath>
     </Reference>
@@ -452,9 +455,6 @@
     </Reference>
     <Reference Include="Unity.Rider.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.Rider.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="com.unity.cinemachine.editor">
-      <HintPath>Library\ScriptAssemblies\com.unity.cinemachine.editor.dll</HintPath>
     </Reference>
     <Reference Include="netstandard">
       <HintPath>C:\Program Files\Unity\Hub\Editor\2019.4.16f1\Editor\Data\NetStandard\ref\2.0.0\netstandard.dll</HintPath>
@@ -801,6 +801,9 @@
     <Reference Include="System.Xml.Serialization">
       <HintPath>C:\Program Files\Unity\Hub\Editor\2019.4.16f1\Editor\Data\NetStandard\compat\2.0.0\shims\netfx\System.Xml.Serialization.dll</HintPath>
     </Reference>
+    <Reference Include="Cinemachine">
+      <HintPath>Library\ScriptAssemblies\Cinemachine.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.Timeline">
       <HintPath>Library\ScriptAssemblies\Unity.Timeline.dll</HintPath>
     </Reference>
@@ -809,9 +812,6 @@
     </Reference>
     <Reference Include="UnityEngine.UI">
       <HintPath>Library\ScriptAssemblies\UnityEngine.UI.dll</HintPath>
-    </Reference>
-    <Reference Include="Cinemachine">
-      <HintPath>Library\ScriptAssemblies\Cinemachine.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
