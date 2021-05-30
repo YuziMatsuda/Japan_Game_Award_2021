@@ -8,9 +8,9 @@ public class Player_Data : MonoBehaviour
 {
     public string datapath;
 
-    [SerializeField] public bool[] stage_clear_number;   // クリア取得
+    [SerializeField] public bool[] stage_clear_number;                      // クリア取得
     [SerializeField] public int max_stage;
-    [SerializeField] public bool delete_start;           // データ削除開始
+    [SerializeField] public bool delete_start;                              // データ削除開始
 
     [SerializeField] private GameObject[] clear = new GameObject[5];        // クリアー
     [SerializeField] private GameObject[] clear_prefab = new GameObject[5]; // クリアー用のプレハブ
@@ -22,7 +22,6 @@ public class Player_Data : MonoBehaviour
 
     private Player player;
     private Player_Data player_data;
-
 
     public void Save_Data(Player_Data player_data)
     {
@@ -82,9 +81,9 @@ public class Player_Data : MonoBehaviour
         Load_Data(player_data, player_data.datapath);
         max_stage = 5;
         player_data.delete_start = false;
-        if(player.sence == Player.Character_Sence.NEXT_STAGESELECT)
+        if (player.sence == Player.Character_Sence.NEXT_STAGESELECT)
         {
-             Clear_Init();
+            Clear_Init();
         }
     }
 
@@ -110,19 +109,10 @@ public class Player_Data : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        switch(player.sence)
+        if (player.sence == Player.Character_Sence.GAME_DATADELETE)
         {
-            case Player.Character_Sence.GAME_DATADELETE:
-            {
-                Title_DataDelete_Check();
-                break;
-            }
-            case Player.Character_Sence.NEXT_GAMETITLE:
-            {
-                Select_Move_DataSave();
-                break;
-            }
-        }  
+            Title_DataDelete_Check();
+        }
     }
 
     public void Title_DataDelete_Check()
