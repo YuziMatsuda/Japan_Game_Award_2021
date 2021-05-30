@@ -1368,6 +1368,22 @@ MonoBehaviour:
   stage_clear_number: 0000000000
   max_stage: 5
   delete_start: 0
+  clear:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  clear_prefab:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  canvas: {fileID: 0}
+  criteria_log_pos_x: 0
+  move_log_pos_x: 0
+  log_pos_y: 0
 --- !u!1 &1251361783
 GameObject:
   m_ObjectHideFlags: 0
@@ -1864,7 +1880,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 292c8651dc2904040843a50bc8e7fd4c, type: 3}
+  m_Sprite: {fileID: 21300000, guid: e87f83a0d2916e84d8766f1d1cf14b76, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
