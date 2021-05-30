@@ -138,7 +138,7 @@ public class Select_Draw_Controller : MonoBehaviour
     // フェードイン処理
     public void Draw_LoadNow_FadeIn(Player.Character_Sence Next_Scene)
     {
-        float Load_Now_Max_Position = -1920.0f;
+        float Load_Now_Max_Position = -2000.0f;
         if (load_now_rect.anchoredPosition.x >= Load_Now_Max_Position)
         {
             load_now_rect.anchoredPosition += new Vector2(fade_speed * Time.deltaTime, 0);
