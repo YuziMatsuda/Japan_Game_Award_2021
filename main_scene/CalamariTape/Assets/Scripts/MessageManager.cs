@@ -18,24 +18,29 @@ public class MessageManager : MonoBehaviour
 
     /// <summary>メッセージ表示中も操作を止めない（デバッグ用）</summary>
     [SerializeField] private bool _controllerDisabled = true;
+    /// <summary>表示済みであるか</summary>
+    private bool _displaied = false;
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag.Equals("Player"))
+        if (other.gameObject.tag.Equals("Player") && _displaied == false)
         {
             if (_controllerDisabled == true)
             {
                 if (_message.activeSelf == false)
                 {
                     _modeChanger.enabled = false;
+                    _playerManager._calamariAnimation.PauseAnimation("Scotch_tape_outside");
                     _playerManager._calamariController.enabled = false;
                     _playerManager._nenchakController.enabled = false;
+                    _playerManager._tsuruTsuruAnimation.PauseAnimation("Scotch_tape_outside");
                     _playerManager._tsurutsuruController.enabled = false;
                     _pauseWindowManager.enabled = false;
                 }
             }
 
             _message.SetActive(true);
+            _displaied = true;
         }
     }
 

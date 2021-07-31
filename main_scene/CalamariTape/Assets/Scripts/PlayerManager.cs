@@ -16,8 +16,12 @@ public class PlayerManager : MonoBehaviour
 
     /// <summary>カラマリモードの操作スクリプト</summary>
     [SerializeField] public CalamariMoveController _calamariController;
+    /// <summary>カラマリモードのアニメーションスクリプト</summary>
+    [SerializeField] public CalamariAnimation _calamariAnimation;
     /// <summary>ネンチャクモードの操作スクリプト</summary>
     [SerializeField] public NenchakMoveController _nenchakController;
     /// <summary>ツルツルモードの操作スクリプト</summary>
     [SerializeField] public TsuruTsuruMoveController _tsurutsuruController;
+    /// <summary>ツルツルモードのアニメーションスクリプト</summary>
+    [SerializeField] public TsuruTsuruAnimation _tsuruTsuruAnimation;
 }

@@ -97,15 +97,13 @@ public class CalamariMoveController : MonoBehaviour
     /// </summary>
     private int _wallRunHorizontalMode = (int)WallRunHorizontalMode.RIGHT_IS_FRONT;
 
-    /// <summary>モルモットのアニメーター</summary>
-    [SerializeField] private Animator _animator;
+    /// <summary>カラマリモードのアニメーション</summary>
+    [SerializeField] private CalamariAnimation _animation;
 
     /// <summary>テープ（外側）の位置情報</summary>
     [SerializeField] private Transform _tapeOutside;
     /// <summary>モルモットの位置情報</summary>
     [SerializeField] private Transform _morumotto;
-    /// <summary>回転スピード</summary>
-    [SerializeField] private float _rollSpeed = 5f;
 
     /// <summary>プレイヤーの移動制御を停止するフラグ</summary>
     public bool _characterStop { set; get; } = false;
@@ -179,6 +177,15 @@ public class CalamariMoveController : MonoBehaviour
         {
             StartCoroutine(PositionCash());
         }
+
+        // アニメーションのループ対策
+        if (_wallRunVertical == false && _wallRunHorizontal == false)
+        {
+            if (_animation.getAnimationLoop("Scotch_tape_outside", "MoveSpeed", _movedSpeedToAnimator) == true)
+            {
+                _animation.setAnimetionParameters("Scotch_tape_outside", "MoveSpeed", _movedSpeedToAnimator);
+            }
+        }
     }
 
     private void OnTriggerStay(Collider other)
@@ -229,8 +236,15 @@ public class CalamariMoveController : MonoBehaviour
 
     private void OnEnable()
     {
-        _wallRunVertical = false;
-        _wallRunHorizontal = false;
+        var i = transform.position;
+        Debug.DrawRay(i, Vector3.right * _registMaxDistance, Color.green);
+        Debug.DrawRay(i, Vector3.left * _registMaxDistance, Color.green);
+        // 左右に壁が無くかつ壁昇りモードが残っていた場合はフラグをリセット
+        if (Physics.Raycast(i, Vector3.right, _registMaxDistance) == false && Physics.Raycast(i, Vector3.left, _registMaxDistance) == false && _wallRunHorizontal == true)
+        {
+            _wallRunHorizontal = false;
+        }
+
         _calamariStop = false;
         _scale = 1.0f;
 
@@ -463,7 +477,7 @@ public class CalamariMoveController : MonoBehaviour
         }
 
         // 移動スピードをanimatorに反映
-        if (_wallRunVertical == true && 0 < _value._parameter && _value._adhesive == true)
+        if ((_wallRunVertical == true || _wallRunHorizontal == true) && 0 < _value._parameter && _value._adhesive == true)
         {
             _movedSpeedToAnimator = new Vector3(_moveVelocity.x, _moveVelocity.y, 0).magnitude;
         }
@@ -471,7 +485,8 @@ public class CalamariMoveController : MonoBehaviour
         {
             _movedSpeedToAnimator = new Vector3(_moveVelocity.x, 0, _moveVelocity.z).magnitude;
         }
-        _animator.SetFloat("MoveSpeed", _movedSpeedToAnimator);
+        _animation.setAnimetionParameters("Morumotto", "MoveSpeed", _movedSpeedToAnimator);
+        _animation.setAnimetionParameters("Scotch_tape_outside", "MoveSpeed", _movedSpeedToAnimator);
         if (0 < _movedSpeedToAnimator)
         {
             PlaySoundEffectMove();
@@ -484,7 +499,6 @@ public class CalamariMoveController : MonoBehaviour
         // 2点間の距離を測って一時的に停止する処理を呼び出す
         if (0 < _movedSpeedToAnimator)
         {
-            RollObject();
             if (_distanceFirstPointSaved == false)
             {
                 _distanceFirstPointSaved = true;
@@ -576,12 +590,12 @@ public class CalamariMoveController : MonoBehaviour
                     // 上方向なら縦向き
                     if (0f < _moveVelocity.y)
                     {
-                        _transform.eulerAngles = new Vector3(_transform.eulerAngles.x, 180f, 0f);
+                        _transform.eulerAngles = new Vector3(_transform.eulerAngles.x, 0f, 0f);
                     }
                     // 下向きなら縦向き
                     else if (_moveVelocity.y < 0f)
                     {
-                        _transform.eulerAngles = new Vector3(_transform.eulerAngles.x, 0f, 0f);
+                        _transform.eulerAngles = new Vector3(_transform.eulerAngles.x, 180f, 0f);
                     }
                 }
                 else
@@ -589,12 +603,77 @@ public class CalamariMoveController : MonoBehaviour
                     // 左向きなら横向き
                     if (0f < _moveVelocity.x)
                     {
-                        _transform.eulerAngles = new Vector3(_transform.eulerAngles.x, 0f, 90f);
+                        _transform.eulerAngles = new Vector3(_transform.eulerAngles.x, 0f, -90f);
                     }
                     // 右向きなら横向き
                     else if (_moveVelocity.x < 0f)
                     {
-                        _transform.eulerAngles = new Vector3(_transform.eulerAngles.x, 0f, -90f);
+                        _transform.eulerAngles = new Vector3(_transform.eulerAngles.x, 0f, 90f);
+                    }
+                }
+            }
+        }
+        else if (_wallRunHorizontal == true)
+        {
+            if (0 < Mathf.Abs(_moveVelocity.y) || 0 < Mathf.Abs(_moveVelocity.z))
+            {
+                if (Mathf.Abs(_moveVelocity.y) < Mathf.Abs(_moveVelocity.z))
+                {
+                    if (_wallRunHorizontalMode == (int)WallRunHorizontalMode.RIGHT_IS_FRONT)
+                    {
+                        // 正面なら縦向き
+                        if (0f < _moveVelocity.z)
+                        {
+                            //_transform.eulerAngles = new Vector3(_transform.eulerAngles.x, 180f, 0f);
+                            _transform.eulerAngles = new Vector3(_transform.eulerAngles.x, 0f, 90f);
+                        }
+                        else if (_moveVelocity.z < 0f)
+                        {
+                            _transform.eulerAngles = new Vector3(_transform.eulerAngles.x, 180f, -90f);
+                        }
+                    }
+                    else if (_wallRunHorizontalMode == (int)WallRunHorizontalMode.LEFT_IS_FRONT)
+                    {
+                        // 正面なら縦向き
+                        if (0f < _moveVelocity.z)
+                        {
+                            _transform.eulerAngles = new Vector3(_transform.eulerAngles.x, 0f, -90f);
+                        }
+                        else if (_moveVelocity.z < 0f)
+                        {
+                            _transform.eulerAngles = new Vector3(_transform.eulerAngles.x, 180f, 90f);
+                        }
+                    }
+                }
+                else
+                {
+                    // 右側に壁があった際の床上移動と壁移動
+                    if (_wallRunHorizontalMode == (int)WallRunHorizontalMode.RIGHT_IS_FRONT)
+                    {
+                        // 左向きなら横向き
+                        if (0f < _moveVelocity.y)
+                        {
+                            _transform.eulerAngles = new Vector3(_transform.eulerAngles.x, 90f, 0f);
+                        }
+                        // 右向きなら横向き
+                        else if (_moveVelocity.y < 0f)
+                        {
+                            _transform.eulerAngles = new Vector3(_transform.eulerAngles.x, -90f, 0f);
+                        }
+                    }
+                    // 左側に壁があった際の床上移動と壁移動
+                    else if (_wallRunHorizontalMode == (int)WallRunHorizontalMode.LEFT_IS_FRONT)
+                    {
+                        // 左向きなら横向き
+                        if (0f < _moveVelocity.y)
+                        {
+                            _transform.eulerAngles = new Vector3(_transform.eulerAngles.x, -90f, 0f);
+                        }
+                        // 右向きなら横向き
+                        else if (_moveVelocity.y < 0f)
+                        {
+                            _transform.eulerAngles = new Vector3(_transform.eulerAngles.x, 90f, 0f);
+                        }
                     }
                 }
             }
@@ -615,21 +694,18 @@ public class CalamariMoveController : MonoBehaviour
         {
             _calamariStop = true;
         }
-        else
-        {
-            _calamariStop = false;
-        }
+
+        _animation.PauseAnimation("Scotch_tape_outside");
 
         yield return new WaitForSeconds(1f);
 
-        if (_calamariStop == false)
-        {
-            _calamariStop = true;
-        }
-        else
+        if (_calamariStop == true)
         {
             _calamariStop = false;
         }
+
+        _animation.PlayAnimation("Scotch_tape_outside");
+
         StopCoroutine(CalamariStop());
     }
 
@@ -661,25 +737,6 @@ public class CalamariMoveController : MonoBehaviour
         {
             _sfxPlayedMove = true;
             _sfxPlay.PlaySFX("se_move");
-        }
-    }
-
-    /// <summary>
-    /// 移動速度に応じて各オブジェクトを回転させる
-    /// </summary>
-    private void RollObject()
-    {
-        if (_calamariStop == false)
-        {
-            if (_wallRunVertical == true)
-            {
-                _tapeOutside.eulerAngles += new Vector3(0, 0, _rollSpeed/* * -1*/);
-            }
-            else
-            {
-                _tapeOutside.eulerAngles += new Vector3(0, 0, _rollSpeed * -1);
-            }
-            _morumotto.eulerAngles += new Vector3(_rollSpeed, 0, 0);
         }
     }
 

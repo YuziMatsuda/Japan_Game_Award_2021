@@ -60,6 +60,7 @@
     <Compile Include="Assets\Scripts\Scissors.cs" />
     <Compile Include="Assets\Scripts\TsuruTsuruEffectController.cs" />
     <Compile Include="Assets\Scripts\GameCheck.cs" />
+    <Compile Include="Assets\Scripts\Interface\DebugDemo.cs" />
     <Compile Include="Assets\Scripts\GameRedo.cs" />
     <Compile Include="Assets\SampleScenes\Scripts\SlowMoButton.cs" />
     <Compile Include="Assets\Scripts\ModeChanger.cs" />
@@ -75,6 +76,7 @@
     <Compile Include="Assets\SampleScenes\Menu\Scripts\PauseMenu.cs" />
     <Compile Include="Assets\Scripts\Common\LayerManager.cs" />
     <Compile Include="Assets\SampleScenes\Scripts\CameraSwitch.cs" />
+    <Compile Include="Assets\Scripts\GameOverLine.cs" />
     <Compile Include="Assets\Scripts\UIController.cs" />
     <Compile Include="Assets\SampleScenes\Scripts\PlaceTargetWithMouse.cs" />
     <Compile Include="Assets\SampleScenes\Menu\Scripts\MenuSceneLoader.cs" />
@@ -83,6 +85,7 @@
     <Compile Include="Assets\Scripts\Common\StageNameManager.cs" />
     <Compile Include="Assets\Scripts\MoveController.cs" />
     <Compile Include="Assets\Scripts\ClearManager.cs" />
+    <Compile Include="Assets\Scripts\CalamariAnimation.cs" />
     <Compile Include="Assets\Scripts\Common\StageClearNumber.cs" />
     <Compile Include="Assets\Scripts\MessageManager.cs" />
     <Compile Include="Assets\Scripts\PlayerManager.cs" />
@@ -91,11 +94,14 @@
     <Compile Include="Assets\Scripts\SaveControllerScene.cs" />
     <Compile Include="Assets\Scripts\SceneMove.cs" />
     <Compile Include="Assets\Scripts\GoalEvent.cs" />
+    <Compile Include="Assets\Scripts\CalamariState.cs" />
+    <Compile Include="Assets\Scripts\VisualizeDebugMode.cs" />
     <Compile Include="Assets\Scripts\GameBack.cs" />
     <Compile Include="Assets\Scripts\ScreenDirectInOut.cs" />
     <Compile Include="Assets\Scripts\CameraPointMove.cs" />
     <Compile Include="Assets\Scripts\PauseWindowManager.cs" />
-    <Compile Include="Assets\Scripts\GameOverLine.cs" />
+    <Compile Include="Assets\Scripts\TsuruTsuruAnimation.cs" />
+    <Compile Include="Assets\Scripts\TsuruTsuruState.cs" />
   </ItemGroup>
   <ItemGroup>
      <None Include="Assets\8K Skybox Pack Free\ReadMe.txt" />

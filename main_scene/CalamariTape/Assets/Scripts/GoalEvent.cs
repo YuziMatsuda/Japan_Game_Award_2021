@@ -5,7 +5,7 @@ using UnityEngine;
 /// <summary>
 /// ゴール判定スクリプトクラス
 /// </summary>
-public class GoalEvent : MonoBehaviour
+public class GoalEvent : MonoBehaviour, DebugDemo
 {
     /// <summary>モード変更の制御</summary>
     [SerializeField] private ModeChanger _modeChanger;
@@ -26,6 +26,9 @@ public class GoalEvent : MonoBehaviour
     /// <summary>ゴール床オブジェクト接着判定</summary>
     private bool _goalTrigger;
 
+    /// <summary>デバッグ</summary>
+    [SerializeField] private VisualizeDebugMode _debug;
+
     private void OnTriggerEnter(Collider other)
     {
         if (_goalTrigger == true && other.gameObject.tag.Equals("Player"))
@@ -33,7 +36,7 @@ public class GoalEvent : MonoBehaviour
             StopPlayer();
             _clearUI.SetActive(true);
             _sfx.PlaySFX("me_game_clear");
-            _saveController.SaveDataWrite();
+            StartCoroutine(Save());
             StartCoroutine(BloomFire());
         }
     }
@@ -53,11 +56,20 @@ public class GoalEvent : MonoBehaviour
     {
         _modeChanger.enabled = false;
         _playerManager._calamariController._characterStop = true;
+        _playerManager._calamariAnimation.PauseAnimation("Scotch_tape_outside");
         _playerManager._calamariController.enabled = false;
         _playerManager._nenchakController.enabled = false;
         _playerManager._tsurutsuruController._characterStop = true;
+        _playerManager._tsuruTsuruAnimation.PauseAnimation("Scotch_tape_outside");
         _playerManager._tsurutsuruController.enabled = false;
         _pauseWindowManager.enabled = false;
+    }
+
+    private IEnumerator Save()
+    {
+        _saveController.SaveDataWrite();
+        yield return null;
+        StopCoroutine(Save());
     }
 
     /// <summary>
@@ -72,5 +84,13 @@ public class GoalEvent : MonoBehaviour
             _fireworks[i].SetActive(true);
         }
         StopCoroutine(BloomFire());
+    }
+
+    public void DebugDemo1(string message)
+    {
+        if (_debug.Debug == true && _debug.DebugUI == true)
+        {
+            _debug.Log(message);
+        }
     }
 }
