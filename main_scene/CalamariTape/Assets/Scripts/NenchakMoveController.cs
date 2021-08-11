@@ -2,8 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityStandardAssets.CrossPlatformInput;
-using Controller.Wall;
+using Controller.WallHorizontal;
 using Const.Tag;
+using Const.Layer;
+using Controller.WallVertical;
 
 /// <summary>
 /// プレイヤー操作スクリプトクラス
@@ -45,9 +47,6 @@ public class NenchakMoveController : MonoBehaviour
     /// <summary>位置フラグを一時保存</summary>
     [SerializeField] private bool _positionCashDebugOff;
 
-    /// <summary>耐久ゲージ</summary>
-    [SerializeField] private DurableValue _value;
-
     /// <summary>アニメーション</summary>
     [SerializeField] private float _movedSpeedToAnimator;
 
@@ -58,6 +57,8 @@ public class NenchakMoveController : MonoBehaviour
 
     /// <summary>壁走り（縦）</summary>
     [SerializeField] private bool _wallRunVertical = false;
+    /// <summary>壁走り（縦）直前のフラグ情報</summary>
+    private bool _wallRunVerticalLast = false;
     /// <summary>壁走り（横）</summary>
     [SerializeField] private bool _wallRunHorizontal = false;
     /// <summary>RayCast判定の距離値</summary>
@@ -72,17 +73,15 @@ public class NenchakMoveController : MonoBehaviour
     /// 1：右方向入力で登り、左方向で下りる<para/>
     /// -1：左方向入力で登り、右方向で下りる
     /// </summary>
-    private int _wallRunHorizontalMode = (int)WallRunHorizontalMode.RIGHT_IS_FRONT;
+    private int _wallRunHorizontalMode = (int)WallRunHorizontalFrontMode.RIGHT_IS_FRONT;
 
-    /// <summary>モルモットのアニメーター</summary>
-    [SerializeField] private Animator _animator;
+    /// <summary>ネンチャクモードのアニメーション</summary>
+    [SerializeField] private NenchakAnimation _animation;
 
     /// <summary>テープ（外側）の位置情報</summary>
     [SerializeField] private Transform _tapeOutside;
     /// <summary>モルモットの位置情報</summary>
     [SerializeField] private Transform _morumotto;
-    /// <summary>回転スピード</summary>
-    [SerializeField] private float _rollSpeed = 5f;
 
     /// <summary>SE再生用のゲームオブジェクト</summary>
     [SerializeField] private SfxPlay _sfxPlay;
@@ -92,6 +91,18 @@ public class NenchakMoveController : MonoBehaviour
     private bool _sfxPlayedDerable;
     /// <summary>スケール拡大SE再生可フラグ</summary>
     private bool _sfxPlayedScaleUp;
+
+    /// <summary>ネンチャク用の壁（縦）</summary>
+    private GameObject _clearVtclWall;
+    /// <summary>一度でも壁（縦）に衝突したことがある</summary>
+    private bool _wallRunedVtcl;
+    /// <summary>ネンチャク用の壁（横）</summary>
+    private GameObject _clearHztlWall;
+    /// <summary>一度でも壁（横）に衝突したことがある</summary>
+    private bool _wallRunedHztl;
+
+    /// <summary>プレイヤーの耐久値</summary>
+    [SerializeField] private NenchakHealth _health;
 
     void Start()
     {
@@ -106,11 +117,18 @@ public class NenchakMoveController : MonoBehaviour
         {
             _mainCameraTransform = Camera.main.transform;
         }
+        var color = _health.ReadMaterial();
+        _health.ReflectMaterial(color);
+        _health._defaultAlpha = _health.ReadMaterial().a;
     }
 
     private void FixedUpdate()
     {
         CharacterMovement();
+        if (_wallRunVertical == true)
+        {
+            _wallRunVerticalLast = _wallRunVertical;
+        }
     }
 
     private void Update()
@@ -138,6 +156,15 @@ public class NenchakMoveController : MonoBehaviour
         {
             StartCoroutine(PositionCash());
         }
+
+        // アニメーションのループ対策
+        if (_wallRunVertical == false && _wallRunHorizontal == false)
+        {
+            if (_animation.getAnimationLoop("Scotch_tape_outside", "MoveSpeed", _movedSpeedToAnimator) == true)
+            {
+                _animation.setAnimetionParameters("Scotch_tape_outside", "MoveSpeed", _movedSpeedToAnimator);
+            }
+        }
     }
 
     private void OnTriggerStay(Collider other)
@@ -146,9 +173,11 @@ public class NenchakMoveController : MonoBehaviour
         if (other.gameObject.tag.Equals(TagManager.VERTICAL_WALL))
         {
             _wallRunVertical = true;
+            _wallRunVerticalLast = false;
             _wallRunHorizontal = false;
             var r = other.gameObject.transform.position;
             _wallPosition = new Vector3(r.x, r.y, r.z);
+            _wallRunedVtcl = true;
         }
 
         // 横にある壁に対して横方向へ入力すると登る
@@ -162,12 +191,23 @@ public class NenchakMoveController : MonoBehaviour
             Debug.DrawRay(i, Vector3.left * _registMaxDistance, Color.green);
             if (Physics.Raycast(i, Vector3.right, _registMaxDistance) == true)
             {
-                _wallRunHorizontalMode = (int)WallRunHorizontalMode.RIGHT_IS_FRONT;
+                _wallRunHorizontalMode = (int)WallRunHorizontalFrontMode.RIGHT_IS_FRONT;
             }
             else if (Physics.Raycast(i, Vector3.left, _registMaxDistance) == true)
             {
-                _wallRunHorizontalMode = (int)WallRunHorizontalMode.LEFT_IS_FRONT;
+                _wallRunHorizontalMode = (int)WallRunHorizontalFrontMode.LEFT_IS_FRONT;
             }
+            _wallRunedHztl = true;
+        }
+
+        // 一度でも壁に衝突
+        if (_wallRunedVtcl == true)
+        {
+            _clearVtclWall = NenchakWallVerticalDecision.CheckClear(other.gameObject);
+        }
+        if (_wallRunedHztl == true)
+        {
+            _clearHztlWall = NenchakWallHorizontalDecision.CheckClear(other.gameObject);
         }
     }
 
@@ -198,6 +238,22 @@ public class NenchakMoveController : MonoBehaviour
             _sfxPlayedDerable = false;
             StopCoroutine(SleepTimeSoundEffectDerableDecrease());
         }
+
+        // 壁に衝突した情報をリセット
+        _clearVtclWall = null;
+        _wallRunedVtcl = false;
+        _clearHztlWall = null;
+        _wallRunedHztl = false;
+    }
+
+    /// <summary>
+    /// モードチェンジで実行するメソッド
+    /// </summary>
+    public void OnChange()
+    {
+        var c = _health.ReadMaterial();
+        _health.ReflectMaterial(c.r, c.g, c.b, _health._defaultAlpha);
+        _health._blinkingMaterialStart = false;
     }
 
     /// <summary>
@@ -208,20 +264,80 @@ public class NenchakMoveController : MonoBehaviour
         var h = CrossPlatformInputManager.GetAxis("Horizontal");
         var v = CrossPlatformInputManager.GetAxis("Vertical");
 
-        // 前後方向で登る制御
-        if (0 < _value._parameter && _value._adhesive == true && _wallRunVertical == true && _wallRunHorizontal == false)
+        if (0 < _health.Parameter && _health.Adhesive == true && _wallRunVertical == true && _wallRunHorizontal == false)
         {
+            // 前後方向で登る制御
             _moveVelocity.x = h * _groundSetMoveSpeed;
             _moveVelocity.y = v * _groundSetMoveSpeed;
         }
-        // 横方向で登る制御
-        else if (0 < _value._parameter && _value._adhesive == true && _wallRunHorizontal == true)
+        else if (0 < _health.Parameter && _health.Adhesive == true && _wallRunHorizontal == true)
         {
+            // 横方向で登る制御
             _moveVelocity.y = h * _groundSetMoveSpeed * _wallRunHorizontalMode;
             _moveVelocity.z = v * _groundSetMoveSpeed;
         }
-        // 壁を登らない
-        else
+        else if (0 < _health.Parameter && _health.Adhesive == true && _wallRunedVtcl == true && _wallRunedHztl == false)
+        {
+            // 耐久値がある内は縦方向の入力で登る壁に対して壁の外に出ない挙動にする
+            var wall = NenchakWallVerticalDecision.CheckClear(_clearVtclWall);
+            if (wall != null)
+            {
+                var direction = NenchakWallVerticalDecision.ShowDirection(wall);
+                if ((v < 0f && direction == (int)WallRunVerticalMode.TOP) || (0f < v && direction == (int)WallRunVerticalMode.BOTTOM))
+                {
+                    // 上には移動出来ないが下には移動出来る
+                    // 下には移動出来ないが上には移動出来る
+                    _moveVelocity.y = v * _groundSetMoveSpeed;
+                }
+                else if ((h < 0f && direction == (int)WallRunVerticalMode.RIGHT) || (0f < h && direction == (int)WallRunVerticalMode.LEFT))
+                {
+                    // 右には移動出来ないが左には移動出来る
+                    // 左には移動出来ないが右には移動出来る
+                    _moveVelocity.x = h * _groundSetMoveSpeed;
+                }
+            }
+        }
+        else if (0 < _health.Parameter && _health.Adhesive == true && _wallRunedHztl == true)
+        {
+            // 耐久値がある内は横方向の入力で登る壁に対して壁の外に出ない挙動にする
+            var wall = NenchakWallHorizontalDecision.CheckClear(_clearHztlWall);
+            if (wall != null)
+            {
+                if (_wallRunHorizontalMode == (int)WallRunHorizontalFrontMode.RIGHT_IS_FRONT)
+                {
+                    var direction = NenchakWallHorizontalDecision.ShowDirection(wall);
+                    if ((v < 0f && direction == (int)WallRunHorizontalMode.LEFT) || (0f < v && direction == (int)WallRunHorizontalMode.RIGHT))
+                    {
+                        // 奥には移動出来ないが手前には移動出来る
+                        // 手前には移動出来ないが奥には移動出来る
+                        _moveVelocity.z = v * _groundSetMoveSpeed;
+                    }
+                    else if ((h < 0f && direction == (int)WallRunHorizontalMode.TOP) || (0f < h && direction == (int)WallRunHorizontalMode.BOTTOM))
+                    {
+                        // 上には移動出来ないが下には移動出来る
+                        // 下には移動出来ないが上には移動出来る
+                        _moveVelocity.y = h * _groundSetMoveSpeed * _wallRunHorizontalMode;
+                    }
+                }
+                else if (_wallRunHorizontalMode == (int)WallRunHorizontalFrontMode.LEFT_IS_FRONT)
+                {
+                    var direction = NenchakWallHorizontalDecision.ShowDirection(wall);
+                    if ((v < 0f && direction == (int)WallRunHorizontalMode.LEFT) || (0f < v && direction == (int)WallRunHorizontalMode.RIGHT))
+                    {
+                        // 奥には移動出来ないが手前には移動出来る
+                        // 手前には移動出来ないが奥には移動出来る
+                        _moveVelocity.z = v * _groundSetMoveSpeed;
+                    }
+                    else if ((h < 0f && direction == (int)WallRunHorizontalMode.BOTTOM) || (0f < h && direction == (int)WallRunHorizontalMode.TOP))
+                    {
+                        // 上には移動出来ないが下には移動出来る
+                        // 下には移動出来ないが上には移動出来る
+                        _moveVelocity.y = h * _groundSetMoveSpeed * _wallRunHorizontalMode;
+                    }
+                }
+            }
+        }
+        else if (_health.Parameter <= 0f && _health.Adhesive == false)
         {
             _moveVelocity.x = 0f;
             // 重力による加速
@@ -234,15 +350,6 @@ public class NenchakMoveController : MonoBehaviour
         // 値を0へ戻す
         _moveVelocity = Vector3.zero;
         _movedSpeedToAnimator = 0f;
-    }
-
-    /// <summary>
-    /// 移動速度に応じて各オブジェクトを回転させる
-    /// </summary>
-    private void RollObject()
-    {
-        _tapeOutside.eulerAngles += new Vector3(0, 0, _rollSpeed * -1);
-        _morumotto.eulerAngles += new Vector3(_rollSpeed, 0, 0);
     }
 
     /// <summary>
@@ -265,7 +372,11 @@ public class NenchakMoveController : MonoBehaviour
 
         // 移動スピードをanimatorに反映
         _movedSpeedToAnimator = new Vector3(_moveVelocity.x, _moveVelocity.y, _moveVelocity.z).magnitude;
-        _animator.SetFloat("MoveSpeed", _movedSpeedToAnimator);
+        if (0 < _health.Parameter && _health.Adhesive == true)
+        {
+            _animation.setAnimetionParameters("Morumotto", "MoveSpeed", _movedSpeedToAnimator);
+            _animation.setAnimetionParameters("Scotch_tape_outside", "MoveSpeed", _movedSpeedToAnimator);
+        }
         if (0 < _movedSpeedToAnimator)
         {
             PlaySoundEffectMove();
@@ -276,18 +387,29 @@ public class NenchakMoveController : MonoBehaviour
         }
 
         // テープの耐久ゲージを減らす
-        if (0 < _movedSpeedToAnimator && 0 < _value._parameter && _value._adhesive == true && _wallRunVertical == true)
+        if (0 < _movedSpeedToAnimator && 0 < _health.Parameter && _health.Adhesive == true && (_wallRunVertical == true || _wallRunHorizontal == true))
         {
-            RollObject();
             PlaySoundEffectDerableDecrease();
 
-            _value._parameter -= Time.deltaTime;
-            Debug.Log("耐久値：" + _value._parameter);
-            if (_value._parameter <= 0)
+            _health.Parameter -= Time.deltaTime;
+            var m = _health.ReadMaterial();
+            var a = _health.CalcAlpha(_health.Parameter);
+            _health.ReflectMaterial(m.r, m.g, m.b, a);
+            Debug.Log("耐久値：" + _health.Parameter);
+            if (0f < _health.Parameter && _health.Parameter < 2f)
             {
-                _value._parameter = 0f;
-                _value._adhesive = false;
+                if (_health._blinkingMaterialStart == false)
+                {
+                    _health._blinkingMaterialStart = true;
+                    StartCoroutine(_health.BlinkingMaterial());
+                }
+            }
+            else if (_health.Parameter <= 0)
+            {
+                _health.Parameter = 0f;
+                _health.Adhesive = false;
                 Debug.Log("耐久値無し");
+                _animation.PauseAnimation("Scotch_tape_outside");
             }
         }
     }
@@ -354,6 +476,70 @@ public class NenchakMoveController : MonoBehaviour
                 }
             }
         }
+        else if (_wallRunHorizontal == true)
+        {
+            if (0 < Mathf.Abs(_moveVelocity.y) || 0 < Mathf.Abs(_moveVelocity.z))
+            {
+                if (Mathf.Abs(_moveVelocity.y) < Mathf.Abs(_moveVelocity.z))
+                {
+                    if (_wallRunHorizontalMode == (int)WallRunHorizontalFrontMode.RIGHT_IS_FRONT)
+                    {
+                        // 正面なら縦向き
+                        if (0f < _moveVelocity.z)
+                        {
+                            _transform.eulerAngles = new Vector3(_transform.eulerAngles.x, 0f, 90f);
+                        }
+                        else if (_moveVelocity.z < 0f)
+                        {
+                            _transform.eulerAngles = new Vector3(_transform.eulerAngles.x, 180f, -90f);
+                        }
+                    }
+                    else if (_wallRunHorizontalMode == (int)WallRunHorizontalFrontMode.LEFT_IS_FRONT)
+                    {
+                        // 正面なら縦向き
+                        if (0f < _moveVelocity.z)
+                        {
+                            _transform.eulerAngles = new Vector3(_transform.eulerAngles.x, 0f, -90f);
+                        }
+                        else if (_moveVelocity.z < 0f)
+                        {
+                            _transform.eulerAngles = new Vector3(_transform.eulerAngles.x, 180f, 90f);
+                        }
+                    }
+                }
+                else
+                {
+                    // 右側に壁があった際の床上移動と壁移動
+                    if (_wallRunHorizontalMode == (int)WallRunHorizontalFrontMode.RIGHT_IS_FRONT)
+                    {
+                        // 左向きなら横向き
+                        if (0f < _moveVelocity.y)
+                        {
+                            _transform.eulerAngles = new Vector3(_transform.eulerAngles.x, 90f, 0f);
+                        }
+                        // 右向きなら横向き
+                        else if (_moveVelocity.y < 0f)
+                        {
+                            _transform.eulerAngles = new Vector3(_transform.eulerAngles.x, -90f, 0f);
+                        }
+                    }
+                    // 左側に壁があった際の床上移動と壁移動
+                    else if (_wallRunHorizontalMode == (int)WallRunHorizontalFrontMode.LEFT_IS_FRONT)
+                    {
+                        // 左向きなら横向き
+                        if (0f < _moveVelocity.y)
+                        {
+                            _transform.eulerAngles = new Vector3(_transform.eulerAngles.x, -90f, 0f);
+                        }
+                        // 右向きなら横向き
+                        else if (_moveVelocity.y < 0f)
+                        {
+                            _transform.eulerAngles = new Vector3(_transform.eulerAngles.x, 90f, 0f);
+                        }
+                    }
+                }
+            }
+        }
         else
         {
             _transform.LookAt(_transform.position + new Vector3(_moveVelocity.x, 0, _moveVelocity.z));
@@ -370,6 +556,30 @@ public class NenchakMoveController : MonoBehaviour
             _sfxPlayedMove = true;
             _sfxPlay.PlaySFX("se_move");
         }
+    }
+
+    /// <summary>
+    /// 接地判定
+    /// </summary>
+    /// <returns>接地状態か否か</returns>
+    private bool IsGrounded()
+    {
+        var result = _characterController.isGrounded;
+
+        if (result == false)
+        {
+            Debug.DrawRay(_transform.position + Vector3.up * 0.1f, Vector3.down * _registMaxDistance, Color.green);
+            var ray = new Ray(_transform.position + Vector3.up * 0.1f, Vector3.down);
+            foreach (RaycastHit hit in Physics.RaycastAll(ray, _registMaxDistance))
+            {
+                if (hit.collider.gameObject.layer == (int)LayerManager.FIELD)
+                {
+                    result = true;
+                }
+            }
+        }
+
+        return result;
     }
 
     /// <summary>

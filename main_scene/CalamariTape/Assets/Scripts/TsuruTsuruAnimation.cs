@@ -61,12 +61,12 @@ public class TsuruTsuruAnimation : MonoBehaviour
             }
             else
             {
-                _state._animatorTape.speed = 0f;
+                _state._animatorTape.SetFloat(name, value);
             }
         }
         else if (animatorName.Equals(_state._animatorMarmot.name))
         {
-            _state._animatorTape.SetFloat(name, value);
+            _state._animatorMarmot.SetFloat(name, value);
         }
         else
         {

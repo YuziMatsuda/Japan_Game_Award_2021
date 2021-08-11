@@ -2,16 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Controller.Wall
+namespace Controller.WallHorizontal
 {
     /// <summary>
     /// 横にある壁に対して横方向へ入力すると登るモードオプション
     /// </summary>
     public enum WallRunHorizontalMode
     {
-        /// <summary>1：右方向入力で登り、左方向で下りる</summary>
-        RIGHT_IS_FRONT = 1,
-        /// <summary>-1：左方向入力で登り、右方向で下りる</summary>
-        LEFT_IS_FRONT = -1
+        /// <summary>0：上に配置</summary>
+        TOP = 0,
+        /// <summary>1：右に配置</summary>
+        RIGHT = 1,
+        /// <summary>2：下に配置</summary>
+        BOTTOM = 2,
+        /// <summary>3：左に配置</summary>
+        LEFT = 3
     }
 }
