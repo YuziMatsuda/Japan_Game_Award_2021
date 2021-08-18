@@ -29,6 +29,7 @@ public class Title_Draw_Controller : MonoBehaviour
     private float data_delete_complete_position_y;                      // データ削除完了画像のX軸
     private float data_delete_complete_position_x;                      // データ削除完了画像のY軸
     private float timer;                                                // フェード用のタイマー
+    [SerializeField] private float max_rect_y; 
     [SerializeField] private float alpha;                               // フェードのα値
     private float alpha_speed;                                          // フェードの速度
     float red, green, blue;
@@ -205,6 +206,8 @@ public class Title_Draw_Controller : MonoBehaviour
         // ３秒経過後にフェードアウト
         if (alpha <= 0)
         {
+            // タイマー初期化
+            timer = 0.0f;
             player.sence = Player.Character_Sence.PUSH_GAME_START;
         }
     }
@@ -324,7 +327,7 @@ public class Title_Draw_Controller : MonoBehaviour
             player_data.delete_start = true;
         }
         */
-        float max_rect_y = 310.0f;
+        // float max_rect_y = 310.0f;
         if (data_delete_complete_rect.anchoredPosition.y >= max_rect_y)
         {
             data_delete_complete_rect.anchoredPosition -= new Vector2(0.0f, data_delete_complete_position_y * Time.deltaTime * 1.0f);
@@ -336,7 +339,7 @@ public class Title_Draw_Controller : MonoBehaviour
             // 2秒経過した後に「GameSelect_Draw」へ遷移
             if (timer >= EndTime)
             {
-                timer = 0;
+                timer = 0.0f;
                 data_dalete_complete.SetActive(false);
                 player.set_Data_Complete_FalseFlg();
                 data_delete_complete_position_y = 450.0f;

@@ -1334,6 +1334,7 @@ MonoBehaviour:
   load_now: {fileID: 124578196}
   data_dalete_complete: {fileID: 876447391}
   fade_in: {fileID: 676600816}
+  max_rect_y: 310
   alpha: 0
 --- !u!114 &1245046215
 MonoBehaviour:
