@@ -7,6 +7,8 @@ public class Select_Sound_Manager : MonoBehaviour
     [SerializeField] private AudioClip se_decision;
     [SerializeField] private AudioClip se_cancel;
     [SerializeField] private AudioClip se_scroll;
+    [SerializeField] private int min_scroll_number;         // 最小のスクロール値 (０固定)
+    [SerializeField] private int max_scroll_number;         // 最大のスクロール値（最大ステージ数）
 
     private Player player;
     private AudioSource audioSource;
@@ -40,7 +42,26 @@ public class Select_Sound_Manager : MonoBehaviour
     {
         if (Input.GetButtonDown("Left_Input") || Input.GetButtonDown("Right_Input"))
         {
-            if(player.select_stage_number > 0 && player.select_stage_number < 4)
+            // 最小スクロール値(0)と最大スクロール(最大ステージ数)の間に赤枠がある場合
+            if(player.select_stage_number > min_scroll_number && player.select_stage_number < max_scroll_number)
+            {
+                audioSource.PlayOneShot(se_scroll);
+            }
+        }
+
+        if (Input.GetButtonDown("Right_Input"))
+        {
+            // 最小スクロール値(0)に赤枠がある場合
+            if (player.select_stage_number == min_scroll_number)
+            {
+                audioSource.PlayOneShot(se_scroll);
+            }
+        }
+
+        if (Input.GetButtonDown("Left_Input"))
+        {
+            // 最大スクロール(最大ステージ数)に赤枠がある場合
+            if (player.select_stage_number == max_scroll_number)
             {
                 audioSource.PlayOneShot(se_scroll);
             }

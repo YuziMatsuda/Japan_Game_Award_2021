@@ -976,6 +976,8 @@ MonoBehaviour:
   se_decision: {fileID: 8300000, guid: a0d39eec9bc037b4ba4f7fdb2c477601, type: 3}
   se_cancel: {fileID: 8300000, guid: e7ea656ec95abdc4f94a15c6595d90d0, type: 3}
   se_scroll: {fileID: 8300000, guid: 2954eabc092144c4b8f04563f4711016, type: 3}
+  min_scroll_number: 0
+  max_scroll_number: 4
 --- !u!1 &1010206036
 GameObject:
   m_ObjectHideFlags: 0
