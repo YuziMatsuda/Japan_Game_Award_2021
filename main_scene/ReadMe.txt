@@ -1,3 +1,133 @@
+2021/08/27 09:08
+★縦向きの動く壁（カラマリ/ネンチャク）モード対応
+・動く壁の配置変更
+main_scene\CalamariTape\Assets\Scenes\Stage6_Scene.unity
+・カラマリモードにて縦向きの動く壁に対する移動制御の追加
+main_scene\CalamariTape\Assets\Scripts\CalamariMoveController.cs
+main_scene\CalamariTape\Assets\Scripts\CalamariWallMove.cs
+・ネンチャクモードにて縦向きの動く壁に対する移動制御の追加
+main_scene\CalamariTape\Assets\Scripts\NenchakMoveController.cs
+main_scene\CalamariTape\Assets\Scripts\NenchakWallMove.cs
+・ギミック制御処理の対象に縦向きの動く壁を追加
+main_scene\CalamariTape\Assets\Scripts\StopGimmick.cs
+・動く壁を動かすスクリプトコンポーネントを定数化
+main_scene\CalamariTape\Assets\Scripts\NotAttached\DeadNullReference.cs
+main_scene\CalamariTape\Assets\Scripts\Common\ComponentManager.cs
+・【削除】動く壁を動かすスクリプト名を変更
+main_scene\CalamariTape\Assets\Scripts\MoveVerticalWall.cs
+・【追加】動く壁を動かすスクリプト名を変更
+main_scene\CalamariTape\Assets\Scripts\MoveWalls.cs
+・縦向きの動く壁をプレハブ化
+main_scene\CalamariTape\Assets\Prefabs\MoveHorizontalWall.prefab
+
+2021/08/25 9:15
+★ネンチャクモードにて横向きの動く壁対応
+・横向きの動く壁に範囲外判定オブジェクト追加
+main_scene\CalamariTape\Assets\Prefabs\MoveVerticalWall.prefab
+・各ステージの情報を変更
+main_scene\CalamariTape\Assets\Scenes\main.unity
+main_scene\CalamariTape\Assets\Scenes\Stage2_Scene.unity
+main_scene\CalamariTape\Assets\Scenes\Stage3_Scene.unity
+main_scene\CalamariTape\Assets\Scenes\Stage4_Scene.unity
+main_scene\CalamariTape\Assets\Scenes\Stage5_Scene.unity
+main_scene\CalamariTape\Assets\Scenes\Stage6_Scene.unity
+・共通処理の名称変更
+main_scene\CalamariTape\Assets\Scripts\CalamariMoveController.cs
+main_scene\CalamariTape\Assets\Scripts\CalamariWallMove.cs
+main_scene\CalamariTape\Assets\Scripts\NotAttached\CalamariStateConf.cs
+・ネンチャクモードへ横向きの動く壁
+main_scene\CalamariTape\Assets\Scripts\NenchakMoveController.cs
+main_scene\CalamariTape\Assets\Scripts\NenchakState.cs
+main_scene\CalamariTape\Assets\Scripts\NenchakScaler.cs
+main_scene\CalamariTape\Assets\Scripts\NenchakWallMove.cs
+
+2021/08/22 14:52
+★新ギミックの動く壁をカラマリモードで移動中の処理を追加、メニュー画面表示の際にギミック停止処理を追加
+・各ステージにてギミック停止スクリプトを追加
+main_scene\CalamariTape\Assets\Scenes\main.unity
+main_scene\CalamariTape\Assets\Scenes\Stage2_Scene.unity
+main_scene\CalamariTape\Assets\Scenes\Stage3_Scene.unity
+main_scene\CalamariTape\Assets\Scenes\Stage4_Scene.unity
+main_scene\CalamariTape\Assets\Scenes\Stage5_Scene.unity
+main_scene\CalamariTape\Assets\Scenes\Stage6_Scene.unity
+・カラマリモードにて動く壁を移動中の処理を適用
+main_scene\CalamariTape\Assets\Scripts\CalamariMoveController.cs
+・クリア画面表示の際にギミックを停止する処理を追加
+main_scene\CalamariTape\Assets\Scripts\GoalEvent.cs
+・横向きの動く壁へギミック停止処理を追加
+main_scene\CalamariTape\Assets\Scripts\MoveVerticalWall.cs
+・ポーズ画面表示の際にギミックを停止・開始する処理を追加
+main_scene\CalamariTape\Assets\Scripts\PauseWindowManager.cs
+・ギミック停止スクリプトを作成
+main_scene\CalamariTape\Assets\Scripts\StopGimmick.cs
+
+2021/08/21 20:34
+★（途中）新ギミックの動く壁の実装
+・ステージ追加により、セーブデータを更新
+main_scene\CalamariTape\Assets\data\data.json
+・各ステージのカラマリモードのコンポーネント情報を更新
+main_scene\CalamariTape\Assets\Scenes\main.unity
+main_scene\CalamariTape\Assets\Scenes\Stage2_Scene.unity
+main_scene\CalamariTape\Assets\Scenes\Stage3_Scene.unity
+main_scene\CalamariTape\Assets\Scenes\Stage4_Scene.unity
+main_scene\CalamariTape\Assets\Scenes\Stage5_Scene.unity
+・カラマリモードのプレイヤー情報を各コンポネントへ分割
+main_scene\CalamariTape\Assets\Scripts\CalamariMoveController.cs
+main_scene\CalamariTape\Assets\Scripts\CalamariState.cs
+main_scene\CalamariTape\Assets\Scripts\CalamariScaler.cs
+main_scene\CalamariTape\Assets\Scripts\CalamariWallMove.cs
+・セーブ処理へ新ステージ「Stage6_Scene」追加
+main_scene\CalamariTape\Assets\Scripts\SaveControllerScene.cs
+main_scene\CalamariTape\Assets\Scripts\Common\StageNameManager.cs
+・動く壁の処理を追加
+main_scene\CalamariTape\Assets\Scripts\MoveVerticalWall.cs
+main_scene\CalamariTape\Assets\Scripts\Common\WallRunMoveVerticalMode.cs
+main_scene\CalamariTape\Assets\Scripts\NotAttached\DeadNullReference.cs
+・カラマリモードの大きさ調整処理を別ロジックにて追加
+main_scene\CalamariTape\Assets\Scripts\NotAttached\CalamariStateConf.cs
+
+2021/08/13 14:50
+★メニュー画面、クリア画面の不具合修正
+・各ステージのメニュー画面、クリア画面オブジェクト更新
+main_scene\CalamariTape\Assets\Scenes\main.unity
+main_scene\CalamariTape\Assets\Scenes\Stage2_Scene.unity
+main_scene\CalamariTape\Assets\Scenes\Stage3_Scene.unity
+main_scene\CalamariTape\Assets\Scenes\Stage4_Scene.unity
+main_scene\CalamariTape\Assets\Scenes\Stage5_Scene.unity
+・メニュー画面、クリア画面を表示中にクリックにて項目非選択とならないよう修正
+main_scene\CalamariTape\Assets\Scripts\ClearManager.cs
+main_scene\CalamariTape\Assets\Scripts\Menu.cs
+main_scene\CalamariTape\Assets\Scripts\UIController.cs
+・チュートリアルメッセージ表示中にメニュー画面表示可能として、メニュー画面表示中はチュートリアルメッセージのテキスト送りを停止する
+main_scene\CalamariTape\Assets\Scripts\MessageManager.cs
+main_scene\CalamariTape\Assets\Scripts\MessageScrollText.cs
+main_scene\CalamariTape\Assets\Scripts\PauseWindowManager.cs
+main_scene\CalamariTape\Assets\Scripts\Common\TagManager.cs
+・タグ管理スクリプトへチュートリアルメッセージタグを追加
+main_scene\CalamariTape\ProjectSettings\TagManager.asset
+・ゲームオブジェクトの名前を管理するスクリプトを作成
+main_scene\CalamariTape\Assets\Scripts\Common\NameManager.cs
+
+2021/08/12 17:33
+★各ステージにてオブジェクトが重なった時に点滅しないよう修正、ブロック系の見た目修正
+・各ステージにてオブジェクトが重なった時に点滅しないよう修正、ブロック系の見た目修正
+main_scene\CalamariTape\Assets\Scenes\main.unity
+main_scene\CalamariTape\Assets\Scenes\Stage2_Scene.unity
+main_scene\CalamariTape\Assets\Scenes\Stage3_Scene.unity
+main_scene\CalamariTape\Assets\Scenes\Stage4_Scene.unity
+main_scene\CalamariTape\Assets\Scenes\Stage5_Scene.unity
+
+・登れない壁ブロック、登れる壁ブロック、床マテリアルを作成
+main_scene\CalamariTape\Assets\Prototype Textures\Materials\
+main_scene\CalamariTape\Assets\Scenes\Stage3_Scene\
+main_scene\CalamariTape\Assets\Wood Patterns\Wood Patterns Demo\Materials\
+main_scene\CalamariTape\Assets\Prototype Textures\Materials\Pink\
+main_scene\CalamariTape\Assets\Prototype Textures\Materials\Yellow\
+main_scene\CalamariTape\Assets\Scenes\Stage2_Scene\
+main_scene\CalamariTape\Assets\Scenes\Stage3_Scene\
+main_scene\CalamariTape\Assets\Scenes\Stage4_Scene\
+main_scene\CalamariTape\Assets\Wood Patterns\Wood Patterns Demo\Materials\
+
 2021/08/11 19:00
 ★カラマリモードにて壁移動の振る舞い、耐久値による見た目の変更
 ・各ステージにてカラマリモードのコンポネント情報の更新、壁オブジェクトのタグ、レイヤー情報の変更

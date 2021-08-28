@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityStandardAssets.CrossPlatformInput;
 using Controller.WallHorizontal;
-using Const.Tag;
+using Controller.AllmodeState;
 using Const.Layer;
 
 /// <summary>
@@ -19,11 +19,6 @@ public class CalamariMoveController : MonoBehaviour
     private float _airSetMoveSpeed;
     /// <summary>移動速度（最大）</summary>
     [SerializeField] private float _maxMoveSpeed = 6f;
-
-    /// <summary>拡大率</summary>
-    [SerializeField,Range(1, 4)] private float _scale = 1;
-    /// <summary>拡大率の一時保存</summary>
-    private float _registedScale;
 
     /// <summary>プレイヤー移動のコントローラー</summary>
     [SerializeField] private CharacterController _characterController;
@@ -63,19 +58,8 @@ public class CalamariMoveController : MonoBehaviour
     /// <summary>移動速度を一時停止する制御フラグ</summary>
     [SerializeField] private bool _calamariStop;
 
-    /// <summary>重力値の角度</summary>
-    [SerializeField] private Vector3 _wallPosition;
-
-    /// <summary>壁走り（縦）</summary>
-    [SerializeField] private bool _wallRunVertical = false;
-    /// <summary>壁走り（横）</summary>
-    [SerializeField] private bool _wallRunHorizontal = false;
-    /// <summary>RayCast判定の距離値</summary>
-    [SerializeField] private float _maxDistance = 2.3f;
-    /// <summary>RayCast判定の距離の処理内で扱う</summary>
-    private float _registMaxDistance;
-    /// <summary>RayCast判定の距離値（最大）</summary>
-    [SerializeField] private float _maxMaxDistance = 8.5f;
+    /// <summary>壁走り</summary>
+    [SerializeField] private CalamariWallMove _wallMove;
 
     /// <summary>2点間の距離を測る際の一つ目を記録したか否か</summary>
     private bool _distanceFirstPointSaved;
@@ -86,13 +70,6 @@ public class CalamariMoveController : MonoBehaviour
     [SerializeField] private SfxPlay _sfxPlay;
     /// <summary>SE再生中フラグ</summary>
     private bool _sfxPlayedJump;
-
-    /// <summary>
-    /// 横にある壁に対して横方向へ入力すると登るモード<para/>
-    /// 1：右方向入力で登り、左方向で下りる<para/>
-    /// -1：左方向入力で登り、右方向で下りる
-    /// </summary>
-    private int _wallRunHorizontalMode = (int)WallRunHorizontalFrontMode.RIGHT_IS_FRONT;
 
     /// <summary>カラマリモードのアニメーション</summary>
     [SerializeField] private CalamariAnimation _animation;
@@ -108,24 +85,17 @@ public class CalamariMoveController : MonoBehaviour
     private bool _sfxPlayedMove;
     /// <summary>耐久ゲージ減少SE再生中フラグ</summary>
     private bool _sfxPlayedDerable;
-    /// <summary>スケール拡大SE再生可フラグ</summary>
-    private bool _sfxPlayedScaleUp;
-
-    /// <summary>無重力状態フラグ</summary>
-    private bool _zeroGravity;
-    /// <summary>重力有効状態フラグ</summary>
-    private bool _enableGravity;
 
     /// <summary>プレイヤーの耐久値</summary>
     [SerializeField] private CalamariHealth _health;
 
+    /// <summary>プレイヤーの大きさ</summary>
+    [SerializeField] private CalamariScaler _scaler;
+
     void Start()
     {
         _transform = this.transform;
-        _registedScale = _scale;
         _groundSetMoveSpeed = _moveSpeed;
-        _registMaxDistance = _maxDistance;
-        _sfxPlayedScaleUp = true;
 
         _gravityAcceleration = 0f;
         if (Camera.main != null)
@@ -147,7 +117,7 @@ public class CalamariMoveController : MonoBehaviour
 
     private void Update()
     {
-        if (_wallRunVertical == false && _wallRunHorizontal == false)
+        if (_wallMove._wallRunVertical == false && _wallMove._wallRunHorizontal == false)
         {
             if (IsGrounded() && _jumpAction != true)
             {
@@ -155,19 +125,14 @@ public class CalamariMoveController : MonoBehaviour
             }
         }
 
-        ScaleChangeForController();
-        ScaleChangeForMouse();
+        _scaler.ScaleChangeForController();
+        _scaler.ScaleChangeForMouse();
 
-        _registedScale = _scale;
-        _transform.localScale = new Vector3(1, 1, 1) * _scale;
         // 大きさに合わせて速度を計算
-        _groundSetMoveSpeed = ParameterMatchScale(_moveSpeed, _maxMoveSpeed);
+        _groundSetMoveSpeed = AllmodeStateConf.ParameterMatchScale(_moveSpeed, _maxMoveSpeed, _scaler.Scale);
 
         // 大きさに合わせてジャンプを計算
-        _registedJumpMax = ParameterMatchScale(_jumpMax, _maxJumpMax);
-
-        // 大きさに合わせてRayの距離を計算
-        _registMaxDistance = ParameterMatchScale(_maxDistance, _maxMaxDistance);
+        _registedJumpMax = AllmodeStateConf.ParameterMatchScale(_jumpMax, _maxJumpMax, _scaler.Scale);
 
         // 空中の移動速度補正
         if (IsGrounded() == false)
@@ -182,86 +147,18 @@ public class CalamariMoveController : MonoBehaviour
         }
 
         // アニメーションのループ対策
-        if (_wallRunVertical == false && _wallRunHorizontal == false)
+        if (_wallMove._wallRunVertical == false && _wallMove._wallRunHorizontal == false)
         {
             if (_animation.getAnimationLoop("Scotch_tape_outside", "MoveSpeed", _movedSpeedToAnimator) == true)
             {
                 _animation.setAnimetionParameters("Scotch_tape_outside", "MoveSpeed", _movedSpeedToAnimator);
             }
         }
-
-        // 壁の接着判定
-        if (IsWallGrounded() == true)
-        {
-            StartCoroutine(EnableGravity());
-        }
-    }
-
-    private void OnTriggerStay(Collider other)
-    {
-        // 前後にある壁に対して前後方向へ入力すると登る
-        if (other.gameObject.tag.Equals(TagManager.VERTICAL_WALL))
-        {
-            _wallRunVertical = true;
-            _wallRunHorizontal = false;
-            var r = other.gameObject.transform.position;
-            _wallPosition = new Vector3(r.x, r.y, r.z);
-        }
-
-        // 横にある壁に対して横方向へ入力すると登る
-        if (other.gameObject.tag.Equals(TagManager.HORIZONTAL_WALL))
-        {
-            _wallRunHorizontal = true;
-            _wallRunVertical = false;
-
-            var i = _transform.position;
-            Debug.DrawRay(i, Vector3.right * _registMaxDistance, Color.green);
-            Debug.DrawRay(i, Vector3.left * _registMaxDistance, Color.green);
-            if (Physics.Raycast(i, Vector3.right, _registMaxDistance) == true)
-            {
-                _wallRunHorizontalMode = (int) WallRunHorizontalFrontMode.RIGHT_IS_FRONT;
-            }
-            else if (Physics.Raycast(i, Vector3.left, _registMaxDistance) == true)
-            {
-                _wallRunHorizontalMode = (int) WallRunHorizontalFrontMode.LEFT_IS_FRONT;
-            }
-        }
-    }
-
-    private void OnTriggerExit(Collider other)
-    {
-        // 前後方向で登る挙動を不可にする
-        if (other.gameObject.tag.Equals(TagManager.VERTICAL_WALL))
-        {
-            _wallRunVertical = false;
-        }
-
-        // 横方向で登る挙動を不可にする
-        if (other.gameObject.tag.Equals(TagManager.HORIZONTAL_WALL))
-        {
-            _wallRunHorizontal = false;
-            StartCoroutine(ZeroGravity());
-        }
     }
 
     private void OnEnable()
     {
-        var i = transform.position;
-        Debug.DrawRay(i, Vector3.right * _registMaxDistance, Color.green);
-        Debug.DrawRay(i, Vector3.left * _registMaxDistance, Color.green);
-        // 左右に壁が無くかつ壁昇りモードが残っていた場合はフラグをリセット
-        if (Physics.Raycast(i, Vector3.right, _registMaxDistance) == false && Physics.Raycast(i, Vector3.left, _registMaxDistance) == false && _wallRunHorizontal == true)
-        {
-            _wallRunHorizontal = false;
-        }
-        // 前後に壁が無くかつ壁昇りモードが残っていた場合はフラグをリセット
-        if (Physics.Raycast(i, Vector3.forward, _registMaxDistance) == false && Physics.Raycast(i, Vector3.back, _registMaxDistance) == false && _wallRunVertical == true)
-        {
-            _wallRunVertical = false;
-        }
-
         _calamariStop = false;
-        _scale = 1.0f;
 
         // 切り替えた際にSEがオフになっていない場合はオフにする
         if (_sfxPlayedDerable == true)
@@ -276,12 +173,13 @@ public class CalamariMoveController : MonoBehaviour
     /// </summary>
     public void OnChange()
     {
-        _zeroGravity = false;
-        _enableGravity = false;
+        _wallMove._zeroGravity = false;
+        _wallMove._enableGravity = false;
 
         var c = _health.ReadMaterial();
         _health.ReflectMaterial(c.r, c.g, c.b, _health._defaultAlpha);
         _health._blinkingMaterialStart = false;
+        _wallMove._rigidbodyVelocity = Vector3.zero;
     }
 
     /// <summary>
@@ -315,14 +213,14 @@ public class CalamariMoveController : MonoBehaviour
         }
 
         // 前後方向で登る制御
-        if (0 < _health.Parameter && _health.Adhesive == true && _wallRunVertical == true && _wallRunHorizontal == false)
+        if (0 < _health.Parameter && _health.Adhesive == true && _wallMove._wallRunVertical == true && _wallMove._wallRunHorizontal == false)
         {
-            Debug.DrawRay(_transform.position, Vector3.down * _registMaxDistance, Color.green);
+            Debug.DrawRay(_transform.position, Vector3.down * _wallMove._registMaxDistance, Color.green);
             if (0f < v)
             {
                 _moveVelocity.y = v * speed;
             }
-            else if (v < 0f && Physics.Raycast(_transform.position, Vector3.down, _registMaxDistance) == true)
+            else if (v < 0f && Physics.Raycast(_transform.position, Vector3.down, _wallMove._registMaxDistance) == true)
             {
                 _moveVelocity.z = v * speed;
             }
@@ -335,27 +233,29 @@ public class CalamariMoveController : MonoBehaviour
                 _moveVelocity.y = 0f;
             }
             _moveVelocity.x = h * speed;
+            // 動く壁だった場合は壁の移動位置に合わせてプレイヤーを移動させる
+            _moveVelocity += _wallMove._rigidbodyVelocity;
         }
         // 横方向で登る制御
-        else if (0 < _health.Parameter && _health.Adhesive == true && _wallRunHorizontal == true)
+        else if (0 < _health.Parameter && _health.Adhesive == true && _wallMove._wallRunHorizontal == true)
         {
-            if (_enableGravity == false)
+            if (_wallMove._enableGravity == false)
             {
                 // 右側に壁があった際の床上移動と壁移動
-                if (_wallRunHorizontalMode == (int)WallRunHorizontalFrontMode.RIGHT_IS_FRONT)
+                if (_wallMove._wallRunHorizontalMode == (int)WallRunHorizontalFrontMode.RIGHT_IS_FRONT)
                 {
-                    Debug.DrawRay(_transform.position, Vector3.down * _registMaxDistance, Color.green);
+                    Debug.DrawRay(_transform.position, Vector3.down * _wallMove._registMaxDistance, Color.green);
                     if (0f < h)
                     {
-                        _moveVelocity.y = h * speed * _wallRunHorizontalMode;
+                        _moveVelocity.y = h * speed * _wallMove._wallRunHorizontalMode;
                     }
-                    else if (h < 0f && Physics.Raycast(_transform.position, Vector3.down, _registMaxDistance) == true)
+                    else if (h < 0f && Physics.Raycast(_transform.position, Vector3.down, _wallMove._registMaxDistance) == true)
                     {
                         _moveVelocity.x = h * speed;
                     }
                     else if (h < 0f)
                     {
-                        _moveVelocity.y = h * speed * _wallRunHorizontalMode;
+                        _moveVelocity.y = h * speed * _wallMove._wallRunHorizontalMode;
                     }
                     else
                     {
@@ -363,20 +263,20 @@ public class CalamariMoveController : MonoBehaviour
                     }
                 }
                 // 左側に壁があった際の床上移動と壁移動
-                else if (_wallRunHorizontalMode == (int)WallRunHorizontalFrontMode.LEFT_IS_FRONT)
+                else if (_wallMove._wallRunHorizontalMode == (int)WallRunHorizontalFrontMode.LEFT_IS_FRONT)
                 {
-                    Debug.DrawRay(_transform.position, Vector3.down * _registMaxDistance, Color.green);
+                    Debug.DrawRay(_transform.position, Vector3.down * _wallMove._registMaxDistance, Color.green);
                     if (h < 0f)
                     {
-                        _moveVelocity.y = h * speed * _wallRunHorizontalMode;
+                        _moveVelocity.y = h * speed * _wallMove._wallRunHorizontalMode;
                     }
-                    else if (0f < h && Physics.Raycast(_transform.position, Vector3.down, _registMaxDistance) == true)
+                    else if (0f < h && Physics.Raycast(_transform.position, Vector3.down, _wallMove._registMaxDistance) == true)
                     {
                         _moveVelocity.x = h * speed;
                     }
                     else if (0f < h)
                     {
-                        _moveVelocity.y = h * speed * _wallRunHorizontalMode;
+                        _moveVelocity.y = h * speed * _wallMove._wallRunHorizontalMode;
                     }
                     else
                     {
@@ -389,6 +289,8 @@ public class CalamariMoveController : MonoBehaviour
                 ControllGravity();
             }
             _moveVelocity.z = v * speed;
+            // 動く壁だった場合は壁の移動位置に合わせてプレイヤーを移動させる
+            _moveVelocity += _wallMove._rigidbodyVelocity;
         }
         // 壁を登らない
         else
@@ -417,8 +319,8 @@ public class CalamariMoveController : MonoBehaviour
                 _moveVelocity.z = v * speed;
             }
         }
-
-        if (_wallRunVertical == false && _wallRunHorizontal == false)
+        // 壁を登らない
+        if (_wallMove._wallRunVertical == false && _wallMove._wallRunHorizontal == false)
         {
             if (_mainCameraTransform != null)
             {
@@ -430,8 +332,8 @@ public class CalamariMoveController : MonoBehaviour
                 _moveVelocity = _moveVelocity.z * Vector3.forward + _moveVelocity.x * Vector3.right;
             }
         }
-
-        if ((_wallRunVertical == false && _wallRunHorizontal == false) || _health.Parameter <= 0)
+        // 壁を登らない（または耐久値ゼロ）
+        if ((_wallMove._wallRunVertical == false && _wallMove._wallRunHorizontal == false) || _health.Parameter <= 0)
         {
             if (IsGrounded() == true && _jumpAction == true)
             {
@@ -490,37 +392,13 @@ public class CalamariMoveController : MonoBehaviour
         _gravityAcceleration += Time.deltaTime;
         var g = 1f;
         var mx = 1f;
-        if (_zeroGravity == true)
+        if (_wallMove._zeroGravity == true)
         {
             g = 0f;
             mx = 5f;
             _moveVelocity.x *= mx;
         }
         _moveVelocity.y = Physics.gravity.y * _gravityAcceleration * g;
-    }
-
-    /// <summary>
-    /// 一定時間重力有効フラグを有効にする
-    /// </summary>
-    /// <returns></returns>
-    private IEnumerator EnableGravity()
-    {
-        _enableGravity = true;
-        yield return new WaitForSeconds(0.5f);
-        _enableGravity = false;
-        StopCoroutine(EnableGravity());
-    }
-
-    /// <summary>
-    /// 一定時間無重力フラグを有効にする
-    /// </summary>
-    /// <returns></returns>
-    private IEnumerator ZeroGravity()
-    {
-        _zeroGravity = true;
-        yield return new WaitForSeconds(0.5f);
-        _zeroGravity = false;
-        StopCoroutine(ZeroGravity());
     }
 
     /// <summary>
@@ -549,11 +427,17 @@ public class CalamariMoveController : MonoBehaviour
         if (_positionCashDebugOff == false && (0 < _moveVelocity.x || 0 < _moveVelocity.z))
         {
             _positionCashDebugOff = true;
+            // デバッグ用のコメントアウトの為、残す
             //StartCoroutine(PositionCash());
         }
 
-        // 移動スピードをanimatorに反映
-        if ((_wallRunVertical == true || _wallRunHorizontal == true) && 0 < _health.Parameter && _health.Adhesive == true)
+        /*
+         移動スピードをanimatorに反映
+         ・かつ、横向きの壁を移動中　または　縦向きの壁を移動中
+         ・かつ、耐久ゲージが残っている
+         ・かつ、粘着フラグが有効である
+         */
+        if ((_wallMove._wallRunVertical == true || _wallMove._wallRunHorizontal == true) && 0 < _health.Parameter && _health.Adhesive == true)
         {
             _movedSpeedToAnimator = new Vector3(_moveVelocity.x, _moveVelocity.y, 0).magnitude;
         }
@@ -561,25 +445,31 @@ public class CalamariMoveController : MonoBehaviour
         {
             _movedSpeedToAnimator = new Vector3(_moveVelocity.x, 0, _moveVelocity.z).magnitude;
         }
-        _animation.setAnimetionParameters("Morumotto", "MoveSpeed", _movedSpeedToAnimator);
-        _animation.setAnimetionParameters("Scotch_tape_outside", "MoveSpeed", _movedSpeedToAnimator);
-        if (0 < _movedSpeedToAnimator)
+
+        var hAxis = CrossPlatformInputManager.GetAxis("Horizontal");
+        var vAxis = CrossPlatformInputManager.GetAxis("Vertical");
+        if (0.1f <= Mathf.Abs(hAxis) || 0.1f <= Mathf.Abs(vAxis))
         {
-            PlaySoundEffectMove();
-        }
-        else
-        {
-            _sfxPlayedMove = false;
+            _animation.setAnimetionParameters("Morumotto", "MoveSpeed", _movedSpeedToAnimator);
+            _animation.setAnimetionParameters("Scotch_tape_outside", "MoveSpeed", _movedSpeedToAnimator);
+            if (0 < _movedSpeedToAnimator)
+            {
+                PlaySoundEffectMove();
+            }
+            else
+            {
+                _sfxPlayedMove = false;
+            }
         }
 
         // 2点間の距離を測って一時的に停止する処理を呼び出す
-        if (0 < _movedSpeedToAnimator)
+        if (0 < _movedSpeedToAnimator && (0.1f <= Mathf.Abs(hAxis) || 0.1f <= Mathf.Abs(vAxis)))
         {
             if (_distanceFirstPointSaved == false)
             {
                 _distanceFirstPointSaved = true;
                 // 壁を登らない
-                if (_wallRunVertical == false && _wallRunHorizontal == false)
+                if (_wallMove._wallRunVertical == false && _wallMove._wallRunHorizontal == false)
                 {
                     _distancePoint = new Vector2(_transform.position.x, _transform.position.z);
                 }
@@ -593,7 +483,7 @@ public class CalamariMoveController : MonoBehaviour
             {
                 var point = new Vector2();
                 // 壁を登らない
-                if (_wallRunVertical == false && _wallRunHorizontal == false)
+                if (_wallMove._wallRunVertical == false && _wallMove._wallRunHorizontal == false)
                 {
                     point = new Vector2(_transform.position.x, _transform.position.z);
                 }
@@ -611,8 +501,16 @@ public class CalamariMoveController : MonoBehaviour
             }
         }
 
-        // テープの耐久ゲージを減らす
-        if (0 < _movedSpeedToAnimator && 0 < _health.Parameter && _health.Adhesive == true && (_wallRunVertical == true || _wallRunHorizontal == true))
+        /*
+         テープの耐久ゲージを減らす
+         ・回転アニメーションが再生されている
+         ・かつ、耐久ゲージが残っている
+         ・かつ、粘着フラグが有効である
+         ・かつ、横向きの壁を移動中　または　縦向きの壁を移動中
+         ・かつ、動く壁が止まっている
+         ・かつ、縦方向の入力中　または　横方向の入力中
+         */
+        if (0 < _movedSpeedToAnimator && 0 < _health.Parameter && _health.Adhesive == true && (_wallMove._wallRunVertical == true || _wallMove._wallRunHorizontal == true) && (Mathf.Abs(_wallMove._rigidbodyVelocity.magnitude) <= 0f) && (0.1f <= Mathf.Abs(hAxis) || 0.1f <= Mathf.Abs(vAxis)))
         {
             PlaySoundEffectDerableDecrease();
 
@@ -668,97 +566,107 @@ public class CalamariMoveController : MonoBehaviour
     /// </summary>
     private void CharacterLookAt()
     {
-        if (_wallRunVertical == true)
+        var hAxis = CrossPlatformInputManager.GetAxis("Horizontal");
+        var vAxis = CrossPlatformInputManager.GetAxis("Vertical");
+        if (_wallMove._wallRunVertical == true)
         {
-            if (0 < Mathf.Abs(_moveVelocity.y) || 0 < Mathf.Abs(_moveVelocity.x))
+            if (0.1f <= Mathf.Abs(hAxis) || 0.1f <= Mathf.Abs(vAxis))
             {
-                if (Mathf.Abs(_moveVelocity.x) < Mathf.Abs(_moveVelocity.y))
+                if (0 < Mathf.Abs(_moveVelocity.y) || 0 < Mathf.Abs(_moveVelocity.x))
                 {
-                    // 上方向なら縦向き
-                    if (0f < _moveVelocity.y)
+                    if (Mathf.Abs(_moveVelocity.x) < Mathf.Abs(_moveVelocity.y))
                     {
-                        _transform.eulerAngles = new Vector3(_transform.eulerAngles.x, 0f, 0f);
+                        // 上方向なら縦向き
+                        if (0f < _moveVelocity.y && 0.1f <= vAxis)
+                        {
+                            _transform.eulerAngles = new Vector3(_transform.eulerAngles.x, 0f, 0f);
+                        }
+                        // 下向きなら縦向き
+                        else if (_moveVelocity.y < 0f && vAxis <= -0.1f)
+                        {
+                            _transform.eulerAngles = new Vector3(_transform.eulerAngles.x, 180f, 0f);
+                        }
                     }
-                    // 下向きなら縦向き
-                    else if (_moveVelocity.y < 0f)
+                    else
                     {
-                        _transform.eulerAngles = new Vector3(_transform.eulerAngles.x, 180f, 0f);
-                    }
-                }
-                else
-                {
-                    // 左向きなら横向き
-                    if (0f < _moveVelocity.x)
-                    {
-                        _transform.eulerAngles = new Vector3(_transform.eulerAngles.x, 0f, -90f);
-                    }
-                    // 右向きなら横向き
-                    else if (_moveVelocity.x < 0f)
-                    {
-                        _transform.eulerAngles = new Vector3(_transform.eulerAngles.x, 0f, 90f);
+                        // 左向きなら横向き
+                        if (0f < _moveVelocity.x && 0.1f <= hAxis)
+                        {
+                            _transform.eulerAngles = new Vector3(_transform.eulerAngles.x, 0f, -90f);
+                        }
+                        // 右向きなら横向き
+                        else if (_moveVelocity.x < 0f && hAxis <= -0.1f)
+                        {
+                            _transform.eulerAngles = new Vector3(_transform.eulerAngles.x, 0f, 90f);
+                        }
                     }
                 }
             }
         }
-        else if (_wallRunHorizontal == true)
+        else if (_wallMove._wallRunHorizontal == true)
         {
-            if (0 < Mathf.Abs(_moveVelocity.y) || 0 < Mathf.Abs(_moveVelocity.z))
+            if (0.1f <= Mathf.Abs(hAxis) || 0.1f <= Mathf.Abs(vAxis))
             {
-                if (Mathf.Abs(_moveVelocity.y) < Mathf.Abs(_moveVelocity.z))
+                if (0 < Mathf.Abs(_moveVelocity.y) || 0 < Mathf.Abs(_moveVelocity.z))
                 {
-                    if (_wallRunHorizontalMode == (int)WallRunHorizontalFrontMode.RIGHT_IS_FRONT)
+                    if (Mathf.Abs(_moveVelocity.y) < Mathf.Abs(_moveVelocity.z))
                     {
-                        // 正面なら縦向き
-                        if (0f < _moveVelocity.z)
+                        // 右側に壁があった際の床上移動と壁移動
+                        if (_wallMove._wallRunHorizontalMode == (int)WallRunHorizontalFrontMode.RIGHT_IS_FRONT)
                         {
-                            _transform.eulerAngles = new Vector3(_transform.eulerAngles.x, 0f, 90f);
+                            // 正面なら縦向き
+                            if (0f < _moveVelocity.z && 0.1f <= vAxis)
+                            {
+                                _transform.eulerAngles = new Vector3(_transform.eulerAngles.x, 0f, 90f);
+                            }
+                            else if (_moveVelocity.z < 0f && vAxis <= -0.1f)
+                            {
+                                _transform.eulerAngles = new Vector3(_transform.eulerAngles.x, 180f, -90f);
+                            }
                         }
-                        else if (_moveVelocity.z < 0f)
+                        // 左側に壁があった際の床上移動と壁移動
+                        else if (_wallMove._wallRunHorizontalMode == (int)WallRunHorizontalFrontMode.LEFT_IS_FRONT)
                         {
-                            _transform.eulerAngles = new Vector3(_transform.eulerAngles.x, 180f, -90f);
+                            // 正面なら縦向き
+                            if (0f < _moveVelocity.z && 0.1f <= vAxis)
+                            {
+                                _transform.eulerAngles = new Vector3(_transform.eulerAngles.x, 0f, -90f);
+                            }
+                            else if (_moveVelocity.z < 0f && vAxis <= -0.1f)
+                            {
+                                _transform.eulerAngles = new Vector3(_transform.eulerAngles.x, 180f, 90f);
+                            }
                         }
                     }
-                    else if (_wallRunHorizontalMode == (int)WallRunHorizontalFrontMode.LEFT_IS_FRONT)
+                    else
                     {
-                        // 正面なら縦向き
-                        if (0f < _moveVelocity.z)
+                        // 右側に壁があった際の床上移動と壁移動
+                        if (_wallMove._wallRunHorizontalMode == (int)WallRunHorizontalFrontMode.RIGHT_IS_FRONT)
                         {
-                            _transform.eulerAngles = new Vector3(_transform.eulerAngles.x, 0f, -90f);
+                            // 左向きなら横向き
+                            if (0f < _moveVelocity.y && 0.1f <= hAxis)
+                            {
+                                _transform.eulerAngles = new Vector3(_transform.eulerAngles.x, 90f, 0f);
+                            }
+                            // 右向きなら横向き
+                            else if (_moveVelocity.y < 0f && hAxis <= -0.1f)
+                            {
+                                _transform.eulerAngles = new Vector3(_transform.eulerAngles.x, -90f, 0f);
+                            }
                         }
-                        else if (_moveVelocity.z < 0f)
+                        // 左側に壁があった際の床上移動と壁移動
+                        else if (_wallMove._wallRunHorizontalMode == (int)WallRunHorizontalFrontMode.LEFT_IS_FRONT)
                         {
-                            _transform.eulerAngles = new Vector3(_transform.eulerAngles.x, 180f, 90f);
-                        }
-                    }
-                }
-                else
-                {
-                    // 右側に壁があった際の床上移動と壁移動
-                    if (_wallRunHorizontalMode == (int)WallRunHorizontalFrontMode.RIGHT_IS_FRONT)
-                    {
-                        // 左向きなら横向き
-                        if (0f < _moveVelocity.y)
-                        {
-                            _transform.eulerAngles = new Vector3(_transform.eulerAngles.x, 90f, 0f);
-                        }
-                        // 右向きなら横向き
-                        else if (_moveVelocity.y < 0f)
-                        {
-                            _transform.eulerAngles = new Vector3(_transform.eulerAngles.x, -90f, 0f);
-                        }
-                    }
-                    // 左側に壁があった際の床上移動と壁移動
-                    else if (_wallRunHorizontalMode == (int)WallRunHorizontalFrontMode.LEFT_IS_FRONT)
-                    {
-                        // 左向きなら横向き
-                        if (0f < _moveVelocity.y)
-                        {
-                            _transform.eulerAngles = new Vector3(_transform.eulerAngles.x, -90f, 0f);
-                        }
-                        // 右向きなら横向き
-                        else if (_moveVelocity.y < 0f)
-                        {
-                            _transform.eulerAngles = new Vector3(_transform.eulerAngles.x, 90f, 0f);
+                            // 左向きなら横向き
+                            if (0f < _moveVelocity.y && hAxis <= -0.1f)
+                            {
+                                _transform.eulerAngles = new Vector3(_transform.eulerAngles.x, -90f, 0f);
+                            }
+                            // 右向きなら横向き
+                            else if (_moveVelocity.y < 0f && 0.1f <= hAxis)
+                            {
+                                _transform.eulerAngles = new Vector3(_transform.eulerAngles.x, 90f, 0f);
+                            }
                         }
                     }
                 }
@@ -836,9 +744,9 @@ public class CalamariMoveController : MonoBehaviour
 
         if (result == false)
         {
-            Debug.DrawRay(_transform.position + Vector3.up * 0.1f, Vector3.down * _registMaxDistance, Color.green);
+            Debug.DrawRay(_transform.position + Vector3.up * 0.1f, Vector3.down * _wallMove._registMaxDistance, Color.green);
             var ray = new Ray(_transform.position + Vector3.up * 0.1f, Vector3.down);
-            foreach (RaycastHit hit in Physics.RaycastAll(ray, _registMaxDistance))
+            foreach (RaycastHit hit in Physics.RaycastAll(ray, _wallMove._registMaxDistance))
             {
                 if (hit.collider.gameObject.layer == (int)LayerManager.FIELD)
                 {
@@ -848,123 +756,6 @@ public class CalamariMoveController : MonoBehaviour
         }
 
         return result;
-    }
-
-    /// <summary>
-    /// 壁の接地判定
-    /// </summary>
-    /// <returns>接地状態か否か</returns>
-    private bool IsWallGrounded()
-    {
-        var result = false;
-
-        if (result == false)
-        {
-            Debug.DrawRay(_transform.position + Vector3.up * 0.1f, Vector3.down * _registMaxDistance, Color.green);
-            var ray = new Ray(_transform.position + Vector3.up * 0.1f, Vector3.down);
-            foreach (RaycastHit hit in Physics.RaycastAll(ray, _registMaxDistance))
-            {
-                if (hit.collider.gameObject.layer == (int)LayerManager.WALL)
-                {
-                    result = true;
-                }
-            }
-        }
-
-        return result;
-    }
-
-    /// <summary>
-    /// 拡大SEを再生
-    /// </summary>
-    private void PlaySoundEffectScaleUp()
-    {
-        if (_sfxPlayedScaleUp == true)
-        {
-            _sfxPlay.PlaySFX("se_player_expansion");
-        }
-    }
-
-    /// <summary>
-    /// コントーローラーによる拡大・縮小
-    /// </summary>
-    private void ScaleChangeForController()
-    {
-        // 拡大
-        if (CrossPlatformInputManager.GetButton("ScaleUp") == true && CrossPlatformInputManager.GetButton("ScaleDown") == false)
-        {
-            if (_scale < 4.01f)
-            {
-                _scale += 0.01f;
-                PlaySoundEffectScaleUp();
-            }
-            else
-            {
-                _scale = 4.0f;
-                _sfxPlayedScaleUp = false;
-            }
-        }
-        // 縮小
-        else if (CrossPlatformInputManager.GetButton("ScaleDown") == true && CrossPlatformInputManager.GetButton("ScaleUp") == false)
-        {
-            if (0.99f < _scale)
-            {
-                _scale -= 0.01f;
-                _sfxPlayedScaleUp = true;
-            }
-            else
-            {
-                _scale = 1.0f;
-            }
-        }
-    }
-
-    /// <summary>
-    /// マウスホイールによる拡大・縮小
-    /// </summary>
-    private void ScaleChangeForMouse()
-    {
-        var m_scroll = CrossPlatformInputManager.GetAxis("Mouse ScrollWheel");
-        // 拡大
-        if (0.0f < m_scroll)
-        {
-            if (_scale + m_scroll < 4.01f)
-            {
-                _scale += m_scroll;
-                PlaySoundEffectScaleUp();
-            }
-            else
-            {
-                _scale = 4.0f;
-                _sfxPlayedScaleUp = false;
-            }
-        }
-        // 縮小
-        else if (m_scroll < 0.0f)
-        {
-            if (0.99f < _scale + m_scroll)
-            {
-                _scale += m_scroll;
-                _sfxPlayedScaleUp = true;
-            }
-            else
-            {
-                _scale = 1.0f;
-            }
-        }
-    }
-
-    /// <summary>
-    /// スケールの大きさに合わせて各パラメータを調整する
-    /// </summary>
-    /// <param name="min">基準値（初期値/最小値）</param>
-    /// <param name="max">最大値</param>
-    /// <returns>計算後の値</returns>
-    private float ParameterMatchScale(float min, float max)
-    {
-        var v = _scale - 1f;
-        v = min + ((max - min) * (v / 3));
-        return v;
     }
 
     /// <summary>
