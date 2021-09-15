@@ -41,6 +41,10 @@ public class Select_Draw_Controller : MonoBehaviour
     [SerializeField] private float log_pos_y;                               // クリアロゴと赤枠を表示するY軸
     [SerializeField] private float fade_speed;                              // フェードする速度
 
+    [SerializeField] private int min_scroll_number;                         // 最小のスクロール値 (０固定)
+    [SerializeField] private int max_scroll_number;                         // 最大のスクロール値（最大ステージ数）
+    private int change_screen_number=5;                                     // 画面が切り替わる数
+
     // Start is called before the first frame update
     void Start()
     {
@@ -129,8 +133,16 @@ public class Select_Draw_Controller : MonoBehaviour
         select_stage_image.sprite = select_stage_sprite[player.select_stage_number];
         //　背景の切り替えを配列で行う。
         select_back_image.sprite = select_back_sprite[player.select_stage_number];
-        // 赤枠を表示し、左右移動する事で赤枠も移動する。
-        select_frame_rect.anchoredPosition = new Vector2((move_log_pos_x * player.select_stage_number) + criteria_log_pos_x, log_pos_y);
+        if (player.select_stage_number >= change_screen_number)
+        {
+            // 赤枠を表示し、左右移動する事で赤枠も移動する。
+            select_frame_rect.anchoredPosition = new Vector2((move_log_pos_x * player.select_stage_number) + criteria_log_pos_x - 1850.0f, log_pos_y);
+        }
+        else
+        {
+            // 赤枠を表示し、左右移動する事で赤枠も移動する。
+            select_frame_rect.anchoredPosition = new Vector2((move_log_pos_x * player.select_stage_number) + criteria_log_pos_x, log_pos_y);
+        }
         //  コメントの切り替えを配列で行う。
         select_coment_image.sprite = select_coment_sprite[player.select_stage_number];
     }
@@ -205,6 +217,31 @@ public class Select_Draw_Controller : MonoBehaviour
                 break;
             }
             case 4:
+            {
+                SceneManager.LoadScene("Stage5_Scene");
+                break;
+            }
+            case 5:
+            {
+                SceneManager.LoadScene("Stage5_Scene");
+                break;
+            }
+            case 6:
+            {
+                SceneManager.LoadScene("Stage5_Scene");
+                break;
+            }
+            case 7:
+            {
+                SceneManager.LoadScene("Stage5_Scene");
+                break;
+            }
+            case 8:
+            {
+                SceneManager.LoadScene("Stage5_Scene");
+                break;
+            }
+            case 9:
             {
                 SceneManager.LoadScene("Stage5_Scene");
                 break;

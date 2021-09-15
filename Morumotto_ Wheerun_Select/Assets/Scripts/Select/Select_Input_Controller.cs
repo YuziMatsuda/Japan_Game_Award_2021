@@ -8,6 +8,8 @@ public class Select_Input_Controller : MonoBehaviour
     private Player player;
     // bool button_flg;
     float before_flame;
+    [SerializeField] private int min_scroll_number;         // 最小のスクロール値 (０固定)
+    [SerializeField] private int max_scroll_number;         // 最大のスクロール値（最大ステージ数）
 
     // Start is called before the first frame update
     void Start()
@@ -38,7 +40,7 @@ public class Select_Input_Controller : MonoBehaviour
     {
         if (Input.GetButtonDown("Left_Input"))
         {
-            if (player.select_stage_number > 0)
+            if (player.select_stage_number > min_scroll_number)
             {
                 player.select_stage_number--;
             }
@@ -49,7 +51,7 @@ public class Select_Input_Controller : MonoBehaviour
     {
         if (Input.GetButtonDown("Right_Input"))
         {
-            if (player.select_stage_number < 4)
+            if (player.select_stage_number < max_scroll_number)
             {
                 player.select_stage_number++;
             }
