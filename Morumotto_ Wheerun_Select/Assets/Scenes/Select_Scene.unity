@@ -1588,17 +1588,19 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 191335ee7fab0e940b220198acaf4fdd, type: 3}
   - {fileID: 21300000, guid: 39ce5b0d5cc58fa469c75315b6d29213, type: 3}
   - {fileID: 21300000, guid: c974b473cbff8ba48a7888d1c826bac6, type: 3}
-  - {fileID: 21300000, guid: 9a845409fde326342b6faf5451635bcc, type: 3}
-  - {fileID: 21300000, guid: 4ea11b37e221e2d4ea4378169bf67754, type: 3}
-  - {fileID: 21300000, guid: 191335ee7fab0e940b220198acaf4fdd, type: 3}
-  - {fileID: 21300000, guid: 39ce5b0d5cc58fa469c75315b6d29213, type: 3}
-  - {fileID: 21300000, guid: c974b473cbff8ba48a7888d1c826bac6, type: 3}
+  - {fileID: 21300000, guid: 5547dfef4886b1949bf86057daec5e17, type: 3}
+  - {fileID: 21300000, guid: 9cad36394e024df4cbecfe471c614878, type: 3}
+  - {fileID: 21300000, guid: f40fd275f11df7b4fb2b6bf0e4af91f9, type: 3}
+  - {fileID: 21300000, guid: d2bf4a98c6a0f52489c980d74b34a1ad, type: 3}
+  - {fileID: 21300000, guid: c9a137be6ea38f64d907e210512971d3, type: 3}
   select_coment_image: {fileID: 0}
   max_stage: 10
   criteria_log_pos_x: -750
   move_log_pos_x: 370
   log_pos_y: -286
   fade_speed: -1500
+  min_scroll_number: 0
+  max_scroll_number: 0
 --- !u!114 &1454927947
 MonoBehaviour:
   m_ObjectHideFlags: 0
