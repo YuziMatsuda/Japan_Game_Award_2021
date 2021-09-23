@@ -10,7 +10,7 @@ public class Title_Draw_Controller : MonoBehaviour
     [SerializeField] private GameObject title_background_object;        // 背景
     [SerializeField] private GameObject push_game_object;               // ゲーム開始時のオブジェクト
     [SerializeField] private GameObject select_object;                  // ゲーム選択のオブジェクト
-    [SerializeField] private GameObject game_datadelete_check;          // ゲームデータ削除確認のオブジェクト
+    // [SerializeField] private GameObject game_datadelete_check;          // ゲームデータ削除確認のオブジェクト
     [SerializeField] private GameObject game_end_check;                 // ゲーム終了のオブジェクト
     [SerializeField] private GameObject icon;                           // アイコン
     [SerializeField] private GameObject load_now;                       // ロード中
@@ -33,6 +33,17 @@ public class Title_Draw_Controller : MonoBehaviour
     [SerializeField] private float alpha;                               // フェードのα値
     private float alpha_speed;                                          // フェードの速度
     float red, green, blue;
+
+    [SerializeField] private float up_tex_position_x;                   // 「ゲーム開始」選択時のアイコンのx座標
+    [SerializeField] private float center_tex_position_x;               // 「ゲームデータ消去」選択時のアイコンのx座標
+    [SerializeField] private float down_tex_position_x;                 // 「ゲーム終了」選択時のアイコンのx座標
+    [SerializeField] private float up_tex_position_y;                   // 「ゲーム開始」選択時のアイコンのx座標
+    [SerializeField] private float center_tex_position_y;               // 「ゲームデータ消去」選択時のアイコンのx座標
+    [SerializeField] private float down_tex_position_y;                 // 「ゲーム終了」選択時のアイコンのy座標
+    [SerializeField] private float yes_position_x;                      // 「はい」選択時のアイコンのx座標
+    [SerializeField] private float yes_position_y;                      // 「はい」選択時のアイコンのy座標
+    [SerializeField] private float no_position_x;                       // 「いいえ」選択時のアイコンのx座標
+    [SerializeField] private float no_position_y;                       // 「いいえ」選択時のアイコンのy座標
 
     void Start()
     {
@@ -100,7 +111,7 @@ public class Title_Draw_Controller : MonoBehaviour
         fade_Draw = fade_in.GetComponent<Image>();
         Fade_Init();            // フェードの初期化メソッド
         // 座標位置の設定
-        data_delete_complete_position_x = 600.0f;
+        data_delete_complete_position_x = 450.0f;
         data_delete_complete_position_y = 450.0f;
         alpha_speed = 0.5f;
     }
@@ -164,6 +175,7 @@ public class Title_Draw_Controller : MonoBehaviour
                  GameStart_Draw();
                  break;
             }
+            /*
             case Player.Character_Sence.GAME_DATADELETE_CHECK:
             {
                  GameDatadeleteCheck_Draw(player);
@@ -173,6 +185,7 @@ public class Title_Draw_Controller : MonoBehaviour
             {
                  break;
             }
+            */
             case Player.Character_Sence.GAME_END_CHECK:
             {
                 GameEndCheck_Draw(player);
@@ -191,7 +204,7 @@ public class Title_Draw_Controller : MonoBehaviour
     {
         push_game_object.SetActive(true);
         select_object.SetActive(false);
-        game_datadelete_check.SetActive(false);
+        // game_datadelete_check.SetActive(false);
         game_end_check.SetActive(false);
         icon.SetActive(false);
 
@@ -217,7 +230,7 @@ public class Title_Draw_Controller : MonoBehaviour
     {
         push_game_object.SetActive(true);
         select_object.SetActive(false);
-        game_datadelete_check.SetActive(false);
+        // game_datadelete_check.SetActive(false);
         game_end_check.SetActive(false);
         icon.SetActive(false);
         load_now.SetActive(true);
@@ -238,7 +251,7 @@ public class Title_Draw_Controller : MonoBehaviour
     {
         push_game_object.SetActive(true);
         select_object.SetActive(false);
-        game_datadelete_check.SetActive(false);
+        // game_datadelete_check.SetActive(false);
         game_end_check.SetActive(false);
         icon.SetActive(false);
     }
@@ -248,14 +261,9 @@ public class Title_Draw_Controller : MonoBehaviour
     {
         push_game_object.SetActive(false);
         select_object.SetActive(true);
-        game_datadelete_check.SetActive(false);
+        // game_datadelete_check.SetActive(false);
         game_end_check.SetActive(false);
         icon.SetActive(true);
-        float updown_tex_position_x = -210.0f;
-        float center_tex_position_x = -295.0f;
-        float up_tex_position_y = -50.0f;
-        float center_tex_position_y = -235.0f;
-        float center_tex_position_z = -410.0f;
 
         if (player.Data_Complete_FlgCheck())
         {
@@ -267,17 +275,19 @@ public class Title_Draw_Controller : MonoBehaviour
         {
             case Player.Player_Input.UP:
             {
-                icon_rect.anchoredPosition = new Vector2(updown_tex_position_x, up_tex_position_y);
+                icon_rect.anchoredPosition = new Vector2(up_tex_position_x, up_tex_position_y);
                 break;
             }
+            /*
             case Player.Player_Input.CENTER:
             {
                 icon_rect.anchoredPosition = new Vector2(center_tex_position_x, center_tex_position_y);
                 break;
             }
+            */
             case Player.Player_Input.DOWN:
             {
-                icon_rect.anchoredPosition = new Vector2(updown_tex_position_x, center_tex_position_z);
+                icon_rect.anchoredPosition = new Vector2(down_tex_position_x, down_tex_position_y);
                 break;
             }
         }
@@ -306,7 +316,7 @@ public class Title_Draw_Controller : MonoBehaviour
     {
         push_game_object.SetActive(false);
         select_object.SetActive(false);
-        game_datadelete_check.SetActive(true);
+        // game_datadelete_check.SetActive(true);
         game_end_check.SetActive(false);
         icon.SetActive(true);
         YesNo_Draw(player);
@@ -342,7 +352,7 @@ public class Title_Draw_Controller : MonoBehaviour
                 timer = 0.0f;
                 data_dalete_complete.SetActive(false);
                 player.set_Data_Complete_FalseFlg();
-                data_delete_complete_position_y = 450.0f;
+                data_delete_complete_position_y = 580.0f;
                 data_delete_complete_rect.anchoredPosition = new Vector2(data_delete_complete_position_x, data_delete_complete_position_y);
             }
         }
@@ -354,7 +364,7 @@ public class Title_Draw_Controller : MonoBehaviour
     {
         push_game_object.SetActive(false);
         select_object.SetActive(false);
-        game_datadelete_check.SetActive(false);
+        // game_datadelete_check.SetActive(false);
         game_end_check.SetActive(true);
         icon.SetActive(true);
         YesNo_Draw(player);
@@ -363,10 +373,6 @@ public class Title_Draw_Controller : MonoBehaviour
     //「はい・いいえ」の画像表示と処理を実装
     public void YesNo_Draw(Player player)
     {
-        float yes_position_x = -120.0f;
-        float yes_position_y = -200.0f;
-        float no_position_x = -150.0f;
-        float no_position_y = -350.0f;
         switch (player.input)
         {
             case Player.Player_Input.UP:

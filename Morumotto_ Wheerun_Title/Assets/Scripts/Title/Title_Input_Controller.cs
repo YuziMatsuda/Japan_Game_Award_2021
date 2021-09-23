@@ -42,6 +42,7 @@ public class Title_Input_Controller : MonoBehaviour
             {
                 break;
             }
+            /*
             case Player.Character_Sence.GAME_DATADELETE_CHECK:
             {
                 GameDatadeleteCheck_Input(player);
@@ -51,6 +52,7 @@ public class Title_Input_Controller : MonoBehaviour
             {
                 break;
             }
+            */
             case Player.Character_Sence.GAME_END_CHECK:
             {
                 GameEndCheck_Input(player);
@@ -79,7 +81,7 @@ public class Title_Input_Controller : MonoBehaviour
             {
                 if (Input.GetButtonDown("Down_Input"))
                 {
-                    player.setInput(Player.Player_Input.CENTER);
+                    player.setInput(Player.Player_Input.DOWN);
                 }
                 if (Input.GetButtonDown("Decision"))
                 {
@@ -87,6 +89,7 @@ public class Title_Input_Controller : MonoBehaviour
                 }
                 break;
             }
+            /*
             case Player.Player_Input.CENTER:
             {
                 if(Input.GetButtonDown("Up_Input"))
@@ -104,11 +107,12 @@ public class Title_Input_Controller : MonoBehaviour
                 }
                 break;
             }
+            */
             case Player.Player_Input.DOWN:
             {
                 if(Input.GetButtonDown("Up_Input"))
                 {
-                    player.setInput(Player.Player_Input.CENTER);
+                    player.setInput(Player.Player_Input.UP);
                 }
                 if (Input.GetButtonDown("Decision"))
                 {
@@ -124,6 +128,7 @@ public class Title_Input_Controller : MonoBehaviour
         }
     }
 
+    /*
     public void GameDatadeleteCheck_Input(Player player)
     {
         switch (player.input)
@@ -161,6 +166,7 @@ public class Title_Input_Controller : MonoBehaviour
             player.setInput(Player.Player_Input.CENTER);
         }
     }
+    */
 
     public void GameEndCheck_Input(Player player)
     {

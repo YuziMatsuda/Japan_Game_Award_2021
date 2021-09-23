@@ -12,8 +12,8 @@ public class Player : MonoBehaviour
         PUSH_GAME_START,       // ゲーム開始時に表示
         GAME_SELECT,           // ゲームモードを選択
         GAME_START,            // ゲームスタート(セレクト画面に遷移)
-        GAME_DATADELETE_CHECK, // ゲームデータ消去を確認
-        GAME_DATADELETE,       // ゲームデータ消去
+        // GAME_DATADELETE_CHECK, // ゲームデータ消去を確認
+        // GAME_DATADELETE,       // ゲームデータ消去
         GAME_END_CHECK,        // ゲーム終了を確認
         GAME_END,              // ゲーム終了(exeを終了)
         NEXT_STAGESELECT,      // ステージセレクトの遷移
@@ -26,7 +26,7 @@ public class Player : MonoBehaviour
     public enum Player_Input
     {
         UP,                    // 上
-        CENTER,                // 真ん中
+        // CENTER,                // 真ん中
         DOWN,                  // 下
     }
 

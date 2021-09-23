@@ -42,11 +42,13 @@ public class Title_Sound_Manager : MonoBehaviour
                 GameSelect_Output_Sound();
                 break;
             }
+            /*
             case Player.Character_Sence.GAME_DATADELETE_CHECK:
             {
                 GameDatadeleteCheck_Input();
                 break;
             }
+            */
             case Player.Character_Sence.GAME_END_CHECK:
             {
                 GameEndCheck_Input();
@@ -69,6 +71,7 @@ public class Title_Sound_Manager : MonoBehaviour
                 audioSource.PlayOneShot(se_scroll);
             }
         }
+        /*
         if (player.input == Player.Player_Input.CENTER)
         {
             if (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.DownArrow))
@@ -76,6 +79,7 @@ public class Title_Sound_Manager : MonoBehaviour
                 audioSource.PlayOneShot(se_scroll);
             }
         }
+        */
         if (player.input == Player.Player_Input.DOWN)
         {
             if (Input.GetKeyDown(KeyCode.UpArrow))

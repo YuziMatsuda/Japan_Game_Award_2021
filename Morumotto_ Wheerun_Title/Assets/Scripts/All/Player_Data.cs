@@ -109,10 +109,12 @@ public class Player_Data : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        /*
         if(player.sence == Player.Character_Sence.GAME_DATADELETE)
         {
             Title_DataDelete_Check();
         }
+        */
     }
 
     public void Title_DataDelete_Check()
