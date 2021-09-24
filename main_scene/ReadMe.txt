@@ -1,3 +1,90 @@
+2021/09/23 15:24
+★UI差し替え　ポーズ画面、クリア画面、mainシーンテンプレート更新、チュートリアルへフォント適用
+・コングラチュレーションロゴを更新
+main_scene\CalamariTape\Assets\Images\game_allclear_logo.png
+・ゲームに戻るロゴを更新
+main_scene\CalamariTape\Assets\Images\game_back_logo.png
+・遊び方の確認ロゴを更新
+main_scene\CalamariTape\Assets\Images\game_check_logo.png
+・ステージクリアロゴを更新
+main_scene\CalamariTape\Assets\Images\game_clear_logo.png
+・ポーズロゴを更新
+main_scene\CalamariTape\Assets\Images\game_pause_logo.png
+・次のステージを選ぶロゴを更新
+main_scene\CalamariTape\Assets\Images\game_proceed.png
+・もう一度遊ぶロゴを更新
+main_scene\CalamariTape\Assets\Images\game_redo_logo.png
+・他のステージを選ぶロゴを更新
+main_scene\CalamariTape\Assets\Images\game_select_logo.png
+・各シーンにてクリア画面プレハブ情報を更新
+main_scene\CalamariTape\Assets\Prefabs\ClearScreen.prefab
+main_scene\CalamariTape\Assets\Scenes\Stage2_Scene\ClearScreen.prefab
+main_scene\CalamariTape\Assets\Scenes\Stage3_Scene\ClearScreen.prefab
+main_scene\CalamariTape\Assets\Scenes\Stage4_Scene\ClearScreen.prefab
+・mainシーンのシーンテンプレートを更新
+main_scene\CalamariTape\Assets\Scenes\main 3.scenetemplate
+・各シーンにてポーズ画面、クリア画面のUIを更新
+main_scene\CalamariTape\Assets\Scenes\main.unity
+main_scene\CalamariTape\Assets\Scenes\Stage2_Scene.unity
+main_scene\CalamariTape\Assets\Scenes\Stage3_Scene.unity
+main_scene\CalamariTape\Assets\Scenes\Stage4_Scene.unity
+main_scene\CalamariTape\Assets\Scenes\Stage5_Scene.unity
+main_scene\CalamariTape\Assets\Scenes\Stage6_Scene.unity
+・統一フォントの登録
+main_scene\CalamariTape\Assets\Fonts\rounded-mplus-2m-medium.ttf
+・ロゴ画像のバックアップ
+main_scene\CalamariTape\Assets\Images\game_allclear_logo_bk.png
+main_scene\CalamariTape\Assets\Images\game_back_logo_bk.png
+main_scene\CalamariTape\Assets\Images\game_back_logo_bk2.png
+main_scene\CalamariTape\Assets\Images\game_check_logo_bk2.png
+main_scene\CalamariTape\Assets\Images\game_clear_logo_bk.png
+main_scene\CalamariTape\Assets\Images\game_pause_logo_bk2.png
+main_scene\CalamariTape\Assets\Images\game_proceed_bk2.png
+main_scene\CalamariTape\Assets\Images\game_redo_logo_bk2.png
+main_scene\CalamariTape\Assets\Images\game_select_logo_bk2.png
+
+2021/09/23 12:36
+★新ギミック　滑る床の実装
+・滑る床のエリアを作成
+main_scene\CalamariTape\Assets\Scenes\Stage6_Scene.unity
+・カラマリモードにて、滑る床ギミックで参照する情報を追加
+　コンベア判定を共通ロジックから呼ぶように変更
+main_scene\CalamariTape\Assets\Scripts\CalamariMoveController.cs
+main_scene\CalamariTape\Assets\Scripts\CircleRing.cs
+main_scene\CalamariTape\Assets\Scripts\MarmotWheel.cs
+・ネンチャクモードにて、滑る床ギミックで参照する情報を追加
+main_scene\CalamariTape\Assets\Scripts\NenchakMoveController.cs
+・ギミック停止処理にて、各ギミックをオブジェクト化して管理する方向へ修正
+main_scene\CalamariTape\Assets\Scripts\StopGimmick.cs
+・ツルツルモードにて、滑る床ギミックで参照する情報を追加
+main_scene\CalamariTape\Assets\Scripts\TsuruTsuruMoveController.cs
+・コンポーネント名管理スクリプトへ滑る床の情報を追加
+main_scene\CalamariTape\Assets\Scripts\Common\ComponentManager.cs
+・タグ名管理スクリプトへ滑る床の情報を追加
+main_scene\CalamariTape\Assets\Scripts\Common\TagManager.cs
+・全モード共通ロジックへコンベアと滑る床の判定を追加
+main_scene\CalamariTape\Assets\Scripts\NotAttached\AllmodeStateConf.cs
+・例外無効処理へ滑る床の判定を追加
+main_scene\CalamariTape\Assets\Scripts\NotAttached\DeadNullReference.cs
+・ギミック判定へ滑る床の判定を追加
+main_scene\CalamariTape\Assets\Scripts\NotAttached\GimmicksDecision.cs
+・滑る床のマテリアルを作成
+main_scene\CalamariTape\Assets\Materials\IcePlane.mat
+・滑る床オブジェクトをプレハブ化
+main_scene\CalamariTape\Assets\Prefabs\Gimmicks\IcePlane.prefab
+・滑る床の処理を作成
+main_scene\CalamariTape\Assets\Scripts\IcePlane.cs
+・ギミック停止処理にて使用するインターフェースを作成
+main_scene\CalamariTape\Assets\Scripts\Interface\GimmkckActiveManager.cs
+・ベルトコンベアのギミック停止・再生クラスを作成
+main_scene\CalamariTape\Assets\Scripts\NotAttached\ConveyorMoveCharacterActiveManager.cs
+・ステージ内のギミック情報を管理するスクリプトを作成
+main_scene\CalamariTape\Assets\Scripts\NotAttached\GimmickDifferent.cs
+・回し車のギミック停止・再生クラスを作成
+main_scene\CalamariTape\Assets\Scripts\NotAttached\MarmotHealthActiveManager.cs
+・動く壁のギミック停止・再生クラスを作成
+main_scene\CalamariTape\Assets\Scripts\NotAttached\MoveWallsActiveManager.cs
+
 2021/09/17 09:07
 ★新ギミック　回転リングの実装
 ・回転リングのサンプルエリアを作成
