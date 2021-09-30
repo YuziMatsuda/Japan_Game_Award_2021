@@ -6,6 +6,7 @@ using Const.Tag;
 using Controller.Gravity;
 using DeadException;
 using Const.Component;
+using Beans.Field;
 
 namespace Controller.AllmodeState
 {
@@ -64,8 +65,6 @@ namespace Controller.AllmodeState
         /// <returns>接地状態か否か</returns>
         public static GameObject IsIcePlanedAndObject(CharacterController character, Transform transform, float registMaxDistance)
         {
-            var result = new GameObject();
-
             Debug.DrawRay(transform.position + Vector3.up * 0.1f, Vector3.down * registMaxDistance, Color.green);
             var ray = new Ray(transform.position + Vector3.up * 0.1f, Vector3.down);
             foreach (RaycastHit hit in Physics.RaycastAll(ray, registMaxDistance))
@@ -75,12 +74,12 @@ namespace Controller.AllmodeState
                 {
                     if (g.layer == (int)LayerManager.FIELD || g.GetComponent<IcePlane>()._icePlane == true)
                     {
-                        result = g;
+                        return g;
                     }
                 }
             }
 
-            return result.tag.Equals(TagManager.ICE_PLANE) ? result : null;
+            return null;
         }
 
         /// <summary>
@@ -137,6 +136,75 @@ namespace Controller.AllmodeState
             }
 
             return result;
+        }
+
+        /// <summary>
+        /// 壁の接触判定
+        /// </summary>
+        /// <param name="transform">オブジェクトの位置・角度・スケール</param>
+        /// <param name="distance">接触判定の最大距離</param>
+        /// <returns>接地状態か否か</returns>
+        public static FieldWalled IsFieldWalled(Transform transform, float distance)
+        {
+            var fieldWalled = new FieldWalled();
+            Debug.DrawRay(transform.position, Vector3.forward * distance, Color.green);
+            Debug.DrawRay(transform.position, Vector3.back * distance, Color.green);
+            Debug.DrawRay(transform.position, Vector3.left * distance, Color.green);
+            Debug.DrawRay(transform.position, Vector3.right * distance, Color.green);
+
+            if (fieldWalled._collisionResult == false)
+            {
+                var ray = new Ray(transform.position, Vector3.forward);
+                foreach (RaycastHit hit in Physics.RaycastAll(ray, distance))
+                {
+                    if (hit.collider.gameObject.layer == (int)LayerManager.FIELD)
+                    {
+                        fieldWalled._collisionResult = true;
+                        fieldWalled._hitCollider = hit.collider;
+                    }
+                }
+            }
+
+            if (fieldWalled._collisionResult == false)
+            {
+                var ray = new Ray(transform.position, Vector3.back);
+                foreach (RaycastHit hit in Physics.RaycastAll(ray, distance))
+                {
+                    if (hit.collider.gameObject.layer == (int)LayerManager.FIELD)
+                    {
+                        fieldWalled._collisionResult = true;
+                        fieldWalled._hitCollider = hit.collider;
+                    }
+                }
+            }
+
+            if (fieldWalled._collisionResult == false)
+            {
+                var ray = new Ray(transform.position, Vector3.left);
+                foreach (RaycastHit hit in Physics.RaycastAll(ray, distance))
+                {
+                    if (hit.collider.gameObject.layer == (int)LayerManager.FIELD)
+                    {
+                        fieldWalled._collisionResult = true;
+                        fieldWalled._hitCollider = hit.collider;
+                    }
+                }
+            }
+
+            if (fieldWalled._collisionResult == false)
+            {
+                var ray = new Ray(transform.position, Vector3.right);
+                foreach (RaycastHit hit in Physics.RaycastAll(ray, distance))
+                {
+                    if (hit.collider.gameObject.layer == (int)LayerManager.FIELD)
+                    {
+                        fieldWalled._collisionResult = true;
+                        fieldWalled._hitCollider = hit.collider;
+                    }
+                }
+            }
+
+            return fieldWalled;
         }
 
         /// <summary>
