@@ -1374,6 +1374,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 802b2fc2732671740a52c61b70032f0f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+<<<<<<< HEAD:Morumotto_ Wheerun_Title/Assets/Scenes/Title_Scene.unity
   datapath: 
   stage_clear_number: 0000000000
   max_stage: 5
@@ -1395,6 +1396,14 @@ MonoBehaviour:
   move_log_pos_x: 0
   log_pos_y: 0
 --- !u!1 &1251361783
+=======
+  se_decision: {fileID: 8300000, guid: a0d39eec9bc037b4ba4f7fdb2c477601, type: 3}
+  se_cancel: {fileID: 8300000, guid: e7ea656ec95abdc4f94a15c6595d90d0, type: 3}
+  se_scroll: {fileID: 8300000, guid: 2954eabc092144c4b8f04563f4711016, type: 3}
+  min_scroll_number: 0
+  max_scroll_number: 9
+--- !u!1 &1010206036
+>>>>>>> programmer/select_sence:Morumotto_ Wheerun_Select/Assets/Scenes/Select_Scene.unity
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1694,6 +1703,7 @@ Light:
   m_CullingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+<<<<<<< HEAD:Morumotto_ Wheerun_Title/Assets/Scenes/Title_Scene.unity
   m_RenderingLayerMask: 1
   m_Lightmapping: 4
   m_LightShadowCasterMode: 0
@@ -1708,10 +1718,205 @@ Light:
   m_ShadowAngle: 0
 --- !u!4 &1374891281
 Transform:
+=======
+--- !u!114 &1454927942
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1454927940}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_UiScaleMode: 0
+  m_ReferencePixelsPerUnit: 100
+  m_ScaleFactor: 1
+  m_ReferenceResolution: {x: 800, y: 600}
+  m_ScreenMatchMode: 0
+  m_MatchWidthOrHeight: 0
+  m_PhysicalUnit: 3
+  m_FallbackScreenDPI: 96
+  m_DefaultSpriteDPI: 96
+  m_DynamicPixelsPerUnit: 1
+  m_PresetInfoIsWorld: 0
+--- !u!223 &1454927943
+Canvas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1454927940}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_RenderMode: 0
+  m_Camera: {fileID: 0}
+  m_PlaneDistance: 100
+  m_PixelPerfect: 0
+  m_ReceivesEvents: 1
+  m_OverrideSorting: 0
+  m_OverridePixelPerfect: 0
+  m_SortingBucketNormalizedSize: 0
+  m_AdditionalShaderChannelsFlag: 0
+  m_SortingLayerID: 0
+  m_SortingOrder: 0
+  m_TargetDisplay: 0
+--- !u!224 &1454927944
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1454927940}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0, y: 0, z: 0}
+  m_Children:
+  - {fileID: 363991751}
+  - {fileID: 180422655}
+  - {fileID: 2136576695}
+  - {fileID: 1874800525}
+  - {fileID: 1684304382}
+  - {fileID: 1226246219}
+  - {fileID: 1161938840}
+  - {fileID: 1226216090}
+  - {fileID: 1166176460}
+  m_Father: {fileID: 0}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0, y: 0}
+--- !u!114 &1454927945
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1454927940}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f846b631d977f764b902ce4852220cc8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sence: 0
+  before_check_sence: 0
+  input: 0
+  select_stage_number: 0
+  game_datacomplete_flg: 0
+--- !u!114 &1454927946
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1454927940}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8887a9a17c7929841a71fabe14574e8d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  select_background: {fileID: 180422654}
+  select_stage_screenimage: {fileID: 1874800524}
+  icon: {fileID: 1226246218}
+  load_now: {fileID: 1166176459}
+  select_frame: {fileID: 1684304381}
+  select_coment_back: {fileID: 1161938839}
+  canvas: {fileID: 1454927940}
+  clear:
+  - {fileID: 8311041941077567694, guid: 513c52369a92d9043975b6bbb60c8eb7, type: 3}
+  - {fileID: 8311041941077567694, guid: 513c52369a92d9043975b6bbb60c8eb7, type: 3}
+  - {fileID: 8311041941077567694, guid: 513c52369a92d9043975b6bbb60c8eb7, type: 3}
+  - {fileID: 8311041941077567694, guid: 513c52369a92d9043975b6bbb60c8eb7, type: 3}
+  - {fileID: 8311041941077567694, guid: 513c52369a92d9043975b6bbb60c8eb7, type: 3}
+  - {fileID: 8311041941077567694, guid: 513c52369a92d9043975b6bbb60c8eb7, type: 3}
+  - {fileID: 8311041941077567694, guid: 513c52369a92d9043975b6bbb60c8eb7, type: 3}
+  - {fileID: 8311041941077567694, guid: 513c52369a92d9043975b6bbb60c8eb7, type: 3}
+  - {fileID: 8311041941077567694, guid: 513c52369a92d9043975b6bbb60c8eb7, type: 3}
+  - {fileID: 8311041941077567694, guid: 513c52369a92d9043975b6bbb60c8eb7, type: 3}
+  clear_prefab:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  select_stage_object: {fileID: 2136576694}
+  select_stage_sprite:
+  - {fileID: 21300000, guid: e841a1bcc60052e4c8a32c4a20ad13b3, type: 3}
+  - {fileID: 21300000, guid: 8598c0a0cf8e3d448844eb0544f5dc81, type: 3}
+  - {fileID: 21300000, guid: 18c87cd8af2c441409e506893785865c, type: 3}
+  - {fileID: 21300000, guid: ae6043e3d9a8acb41b36f407f701fc6e, type: 3}
+  - {fileID: 21300000, guid: d3111120217b1ce4ebce28c2eef2bc6a, type: 3}
+  - {fileID: 21300000, guid: e841a1bcc60052e4c8a32c4a20ad13b3, type: 3}
+  - {fileID: 21300000, guid: 8598c0a0cf8e3d448844eb0544f5dc81, type: 3}
+  - {fileID: 21300000, guid: 18c87cd8af2c441409e506893785865c, type: 3}
+  - {fileID: 21300000, guid: ae6043e3d9a8acb41b36f407f701fc6e, type: 3}
+  - {fileID: 21300000, guid: d3111120217b1ce4ebce28c2eef2bc6a, type: 3}
+  select_stage_image: {fileID: 0}
+  select_back_object: {fileID: 363991750}
+  select_back_sprite:
+  - {fileID: 21300000, guid: 26c28d1efe8be9b41be6c7b6a4eede19, type: 3}
+  - {fileID: 21300000, guid: d50b19518c011804aa2f2135f0576b2c, type: 3}
+  - {fileID: 21300000, guid: 62de1192cc668f045a5afbf61653c9a6, type: 3}
+  - {fileID: 21300000, guid: 2efedfa5361178a4ba5abd3c27b97184, type: 3}
+  - {fileID: 21300000, guid: 56ae7431ea701c74d8e5282596ea66d4, type: 3}
+  - {fileID: 21300000, guid: 26c28d1efe8be9b41be6c7b6a4eede19, type: 3}
+  - {fileID: 21300000, guid: d50b19518c011804aa2f2135f0576b2c, type: 3}
+  - {fileID: 21300000, guid: 62de1192cc668f045a5afbf61653c9a6, type: 3}
+  - {fileID: 21300000, guid: 2efedfa5361178a4ba5abd3c27b97184, type: 3}
+  - {fileID: 21300000, guid: 56ae7431ea701c74d8e5282596ea66d4, type: 3}
+  select_back_image: {fileID: 0}
+  select_coment_object: {fileID: 1226216089}
+  select_coment_sprite:
+  - {fileID: 21300000, guid: 9a845409fde326342b6faf5451635bcc, type: 3}
+  - {fileID: 21300000, guid: 4ea11b37e221e2d4ea4378169bf67754, type: 3}
+  - {fileID: 21300000, guid: 191335ee7fab0e940b220198acaf4fdd, type: 3}
+  - {fileID: 21300000, guid: 39ce5b0d5cc58fa469c75315b6d29213, type: 3}
+  - {fileID: 21300000, guid: c974b473cbff8ba48a7888d1c826bac6, type: 3}
+  - {fileID: 21300000, guid: 5547dfef4886b1949bf86057daec5e17, type: 3}
+  - {fileID: 21300000, guid: 9cad36394e024df4cbecfe471c614878, type: 3}
+  - {fileID: 21300000, guid: f40fd275f11df7b4fb2b6bf0e4af91f9, type: 3}
+  - {fileID: 21300000, guid: d2bf4a98c6a0f52489c980d74b34a1ad, type: 3}
+  - {fileID: 21300000, guid: c9a137be6ea38f64d907e210512971d3, type: 3}
+  select_coment_image: {fileID: 0}
+  max_stage: 10
+  criteria_log_pos_x: -750
+  move_log_pos_x: 370
+  log_pos_y: -286
+  fade_speed: -1500
+  min_scroll_number: 0
+  max_scroll_number: 0
+--- !u!114 &1454927947
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1454927940}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c64093a2fc83cbe41b00d1bc60ac5924, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  min_scroll_number: 0
+  max_scroll_number: 9
+--- !u!114 &1454927948
+MonoBehaviour:
+>>>>>>> programmer/select_sence:Morumotto_ Wheerun_Select/Assets/Scenes/Select_Scene.unity
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+<<<<<<< HEAD:Morumotto_ Wheerun_Title/Assets/Scenes/Title_Scene.unity
   m_GameObject: {fileID: 1374891279}
   m_LocalRotation: {x: 0.40821788, y: -0.23456968, z: 0.10938163, w: 0.8754261}
   m_LocalPosition: {x: 0, y: 3, z: 0}
@@ -1721,6 +1926,45 @@ Transform:
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
 --- !u!1 &1532450254
+=======
+  m_GameObject: {fileID: 1454927940}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d3144f62b6f74ff449d37ad48a5e9bc0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  datapath: 
+  stage_clear_number: 00000000000000000000
+  max_stage: 10
+  delete_start: 0
+  clear:
+  - {fileID: 8311041941077567694, guid: 513c52369a92d9043975b6bbb60c8eb7, type: 3}
+  - {fileID: 8311041941077567694, guid: 513c52369a92d9043975b6bbb60c8eb7, type: 3}
+  - {fileID: 8311041941077567694, guid: 513c52369a92d9043975b6bbb60c8eb7, type: 3}
+  - {fileID: 8311041941077567694, guid: 513c52369a92d9043975b6bbb60c8eb7, type: 3}
+  - {fileID: 8311041941077567694, guid: 513c52369a92d9043975b6bbb60c8eb7, type: 3}
+  - {fileID: 8311041941077567694, guid: 513c52369a92d9043975b6bbb60c8eb7, type: 3}
+  - {fileID: 8311041941077567694, guid: 513c52369a92d9043975b6bbb60c8eb7, type: 3}
+  - {fileID: 8311041941077567694, guid: 513c52369a92d9043975b6bbb60c8eb7, type: 3}
+  - {fileID: 8311041941077567694, guid: 513c52369a92d9043975b6bbb60c8eb7, type: 3}
+  - {fileID: 8311041941077567694, guid: 513c52369a92d9043975b6bbb60c8eb7, type: 3}
+  clear_prefab:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  canvas: {fileID: 1454927940}
+  criteria_log_pos_x: -750
+  move_log_pos_x: 370
+  log_pos_y: -286
+--- !u!1 &1684304381
+>>>>>>> programmer/select_sence:Morumotto_ Wheerun_Select/Assets/Scenes/Select_Scene.unity
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
