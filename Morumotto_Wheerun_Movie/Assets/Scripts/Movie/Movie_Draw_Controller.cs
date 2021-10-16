@@ -11,7 +11,7 @@ public class Movie_Draw_Controller : MonoBehaviour
     [SerializeField] private float alpha_speed;
     [SerializeField] private float timer;
     [SerializeField] private float fade_start_timer;
-    private Player player;
+    private Movie_Player player;
     private GameObject player_Draw;
     private Image fade_Draw;
     
@@ -27,8 +27,8 @@ public class Movie_Draw_Controller : MonoBehaviour
     public void Player_Init()
     {
         player_Draw = GameObject.Find("Canvas");
-        player = player_Draw.GetComponent<Player>();
-        player.setSence(Player.Character_Sence.OPENING_MOVIE);
+        player = player_Draw.GetComponent<Movie_Player>();
+        player.setSence(Movie_Player.Character_Sence.OPENING_MOVIE);
         timer = 0.0f;
         sence_change_flg = false;
         Cursor.lockState = CursorLockMode.Locked;
@@ -74,7 +74,7 @@ public class Movie_Draw_Controller : MonoBehaviour
         if (alpha >= 1)
         {
             // 以前のシーンを格納
-            player.before_setSence(Player.Character_Sence.OPENING_MOVIE);
+            player.before_setSence(Movie_Player.Character_Sence.OPENING_MOVIE);
             // タイトルシーンに切り替える処理を記載
             SceneManager.LoadScene("Title_Scene");
         }

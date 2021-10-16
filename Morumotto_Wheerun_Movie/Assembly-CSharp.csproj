@@ -9,7 +9,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{2B48929F-38BC-07BA-C4CD-294FAFABC72F}</ProjectGuid>
+    <ProjectGuid>{434B8F1E-5B03-E55F-79DA-10CB61720B7F}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Assembly-CSharp</AssemblyName>
@@ -57,7 +57,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\Movie\Movie_Draw_Controller.cs" />
-    <Compile Include="Assets\Scripts\All\Player.cs" />
+    <Compile Include="Assets\Scripts\Movie\Movie_Player.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
