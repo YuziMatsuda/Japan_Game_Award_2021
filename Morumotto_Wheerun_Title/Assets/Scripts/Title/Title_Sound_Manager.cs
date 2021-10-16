@@ -8,7 +8,7 @@ public class Title_Sound_Manager : MonoBehaviour
     [SerializeField] private AudioClip se_cancel;
     [SerializeField] private AudioClip se_scroll;
 
-    private Player player;
+    private Title_Player player;
     private AudioSource audioSource;
     private GameObject player_Draw;
 
@@ -16,9 +16,9 @@ public class Title_Sound_Manager : MonoBehaviour
     void Start()
     {
         player_Draw = GameObject.Find("Canvas");
-        player = player_Draw.GetComponent<Player>();
-        player.setSence(Player.Character_Sence.PUSH_GAME_START);
-        player.setInput(Player.Player_Input.UP);
+        player = player_Draw.GetComponent<Title_Player>();
+        player.setSence(Title_Player.Character_Sence.PUSH_GAME_START);
+        player.setInput(Title_Player.Player_Input.UP);
         audioSource = GetComponent<AudioSource>();
     }
 
@@ -32,12 +32,12 @@ public class Title_Sound_Manager : MonoBehaviour
     {
         switch (player.sence)
         {
-            case Player.Character_Sence.PUSH_GAME_START:
+            case Title_Player.Character_Sence.PUSH_GAME_START:
             {
                 PushGameStart_Output_Sound();
                 break;
             }
-            case Player.Character_Sence.GAME_SELECT:
+            case Title_Player.Character_Sence.GAME_SELECT:
             {
                 GameSelect_Output_Sound();
                 break;
@@ -49,7 +49,7 @@ public class Title_Sound_Manager : MonoBehaviour
                 break;
             }
             */
-            case Player.Character_Sence.GAME_END_CHECK:
+            case Title_Player.Character_Sence.GAME_END_CHECK:
             {
                 GameEndCheck_Input();
                 break;
@@ -64,7 +64,7 @@ public class Title_Sound_Manager : MonoBehaviour
 
     public void GameSelect_Output_Sound()
     {
-        if (player.input == Player.Player_Input.UP)
+        if (player.input == Title_Player.Player_Input.UP)
         {
             if (Input.GetKeyDown(KeyCode.DownArrow))
             {
@@ -80,7 +80,7 @@ public class Title_Sound_Manager : MonoBehaviour
             }
         }
         */
-        if (player.input == Player.Player_Input.DOWN)
+        if (player.input == Title_Player.Player_Input.DOWN)
         {
             if (Input.GetKeyDown(KeyCode.UpArrow))
             {
@@ -108,7 +108,7 @@ public class Title_Sound_Manager : MonoBehaviour
         {
             audioSource.PlayOneShot(se_decision);
         }
-        if(player.sence != Player.Character_Sence.PUSH_GAME_START)
+        if(player.sence != Title_Player.Character_Sence.PUSH_GAME_START)
         {
             if (Input.GetButtonDown("Cancel"))
             {
@@ -119,7 +119,7 @@ public class Title_Sound_Manager : MonoBehaviour
 
     public void YesNo_Output_Sound()
     {
-        if (player.input == Player.Player_Input.UP)
+        if (player.input == Title_Player.Player_Input.UP)
         {
             if (Input.GetKeyDown(KeyCode.DownArrow))
             {
@@ -127,7 +127,7 @@ public class Title_Sound_Manager : MonoBehaviour
             }
         }
 
-        if (player.input == Player.Player_Input.DOWN)
+        if (player.input == Title_Player.Player_Input.DOWN)
         {
             if (Input.GetKeyDown(KeyCode.UpArrow))
             {

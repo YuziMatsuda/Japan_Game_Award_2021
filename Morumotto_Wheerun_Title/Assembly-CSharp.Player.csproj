@@ -9,7 +9,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{ECC953A3-967A-D751-F67A-12E0338C4DD0}</ProjectGuid>
+    <ProjectGuid>{71F1DFAB-88B3-4171-B586-BAAB54CBFDAD}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Assembly-CSharp</AssemblyName>
@@ -59,8 +59,8 @@
     <Compile Include="Assets\Controller Tester\Scripts\DetectUnknownControllerMappings.cs" />
     <Compile Include="Assets\Scripts\Title\Title_Input_Controller.cs" />
     <Compile Include="Assets\Scripts\Title\Title_Draw_Controller.cs" />
-    <Compile Include="Assets\Scripts\All\Player.cs" />
-    <Compile Include="Assets\Scripts\All\Player_Data.cs" />
+    <Compile Include="Assets\Scripts\Title\Title_Player.cs" />
+    <Compile Include="Assets\Scripts\Title\Title_Player_Data.cs" />
     <Compile Include="Assets\Scripts\Title\Title_Sound_Manager.cs" />
   </ItemGroup>
   <ItemGroup>

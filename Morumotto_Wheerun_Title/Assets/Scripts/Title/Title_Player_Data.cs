@@ -4,7 +4,7 @@ using UnityEngine;
 using System.IO;
 
 [System.Serializable]
-public class Player_Data : MonoBehaviour
+public class Title_Player_Data : MonoBehaviour
 {
     public string datapath;
 
@@ -20,10 +20,10 @@ public class Player_Data : MonoBehaviour
     [SerializeField] private float move_log_pos_x;                          // クリアロゴと赤枠を表示する際の間隔
     [SerializeField] private float log_pos_y;                               // クリアロゴと赤枠を表示するY軸
 
-    private Player player;
-    private Player_Data player_data;
+    private Title_Player player;
+    private Title_Player_Data player_data;
 
-    public void Save_Data(Player_Data player_data)
+    public void Save_Data(Title_Player_Data player_data)
     {
         // ユーザごとに保管するディレクトリが異なる為、Pathを再度設定
         datapath = Application.dataPath + "/data/data.json";
@@ -39,7 +39,7 @@ public class Player_Data : MonoBehaviour
         writer.Close();
     }
 
-    public void Load_Data(Player_Data player_data, string datapath)
+    public void Load_Data(Title_Player_Data player_data, string datapath)
     {
         // ユーザごとに保管するディレクトリが異なる為、Pathを再度設定
         datapath = Application.dataPath + "/data/data.json";
@@ -76,12 +76,12 @@ public class Player_Data : MonoBehaviour
 
     public void Init()
     {
-        player = GetComponent<Player>();
-        player_data = GameObject.Find("Canvas").GetComponent<Player_Data>();
+        player = GetComponent<Title_Player>();
+        player_data = GameObject.Find("Canvas").GetComponent<Title_Player_Data>();
         Load_Data(player_data, player_data.datapath);
         max_stage = 5;
         player_data.delete_start = false;
-        if (player.sence == Player.Character_Sence.NEXT_STAGESELECT)
+        if (player.sence == Title_Player.Character_Sence.NEXT_STAGESELECT)
         {
             Clear_Init();
         }

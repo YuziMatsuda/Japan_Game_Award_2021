@@ -22,8 +22,8 @@ public class Title_Draw_Controller : MonoBehaviour
     private RectTransform data_delete_complete_rect;                    // データ削除完了画像の座標
     private Image fade_Draw;        
     private GameObject player_Draw;                                     // プレイヤーオブジェクト
-    private Player player;                                              // プレイヤー
-    private Player_Data player_data;
+    private Title_Player player;                                              // プレイヤー
+    private Title_Player_Data player_data;
 
     private float load_now_position_x;                                  // ロード中画像のX軸
     private float data_delete_complete_position_y;                      // データ削除完了画像のX軸
@@ -57,9 +57,9 @@ public class Title_Draw_Controller : MonoBehaviour
         player_Draw = GameObject.Find("Canvas");
         //  player_data = GameObject.Find("Canvas").GetComponent<Player_Data>();
         //  player_data.Load_Data(player_data, player_data.datapath);
-        player = player_Draw.GetComponent<Player>();
+        player = player_Draw.GetComponent<Title_Player>();
         Player_Sence_Check();
-        player.setInput(Player.Player_Input.UP);
+        player.setInput(Title_Player.Player_Input.UP);
         player.set_Data_Complete_FalseFlg();
         // player_data.max_stage = 5;
         // player_data.delete_start = false;
@@ -86,17 +86,17 @@ public class Title_Draw_Controller : MonoBehaviour
         */
 
         // 以前のシーンを確認
-        if (player.before_check_sence == Player.Character_Sence.OPENING_MOVIE)
+        if (player.before_check_sence == Title_Player.Character_Sence.OPENING_MOVIE)
         {
-            player.setSence(Player.Character_Sence.NEXT_GAMESTART);
+            player.setSence(Title_Player.Character_Sence.NEXT_GAMESTART);
         }
-        else if (player.before_check_sence == Player.Character_Sence.GAME_STAGESELECT)
+        else if (player.before_check_sence == Title_Player.Character_Sence.GAME_STAGESELECT)
         {
-            player.setSence(Player.Character_Sence.NEXT_GAMETITLE);
+            player.setSence(Title_Player.Character_Sence.NEXT_GAMETITLE);
         }
         else
         {
-            player.setSence(Player.Character_Sence.PUSH_GAME_START);
+            player.setSence(Title_Player.Character_Sence.PUSH_GAME_START);
         }
     }
 
@@ -119,7 +119,7 @@ public class Title_Draw_Controller : MonoBehaviour
     public void Fade_Init()
     {
         // シーンチェック
-        if (player.sence == Player.Character_Sence.NEXT_GAMESTART)
+        if (player.sence == Title_Player.Character_Sence.NEXT_GAMESTART)
         {
             alpha = 1;
         }
@@ -127,7 +127,7 @@ public class Title_Draw_Controller : MonoBehaviour
         {
             alpha = 0;
         }
-        if (player.sence == Player.Character_Sence.NEXT_GAMETITLE)
+        if (player.sence == Title_Player.Character_Sence.NEXT_GAMETITLE)
         {
             float load_now_position = 0.0f;
             load_now_rect.anchoredPosition = new Vector2(load_now_position, load_now_position);
@@ -146,31 +146,31 @@ public class Title_Draw_Controller : MonoBehaviour
     }
 
     // 各シーンの画面描画分岐処理
-    public void Draw_Texture(Player player)
+    public void Draw_Texture(Title_Player player)
     {
         switch (player.sence)
         {
-            case Player.Character_Sence.NEXT_GAMESTART:
+            case Title_Player.Character_Sence.NEXT_GAMESTART:
             {
                 NextGameStart_Draw();
                 break;
             }
-            case Player.Character_Sence.NEXT_GAMETITLE:
+            case Title_Player.Character_Sence.NEXT_GAMETITLE:
             {
                 NextGameTitle_Draw();
                 break;
             }
-            case Player.Character_Sence.PUSH_GAME_START:
+            case Title_Player.Character_Sence.PUSH_GAME_START:
             {
                 PushGameStart_Draw();
                 break;
             }
-            case Player.Character_Sence.GAME_SELECT:
+            case Title_Player.Character_Sence.GAME_SELECT:
             {
                  GameSelect_Draw(player);
                  break;
             }
-            case Player.Character_Sence.GAME_START:
+            case Title_Player.Character_Sence.GAME_START:
             {
                  GameStart_Draw();
                  break;
@@ -186,12 +186,12 @@ public class Title_Draw_Controller : MonoBehaviour
                  break;
             }
             */
-            case Player.Character_Sence.GAME_END_CHECK:
+            case Title_Player.Character_Sence.GAME_END_CHECK:
             {
                 GameEndCheck_Draw(player);
                 break;
             }
-            case Player.Character_Sence.GAME_END:
+            case Title_Player.Character_Sence.GAME_END:
             {
                 GameEnd_Draw();
                 break;
@@ -221,7 +221,7 @@ public class Title_Draw_Controller : MonoBehaviour
         {
             // タイマー初期化
             timer = 0.0f;
-            player.sence = Player.Character_Sence.PUSH_GAME_START;
+            player.sence = Title_Player.Character_Sence.PUSH_GAME_START;
         }
     }
 
@@ -242,7 +242,7 @@ public class Title_Draw_Controller : MonoBehaviour
         else
         {
             load_now_position_x = -1920.0f;        // ロード画面の初期座標位置
-            player.sence = Player.Character_Sence.PUSH_GAME_START;
+            player.sence = Title_Player.Character_Sence.PUSH_GAME_START;
         }
     }
 
@@ -257,7 +257,7 @@ public class Title_Draw_Controller : MonoBehaviour
     }
 
     //「ゲームモードを選択」を表示と入力後の処理
-    public void GameSelect_Draw(Player player)
+    public void GameSelect_Draw(Title_Player player)
     {
         push_game_object.SetActive(false);
         select_object.SetActive(true);
@@ -273,7 +273,7 @@ public class Title_Draw_Controller : MonoBehaviour
 
         switch (player.input)
         {
-            case Player.Player_Input.UP:
+            case Title_Player.Player_Input.UP:
             {
                 icon_rect.anchoredPosition = new Vector2(up_tex_position_x, up_tex_position_y);
                 break;
@@ -285,7 +285,7 @@ public class Title_Draw_Controller : MonoBehaviour
                 break;
             }
             */
-            case Player.Player_Input.DOWN:
+            case Title_Player.Player_Input.DOWN:
             {
                 icon_rect.anchoredPosition = new Vector2(down_tex_position_x, down_tex_position_y);
                 break;
@@ -305,14 +305,14 @@ public class Title_Draw_Controller : MonoBehaviour
         else
         {
             // 以前のシーンを格納
-            player.before_setSence(Player.Character_Sence.GAME_SELECT);
+            player.before_setSence(Title_Player.Character_Sence.GAME_SELECT);
             // セレクトシーンに切り替える処理を記載
             SceneManager.LoadScene("Select_Scene");
         }
     }
 
     // 「ゲームデータ削除確認」の画像を表示
-    public void GameDatadeleteCheck_Draw(Player player)
+    public void GameDatadeleteCheck_Draw(Title_Player player)
     {
         push_game_object.SetActive(false);
         select_object.SetActive(false);
@@ -360,7 +360,7 @@ public class Title_Draw_Controller : MonoBehaviour
     }
 
     //「ゲーム終了確認」画像を表示
-    public void GameEndCheck_Draw(Player player)
+    public void GameEndCheck_Draw(Title_Player player)
     {
         push_game_object.SetActive(false);
         select_object.SetActive(false);
@@ -371,17 +371,17 @@ public class Title_Draw_Controller : MonoBehaviour
     }
 
     //「はい・いいえ」の画像表示と処理を実装
-    public void YesNo_Draw(Player player)
+    public void YesNo_Draw(Title_Player player)
     {
         switch (player.input)
         {
-            case Player.Player_Input.UP:
+            case Title_Player.Player_Input.UP:
             {
                 icon_rect.anchoredPosition = new Vector2(yes_position_x, yes_position_y);
                 break;
             }
 
-            case Player.Player_Input.DOWN:
+            case Title_Player.Player_Input.DOWN:
             {
                 icon_rect.anchoredPosition = new Vector2(no_position_x, no_position_y);
                 break;

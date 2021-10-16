@@ -6,15 +6,15 @@ using UnityEngine;
 public class Title_Input_Controller : MonoBehaviour
 {
     private GameObject player_input;
-    private Player player;
+    private Title_Player player;
 
     // Start is called before the first frame update
     void Start()
     {
         player_input = GameObject.Find("Canvas");
-        player = player_input.GetComponent<Player>();
-        player.sence = Player.Character_Sence.PUSH_GAME_START;
-        player.input = Player.Player_Input.UP;
+        player = player_input.GetComponent<Title_Player>();
+        player.sence = Title_Player.Character_Sence.PUSH_GAME_START;
+        player.input = Title_Player.Player_Input.UP;
         player.set_Data_Complete_FalseFlg();
     }
 
@@ -24,21 +24,21 @@ public class Title_Input_Controller : MonoBehaviour
         Sence_Input(player);
     }
 
-    public void Sence_Input(Player player)
+    public void Sence_Input(Title_Player player)
     {
         switch(player.sence)
         {
-            case Player.Character_Sence.PUSH_GAME_START:
+            case Title_Player.Character_Sence.PUSH_GAME_START:
             {
                 PushGameStart_Input(player);
                 break;
             }
-            case Player.Character_Sence.GAME_SELECT:
+            case Title_Player.Character_Sence.GAME_SELECT:
             {
                 GameSelect_Input(player);
                 break;
             }
-            case Player.Character_Sence.GAME_START:
+            case Title_Player.Character_Sence.GAME_START:
             {
                 break;
             }
@@ -53,39 +53,39 @@ public class Title_Input_Controller : MonoBehaviour
                 break;
             }
             */
-            case Player.Character_Sence.GAME_END_CHECK:
+            case Title_Player.Character_Sence.GAME_END_CHECK:
             {
                 GameEndCheck_Input(player);
                 break;
             }
-            case Player.Character_Sence.GAME_END:
+            case Title_Player.Character_Sence.GAME_END:
             {
                 break;
             }
         }
     }
 
-    public void PushGameStart_Input(Player player)
+    public void PushGameStart_Input(Title_Player player)
     {
         if (Input.GetButtonDown("Decision"))
         {
-            player.setSence(Player.Character_Sence.GAME_SELECT);
+            player.setSence(Title_Player.Character_Sence.GAME_SELECT);
         }
     }
 
-    public void GameSelect_Input(Player player)
+    public void GameSelect_Input(Title_Player player)
     {
         switch (player.input)
         {
-            case Player.Player_Input.UP:
+            case Title_Player.Player_Input.UP:
             {
                 if (Input.GetButtonDown("Down_Input"))
                 {
-                    player.setInput(Player.Player_Input.DOWN);
+                    player.setInput(Title_Player.Player_Input.DOWN);
                 }
                 if (Input.GetButtonDown("Decision"))
                 {
-                    player.setSence(Player.Character_Sence.GAME_START);
+                    player.setSence(Title_Player.Character_Sence.GAME_START);
                 }
                 break;
             }
@@ -108,23 +108,23 @@ public class Title_Input_Controller : MonoBehaviour
                 break;
             }
             */
-            case Player.Player_Input.DOWN:
+            case Title_Player.Player_Input.DOWN:
             {
                 if(Input.GetButtonDown("Up_Input"))
                 {
-                    player.setInput(Player.Player_Input.UP);
+                    player.setInput(Title_Player.Player_Input.UP);
                 }
                 if (Input.GetButtonDown("Decision"))
                 {
-                    player.setSence(Player.Character_Sence.GAME_END_CHECK);
-                    player.setInput(Player.Player_Input.UP);
+                    player.setSence(Title_Player.Character_Sence.GAME_END_CHECK);
+                    player.setInput(Title_Player.Player_Input.UP);
                 }
                 break;
             }
         }
         if (Input.GetButtonDown("Cancel"))
         {
-            player.setSence(Player.Character_Sence.PUSH_GAME_START);
+            player.setSence(Title_Player.Character_Sence.PUSH_GAME_START);
         }
     }
 
@@ -168,39 +168,39 @@ public class Title_Input_Controller : MonoBehaviour
     }
     */
 
-    public void GameEndCheck_Input(Player player)
+    public void GameEndCheck_Input(Title_Player player)
     {
         switch(player.input)
         {
-            case Player.Player_Input.UP:
+            case Title_Player.Player_Input.UP:
             {
                 if(Input.GetButtonDown("Down_Input"))
                 {
-                    player.setInput(Player.Player_Input.DOWN);
+                    player.setInput(Title_Player.Player_Input.DOWN);
                 }
                 if (Input.GetButtonDown("Decision"))
                 {
-                    player.setSence(Player.Character_Sence.GAME_END);
+                    player.setSence(Title_Player.Character_Sence.GAME_END);
                 }
                 break;
             }
-            case Player.Player_Input.DOWN:
+            case Title_Player.Player_Input.DOWN:
             {
                 if(Input.GetButtonDown("Up_Input"))
                 {
-                    player.setInput(Player.Player_Input.UP);
+                    player.setInput(Title_Player.Player_Input.UP);
                 }
                 if (Input.GetButtonDown("Decision"))
                 {
-                    player.setSence(Player.Character_Sence.GAME_SELECT);
+                    player.setSence(Title_Player.Character_Sence.GAME_SELECT);
                 }
                 break;
             }
         }
         if (Input.GetButtonDown("Cancel"))
         {
-            player.setSence(Player.Character_Sence.GAME_SELECT);
-            player.setInput(Player.Player_Input.DOWN);
+            player.setSence(Title_Player.Character_Sence.GAME_SELECT);
+            player.setInput(Title_Player.Player_Input.DOWN);
         }
     }
 }
