@@ -9,7 +9,8 @@ public class Select_Draw_Controller : MonoBehaviour
 {
     // 各種画像のオブジェクト
     [SerializeField] private GameObject select_background;                  // 背景
-    [SerializeField] private GameObject select_stage_screenimage;           // 各種ステージアイコン(小)
+    [SerializeField] private GameObject select_stage_screenimage_A;         // 各種ステージアイコン_A(小)
+    [SerializeField] private GameObject select_stage_screenimage_B;         // 各種ステージアイコン_B(小)
     [SerializeField] private GameObject icon;                               // アイコン
     [SerializeField] private GameObject load_now;                           // ロード中
     [SerializeField] private GameObject select_frame;                       // 赤枠
@@ -18,7 +19,7 @@ public class Select_Draw_Controller : MonoBehaviour
     [SerializeField] private GameObject[] clear = new GameObject[10];       // クリアー
     [SerializeField] private GameObject[] clear_prefab = new GameObject[10];// クリアー用のプレハブ
     private GameObject player_Draw;                                         // プレイヤーオブジェクト
-    private Player player;                                                  // プレイヤー
+    private Select_Player player;                                                  // プレイヤー
 
     [SerializeField] private GameObject select_stage_object;                // 各種ステージアイコン(大)をまとめるオブジェクト
     [SerializeField] private Sprite[] select_stage_sprite;                  // 各種ステージアイコンのスプライト
@@ -57,8 +58,8 @@ public class Select_Draw_Controller : MonoBehaviour
     {
         // プレイヤーのコンポーネントを取得
         player_Draw = GameObject.Find("Canvas");
-        player = player_Draw.GetComponent<Player>();
-        player.setSence(Player.Character_Sence.NEXT_STAGESELECT);
+        player = player_Draw.GetComponent<Select_Player>();
+        player.setSence(Select_Player.Character_Sence.NEXT_STAGESELECT);
         // マウスカーソル非表示
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
@@ -68,7 +69,8 @@ public class Select_Draw_Controller : MonoBehaviour
     {
         // 各種画像の表示設定
         select_background.SetActive(true);
-        select_stage_screenimage.SetActive(true);
+        select_stage_screenimage_A.SetActive(true);
+        select_stage_screenimage_B.SetActive(false);
         icon.SetActive(true);
         load_now.SetActive(true);
         select_frame.SetActive(true);
@@ -98,29 +100,29 @@ public class Select_Draw_Controller : MonoBehaviour
         Draw_Texture(player);
     }
 
-   public void Draw_Texture(Player player)
+   public void Draw_Texture(Select_Player player)
     {
         // プレイヤーのシーン遷移
         switch (player.sence)
         {
-            case Player.Character_Sence.NEXT_STAGESELECT:
+            case Select_Player.Character_Sence.NEXT_STAGESELECT:
             {
-                Draw_LoadNow_FadeIn(Player.Character_Sence.GAME_STAGESELECT);
+                Draw_LoadNow_FadeIn(Select_Player.Character_Sence.GAME_STAGESELECT);
                 break;
             }
-            case Player.Character_Sence.GAME_STAGESELECT:
+            case Select_Player.Character_Sence.GAME_STAGESELECT:
             {
                 Draw_StageSelect();
                 break;
             }
-            case Player.Character_Sence.NEXT_GAMEMAIN:
+            case Select_Player.Character_Sence.NEXT_GAMEMAIN:
             {
-                Draw_LoadNow_FadeOut(Player.Character_Sence.NEXT_GAMEMAIN);
+                Draw_LoadNow_FadeOut(Select_Player.Character_Sence.NEXT_GAMEMAIN);
                 break;
             }
-            case Player.Character_Sence.NEXT_GAMETITLE:
+            case Select_Player.Character_Sence.NEXT_GAMETITLE:
             {
-                Draw_LoadNow_FadeOut(Player.Character_Sence.NEXT_GAMETITLE);
+                Draw_LoadNow_FadeOut(Select_Player.Character_Sence.NEXT_GAMETITLE);
                 break;
             }
         }
@@ -137,18 +139,22 @@ public class Select_Draw_Controller : MonoBehaviour
         {
             // 赤枠を表示し、左右移動する事で赤枠も移動する。
             select_frame_rect.anchoredPosition = new Vector2((move_log_pos_x * player.select_stage_number) + criteria_log_pos_x - 1850.0f, log_pos_y);
+            select_stage_screenimage_A.SetActive(false);
+            select_stage_screenimage_B.SetActive(true);
         }
         else
         {
             // 赤枠を表示し、左右移動する事で赤枠も移動する。
             select_frame_rect.anchoredPosition = new Vector2((move_log_pos_x * player.select_stage_number) + criteria_log_pos_x, log_pos_y);
+            select_stage_screenimage_A.SetActive(true);
+            select_stage_screenimage_B.SetActive(false);
         }
         //  コメントの切り替えを配列で行う。
         select_coment_image.sprite = select_coment_sprite[player.select_stage_number];
     }
 
     // フェードイン処理
-    public void Draw_LoadNow_FadeIn(Player.Character_Sence Next_Scene)
+    public void Draw_LoadNow_FadeIn(Select_Player.Character_Sence Next_Scene)
     {
         float Load_Now_Max_Position = -2000.0f;
         if (load_now_rect.anchoredPosition.x >= Load_Now_Max_Position)
@@ -162,7 +168,7 @@ public class Select_Draw_Controller : MonoBehaviour
     }
 
     // フェードアウト処理
-    public void Draw_LoadNow_FadeOut(Player.Character_Sence Next_Scene)
+    public void Draw_LoadNow_FadeOut(Select_Player.Character_Sence Next_Scene)
     {
         float Load_Now_Min_Position = 0.0f;
         if (load_now_rect.anchoredPosition.x <= Load_Now_Min_Position)
@@ -177,16 +183,16 @@ public class Select_Draw_Controller : MonoBehaviour
     }
 
     // シーン切り替え処理
-    public void SenceChange(Player.Character_Sence Next_Scene)
+    public void SenceChange(Select_Player.Character_Sence Next_Scene)
     {
-        if (Next_Scene == Player.Character_Sence.NEXT_GAMEMAIN)
+        if (Next_Scene == Select_Player.Character_Sence.NEXT_GAMEMAIN)
         {
             player.set_Stagenumber(player.select_stage_number);
             Next_Stage_Number();
         }
-        else if (Next_Scene == Player.Character_Sence.NEXT_GAMETITLE)
+        else if (Next_Scene == Select_Player.Character_Sence.NEXT_GAMETITLE)
         {
-            player.before_setSence(Player.Character_Sence.GAME_STAGESELECT);
+            player.before_setSence(Select_Player.Character_Sence.GAME_STAGESELECT);
             SceneManager.LoadScene("Title_Scene");
         }
     }

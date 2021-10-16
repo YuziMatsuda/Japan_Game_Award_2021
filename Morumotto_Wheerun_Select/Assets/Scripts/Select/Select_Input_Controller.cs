@@ -5,7 +5,7 @@ using UnityEngine;
 public class Select_Input_Controller : MonoBehaviour
 {
     private GameObject player_input;
-    private Player player;
+    private Select_Player player;
     // bool button_flg;
     float before_flame;
     [SerializeField] private int min_scroll_number;         // 最小のスクロール値 (０固定)
@@ -15,14 +15,14 @@ public class Select_Input_Controller : MonoBehaviour
     void Start()
     {
         player_input = GameObject.Find("Canvas");
-        player = player_input.GetComponent<Player>();
+        player = player_input.GetComponent<Select_Player>();
         //button_flg = false;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(player.sence == Player.Character_Sence.GAME_STAGESELECT)
+        if(player.sence == Select_Player.Character_Sence.GAME_STAGESELECT)
         {
             Player_Input();
         }
@@ -62,7 +62,7 @@ public class Select_Input_Controller : MonoBehaviour
     {
         if (Input.GetButtonDown("Decision"))
         {
-            player.setSence(Player.Character_Sence.NEXT_GAMEMAIN);
+            player.setSence(Select_Player.Character_Sence.NEXT_GAMEMAIN);
         }
     }
 
@@ -70,7 +70,7 @@ public class Select_Input_Controller : MonoBehaviour
     {
         if (Input.GetButtonDown("Cancel"))
         {
-            player.setSence(Player.Character_Sence.NEXT_GAMETITLE);
+            player.setSence(Select_Player.Character_Sence.NEXT_GAMETITLE);
         }
     }
 }

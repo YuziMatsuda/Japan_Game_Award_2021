@@ -10,7 +10,7 @@ public class Select_Sound_Manager : MonoBehaviour
     [SerializeField] private int min_scroll_number;         // 最小のスクロール値 (０固定)
     [SerializeField] private int max_scroll_number;         // 最大のスクロール値（最大ステージ数）
 
-    private Player player;
+    private Select_Player player;
     private AudioSource audioSource;
     private GameObject player_Draw;
 
@@ -18,14 +18,14 @@ public class Select_Sound_Manager : MonoBehaviour
     void Start()
     {
         player_Draw = GameObject.Find("Canvas");
-        player = player_Draw.GetComponent<Player>();
+        player = player_Draw.GetComponent<Select_Player>();
         audioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(player.sence == Player.Character_Sence.GAME_STAGESELECT)
+        if(player.sence == Select_Player.Character_Sence.GAME_STAGESELECT)
         {
             Output_Sound();
         }
