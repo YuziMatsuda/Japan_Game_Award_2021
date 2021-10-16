@@ -15,8 +15,8 @@ public class Select_Draw_Controller : MonoBehaviour
     [SerializeField] private GameObject select_frame;                       // 赤枠
     [SerializeField] private GameObject select_coment_back;                 // コメント用の背景
     [SerializeField] private GameObject canvas;                             // キャンバス
-    [SerializeField] private GameObject[] clear = new GameObject[5];        // クリアー
-    [SerializeField] private GameObject[] clear_prefab = new GameObject[5]; // クリアー用のプレハブ
+    [SerializeField] private GameObject[] clear = new GameObject[10];       // クリアー
+    [SerializeField] private GameObject[] clear_prefab = new GameObject[10];// クリアー用のプレハブ
     private GameObject player_Draw;                                         // プレイヤーオブジェクト
     private Player player;                                                  // プレイヤー
 
@@ -223,27 +223,27 @@ public class Select_Draw_Controller : MonoBehaviour
             }
             case 5:
             {
-                SceneManager.LoadScene("Stage5_Scene");
+                SceneManager.LoadScene("Stage6_Scene");
                 break;
             }
             case 6:
             {
-                SceneManager.LoadScene("Stage5_Scene");
+                SceneManager.LoadScene("Stage7_Scene");
                 break;
             }
             case 7:
             {
-                SceneManager.LoadScene("Stage5_Scene");
+                SceneManager.LoadScene("Stage8_Scene");
                 break;
             }
             case 8:
             {
-                SceneManager.LoadScene("Stage5_Scene");
+                SceneManager.LoadScene("Stage9_Scene");
                 break;
             }
             case 9:
             {
-                SceneManager.LoadScene("Stage5_Scene");
+                SceneManager.LoadScene("Stage10_Scene");
                 break;
             }
         }
