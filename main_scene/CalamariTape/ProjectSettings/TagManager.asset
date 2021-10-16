@@ -3,30 +3,16 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags:
-  - GoalFloor
-  - VerticalWall
-  - HorizontalWall
-  - Wall
-  - ClearVerticalWall
-  - ClearHorizontalWall
-  - Message
-  - MarmotHealth
-  - Conveyor
-  - IcePlane
-  - Tarzan
-  - DashPanel
-  - Trampoline
-  - TippedSaw
+  tags: []
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - Field
+  - 
   - Water
   - UI
-  - Wall
-  - Conveyor
+  - 
+  - 
   - 
   - 
   - 
