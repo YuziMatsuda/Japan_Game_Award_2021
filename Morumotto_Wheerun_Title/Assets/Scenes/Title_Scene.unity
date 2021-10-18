@@ -1335,15 +1335,15 @@ MonoBehaviour:
   fade_in: {fileID: 676600816}
   max_rect_y: 480
   alpha: 0
-  up_tex_position_x: -320
-  center_tex_position_x: -370
-  down_tex_position_x: -320
-  up_tex_position_y: -50
+  up_tex_position_x: -330
+  center_tex_position_x: -360
+  down_tex_position_x: -330
+  up_tex_position_y: -40
   center_tex_position_y: -240
-  down_tex_position_y: -250
-  yes_position_x: -150
+  down_tex_position_y: -245
+  yes_position_x: -160
   yes_position_y: -200
-  no_position_x: -190
+  no_position_x: -200
   no_position_y: -400
 --- !u!114 &1245046215
 MonoBehaviour:
@@ -1369,7 +1369,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1245046208}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 802b2fc2732671740a52c61b70032f0f, type: 3}
   m_Name: 
@@ -1511,7 +1511,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -10, y: -250}
+  m_AnchoredPosition: {x: -15, y: -250}
   m_SizeDelta: {x: 597, y: 160}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1275608421
@@ -2058,7 +2058,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 2c7d9721e581f0143857cd3aa0b90151, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 8055d805bf1a5c44f98e53920881ac94, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2093,7 +2093,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -200, y: -350}
-  m_SizeDelta: {x: 100, y: 100}
+  m_SizeDelta: {x: 200, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &2029341846
 GameObject:
