@@ -59,7 +59,6 @@
     <Compile Include="Assets\main_scene\Assets\Scripts\Common\TagManager.cs" />
     <Compile Include="Assets\main_scene\Assets\SampleScenes\Scripts\ParticleSceneControls.cs" />
     <Compile Include="Assets\main_scene\Assets\Scripts\NenchakMoveController.cs" />
-    <Compile Include="Assets\Morumotto_Wheerun_Select\Assets\Controller Tester\Scripts\DetectUnknownControllerMappings.cs" />
     <Compile Include="Assets\main_scene\Assets\Scripts\GameSelect.cs" />
     <Compile Include="Assets\main_scene\Assets\Scripts\Common\ConveyorManager.cs" />
     <Compile Include="Assets\main_scene\Assets\Standard Assets\Characters\FirstPersonCharacter\Scripts\FirstPersonController.cs" />
@@ -86,6 +85,7 @@
     <Compile Include="Assets\main_scene\Assets\Standard Assets\ParticleSystems\Scripts\ExplosionFireAndDebris.cs" />
     <Compile Include="Assets\main_scene\Assets\Standard Assets\Utility\PlatformSpecificContent.cs" />
     <Compile Include="Assets\main_scene\Assets\Scripts\Interface\DebugDemo.cs" />
+    <Compile Include="Assets\Morumotto_Wheerun_Select\Assets\Controller Tester\Scripts\DetectUnknownControllerMappings.cs" />
     <Compile Include="Assets\Morumotto_Wheerun_Title\Assets\Scripts\Title\Title_Draw_Controller.cs" />
     <Compile Include="Assets\main_scene\Assets\Standard Assets\CrossPlatformInput\Scripts\VirtualInput.cs" />
     <Compile Include="Assets\main_scene\Assets\Scripts\CircleRing.cs" />
@@ -139,6 +139,7 @@
     <Compile Include="Assets\main_scene\Assets\Standard Assets\Utility\TimedObjectDestructor.cs" />
     <Compile Include="Assets\main_scene\Assets\Scripts\NotAttached\NenchakWallHorizontalDecision.cs" />
     <Compile Include="Assets\main_scene\Assets\ModularConveyorTools\Scripts\LinearConveyor.cs" />
+    <Compile Include="Assets\main_scene\Assets\Scripts\ResponseSceneInfo.cs" />
     <Compile Include="Assets\main_scene\Assets\Standard Assets\Characters\RollerBall\Scripts\Ball.cs" />
     <Compile Include="Assets\Morumotto_Wheerun_Title\Assets\Scripts\Title\Title_Player_Data.cs" />
     <Compile Include="Assets\main_scene\Assets\Standard Assets\Environment\Water\Water\Scripts\WaterTile.cs" />
@@ -158,6 +159,7 @@
     <Compile Include="Assets\main_scene\Assets\Standard Assets\Vehicles\Aircraft\Scripts\AeroplaneUserControl4Axis.cs" />
     <Compile Include="Assets\main_scene\Assets\Scripts\StopGimmick.cs" />
     <Compile Include="Assets\main_scene\Assets\Scripts\Common\LayerManager.cs" />
+    <Compile Include="Assets\Morumotto_Wheerun_Movie\Assets\Scripts\Movie\Movie_Player.cs" />
     <Compile Include="Assets\main_scene\Assets\Standard Assets\Utility\DragRigidbody.cs" />
     <Compile Include="Assets\main_scene\Assets\Standard Assets\CrossPlatformInput\Scripts\PlatformSpecific\StandaloneInput.cs" />
     <Compile Include="Assets\main_scene\Assets\Standard Assets\Vehicles\Aircraft\Scripts\AeroplaneAudio.cs" />
@@ -187,7 +189,6 @@
     <Compile Include="Assets\main_scene\Assets\Standard Assets\ParticleSystems\Scripts\ParticleSystemMultiplier.cs" />
     <Compile Include="Assets\main_scene\Assets\Standard Assets\Utility\ObjectResetter.cs" />
     <Compile Include="Assets\main_scene\Assets\SampleScenes\Menu\Scripts\MenuSceneLoader.cs" />
-    <Compile Include="Assets\Morumotto_Wheerun_Select\Assets\Scripts\Select\Select_Player.cs" />
     <Compile Include="Assets\main_scene\Assets\Standard Assets\Utility\AutoMobileShaderSwitch.cs" />
     <Compile Include="Assets\main_scene\Assets\Scripts\NotAttached\MoveWallsActiveManager.cs" />
     <Compile Include="Assets\main_scene\Assets\Scripts\SfxPlay.cs" />
@@ -212,7 +213,6 @@
     <Compile Include="Assets\main_scene\Assets\Standard Assets\2D\Scripts\Restarter.cs" />
     <Compile Include="Assets\main_scene\Assets\Scripts\Common\StageClearNumber.cs" />
     <Compile Include="Assets\main_scene\Assets\Scripts\MessageManager.cs" />
-    <Compile Include="Assets\Morumotto_Wheerun_Movie\Assets\Scripts\Movie\Movie_Player.cs" />
     <Compile Include="Assets\Morumotto_Wheerun_Select\Assets\Scripts\Select\Select_Player_Data.cs" />
     <Compile Include="Assets\main_scene\Assets\Scripts\TsuruTsuruState.cs" />
     <Compile Include="Assets\main_scene\Assets\Standard Assets\2D\Scripts\CameraFollow.cs" />
@@ -234,6 +234,7 @@
     <Compile Include="Assets\main_scene\Assets\Scripts\Common\ConveyorMoveMode.cs" />
     <Compile Include="Assets\main_scene\Assets\Scripts\Common\WallRunHorizontalFrontMode.cs" />
     <Compile Include="Assets\main_scene\Assets\Standard Assets\Environment\Water\Water\Scripts\Water.cs" />
+    <Compile Include="Assets\Morumotto_Wheerun_Select\Assets\Scripts\Select\Select_Player.cs" />
     <Compile Include="Assets\main_scene\Assets\Scripts\Interface\GimmkckActiveManager.cs" />
     <Compile Include="Assets\main_scene\Assets\Scripts\SaveControllerScene.cs" />
     <Compile Include="Assets\main_scene\Assets\Scripts\ClearHorizontalWall.cs" />
@@ -319,7 +320,6 @@
      <None Include="Assets\main_scene\Assets\Standard Assets\ParticleSystems\Shaders\PriorityParticleAlpha.shader" />
      <None Include="Assets\main_scene\Assets\Wheel\arktoon Shaders\Shaders\StencilReaderDoubleFadeFade.shader" />
      <None Include="Assets\main_scene\Assets\Wheel\arktoon Shaders\Shaders\EmissiveFreakFade.shader" />
-     <None Include="Assets\Morumotto_Wheerun_Movie\ProjectSettings\ProjectVersion.txt" />
      <None Include="Assets\main_scene\Assets\Standard Assets\Environment\Water (Basic)\Shaders\FXWaterBasic.shader" />
      <None Include="Assets\main_scene\Assets\Wheel\arktoon Shaders\Shaders\Fade.shader" />
      <None Include="Assets\main_scene\Assets\Wheel\arktoon Shaders\Shaders\EmissiveFreakOpaque.shader" />
