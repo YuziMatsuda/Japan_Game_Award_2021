@@ -79,19 +79,20 @@
     <Compile Include="Assets\main_scene\Assets\Standard Assets\Utility\SimpleMouseRotator.cs" />
     <Compile Include="Assets\main_scene\Assets\Scripts\TsuruTsuruEffectController.cs" />
     <Compile Include="Assets\main_scene\Assets\Scripts\GameCheck.cs" />
+    <Compile Include="Assets\Morumotto_Wheerun_Select\Assets\Controller Tester\Scripts\DetectUnknownControllerMappings.cs" />
     <Compile Include="Assets\main_scene\Assets\Standard Assets\CrossPlatformInput\Scripts\ButtonHandler.cs" />
     <Compile Include="Assets\main_scene\Assets\Standard Assets\Utility\LerpControlledBob.cs" />
     <Compile Include="Assets\main_scene\Assets\Scripts\DoorOpener.cs" />
     <Compile Include="Assets\main_scene\Assets\Standard Assets\ParticleSystems\Scripts\ExplosionFireAndDebris.cs" />
     <Compile Include="Assets\main_scene\Assets\Standard Assets\Utility\PlatformSpecificContent.cs" />
     <Compile Include="Assets\main_scene\Assets\Scripts\Interface\DebugDemo.cs" />
-    <Compile Include="Assets\Morumotto_Wheerun_Select\Assets\Controller Tester\Scripts\DetectUnknownControllerMappings.cs" />
     <Compile Include="Assets\Morumotto_Wheerun_Title\Assets\Scripts\Title\Title_Draw_Controller.cs" />
     <Compile Include="Assets\main_scene\Assets\Standard Assets\CrossPlatformInput\Scripts\VirtualInput.cs" />
     <Compile Include="Assets\main_scene\Assets\Scripts\CircleRing.cs" />
     <Compile Include="Assets\main_scene\Assets\Scripts\GameRedo.cs" />
     <Compile Include="Assets\main_scene\Assets\SampleScenes\Scripts\SlowMoButton.cs" />
     <Compile Include="Assets\main_scene\Assets\Scripts\ModeChanger.cs" />
+    <Compile Include="Assets\Morumotto_Wheerun_Select\Assets\Scripts\Select\Select_Player.cs" />
     <Compile Include="Assets\main_scene\Assets\Standard Assets\Cameras\Scripts\ProtectCameraFromWallClip.cs" />
     <Compile Include="Assets\main_scene\Assets\SampleScenes\Scripts\LevelReset.cs" />
     <Compile Include="Assets\main_scene\Assets\SampleScenes\Menu\Scripts\SceneAndURLLoader.cs" />
@@ -101,6 +102,7 @@
     <Compile Include="Assets\main_scene\Assets\Standard Assets\Environment\Water\Water\Scripts\Displace.cs" />
     <Compile Include="Assets\main_scene\Assets\Standard Assets\Cameras\Scripts\HandHeldCam.cs" />
     <Compile Include="Assets\main_scene\Assets\Standard Assets\Vehicles\Aircraft\Scripts\AeroplanePropellerAnimator.cs" />
+    <Compile Include="Assets\Morumotto_Wheerun_Movie\Assets\Scripts\Movie\Movie_Player.cs" />
     <Compile Include="Assets\main_scene\Assets\Standard Assets\Cameras\Scripts\AbstractTargetFollower.cs" />
     <Compile Include="Assets\main_scene\Assets\Standard Assets\Vehicles\Car\Scripts\CarController.cs" />
     <Compile Include="Assets\main_scene\Assets\Scripts\MessageScrollText.cs" />
@@ -159,7 +161,6 @@
     <Compile Include="Assets\main_scene\Assets\Standard Assets\Vehicles\Aircraft\Scripts\AeroplaneUserControl4Axis.cs" />
     <Compile Include="Assets\main_scene\Assets\Scripts\StopGimmick.cs" />
     <Compile Include="Assets\main_scene\Assets\Scripts\Common\LayerManager.cs" />
-    <Compile Include="Assets\Morumotto_Wheerun_Movie\Assets\Scripts\Movie\Movie_Player.cs" />
     <Compile Include="Assets\main_scene\Assets\Standard Assets\Utility\DragRigidbody.cs" />
     <Compile Include="Assets\main_scene\Assets\Standard Assets\CrossPlatformInput\Scripts\PlatformSpecific\StandaloneInput.cs" />
     <Compile Include="Assets\main_scene\Assets\Standard Assets\Vehicles\Aircraft\Scripts\AeroplaneAudio.cs" />
@@ -234,7 +235,6 @@
     <Compile Include="Assets\main_scene\Assets\Scripts\Common\ConveyorMoveMode.cs" />
     <Compile Include="Assets\main_scene\Assets\Scripts\Common\WallRunHorizontalFrontMode.cs" />
     <Compile Include="Assets\main_scene\Assets\Standard Assets\Environment\Water\Water\Scripts\Water.cs" />
-    <Compile Include="Assets\Morumotto_Wheerun_Select\Assets\Scripts\Select\Select_Player.cs" />
     <Compile Include="Assets\main_scene\Assets\Scripts\Interface\GimmkckActiveManager.cs" />
     <Compile Include="Assets\main_scene\Assets\Scripts\SaveControllerScene.cs" />
     <Compile Include="Assets\main_scene\Assets\Scripts\ClearHorizontalWall.cs" />
