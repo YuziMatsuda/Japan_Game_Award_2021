@@ -66,7 +66,7 @@ public class Title_Sound_Manager : MonoBehaviour
     {
         if (player.input == Title_Player.Player_Input.UP)
         {
-            if (Input.GetKeyDown(KeyCode.DownArrow))
+            if (Input.GetButtonDown("Down_Input"))
             {
                 audioSource.PlayOneShot(se_scroll);
             }
@@ -82,7 +82,7 @@ public class Title_Sound_Manager : MonoBehaviour
         */
         if (player.input == Title_Player.Player_Input.DOWN)
         {
-            if (Input.GetKeyDown(KeyCode.UpArrow))
+            if (Input.GetButtonDown("Up_Input"))
             {
                 audioSource.PlayOneShot(se_scroll);
             }
@@ -121,7 +121,7 @@ public class Title_Sound_Manager : MonoBehaviour
     {
         if (player.input == Title_Player.Player_Input.UP)
         {
-            if (Input.GetKeyDown(KeyCode.DownArrow))
+            if (Input.GetButtonDown("Down_Input"))
             {
                 audioSource.PlayOneShot(se_scroll);
             }
@@ -129,7 +129,7 @@ public class Title_Sound_Manager : MonoBehaviour
 
         if (player.input == Title_Player.Player_Input.DOWN)
         {
-            if (Input.GetKeyDown(KeyCode.UpArrow))
+            if (Input.GetButtonDown("Up_Input"))
             {
                 audioSource.PlayOneShot(se_scroll);
             }
