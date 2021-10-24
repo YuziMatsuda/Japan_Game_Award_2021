@@ -4,44 +4,5 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes:
-  - enabled: 1
-    path: Assets/Morumotto_Wheerun_Movie/Assets/Scenes/Movie_Sence.unity
-    guid: 6154ca28af53a984aa46db0d2b1cc7f2
-  - enabled: 1
-    path: Assets/Morumotto_Wheerun_Title/Assets/Scenes/Title_Scene.unity
-    guid: 195bce6ee72c8f943be7c33e3bc6e4e0
-  - enabled: 1
-    path: Assets/Morumotto_Wheerun_Select/Assets/Scenes/Select_Scene.unity
-    guid: 6f5d7186cf3244f48b125147e3ef53d2
-  - enabled: 1
-    path: Assets/main_scene/Assets/Scenes/main.unity
-    guid: 36652de02646d7d43a63e2ec458e9d65
-  - enabled: 1
-    path: Assets/main_scene/Assets/Scenes/Stage2_Scene.unity
-    guid: 9517b171bdae8fd42bea22414b02266a
-  - enabled: 1
-    path: Assets/main_scene/Assets/Scenes/Stage3_Scene.unity
-    guid: fef5f482a8579ce4790bd1d21888bf71
-  - enabled: 1
-    path: Assets/main_scene/Assets/Scenes/Stage4_Scene.unity
-    guid: 083d55ca2a512634c9065854d44c3916
-  - enabled: 1
-    path: Assets/main_scene/Assets/Scenes/Stage5_Scene.unity
-    guid: 6c3f9c8b96ed166429cb5738bf1e91a6
-  - enabled: 1
-    path: Assets/main_scene/Assets/Scenes/Stage6_Scene.unity
-    guid: c32d7aa3c9b08e449aa84dcc1d2721ed
-  - enabled: 1
-    path: Assets/main_scene/Assets/Scenes/Stage7_Scene.unity
-    guid: 394db2eeda809d4428274baa72b58393
-  - enabled: 1
-    path: Assets/main_scene/Assets/Scenes/Stage8_Scene.unity
-    guid: 98ccacb190d640444a71f8ac5d4f89e1
-  - enabled: 1
-    path: Assets/main_scene/Assets/Scenes/Stage9_Scene.unity
-    guid: d9140b002ed02f54594c26aeb7da17cf
-  - enabled: 1
-    path: Assets/main_scene/Assets/Scenes/Stage10_Scene.unity
-    guid: 7826094e00cf4444daacbf6f98e3efe0
+  m_Scenes: []
   m_configObjects: {}

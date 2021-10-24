@@ -63,7 +63,42 @@ public class Select_Draw_Controller : MonoBehaviour
         // マウスカーソル非表示
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+        // ステージ番号を取得 (結合時にコメント解除)
+        Set_Player_Number();
     }
+
+    public void Set_Player_Number()
+    {
+        try
+        {
+            var sceneObj = GameObject.FindGameObjectWithTag("ResponseSceneInfo");
+            if (sceneObj != null)
+            {
+                var info = sceneObj.GetComponent<ResponseSceneInfo>();
+                // ステージ名が取得できます。
+                Debug.Log(info._fromSceneName);
+                // ステージ番号取得
+                switch (info._fromSceneName)
+                {
+                    case "Stage2_Scene": { player.select_stage_number = 1; break; }
+                    case "Stage3_Scene": { player.select_stage_number = 2; break; }
+                    case "Stage4_Scene": { player.select_stage_number = 3; break; }
+                    case "Stage5_Scene": { player.select_stage_number = 4; break; }
+                    case "Stage6_Scene": { player.select_stage_number = 5; break; }
+                    case "Stage7_Scene": { player.select_stage_number = 6; break; }
+                    case "Stage8_Scene": { player.select_stage_number = 7; break; }
+                    case "Stage9_Scene": { player.select_stage_number = 8; break; }
+                    case "Stage10_Scene": { player.select_stage_number = 9; break; }
+                    default: { player.select_stage_number = 0; break; }
+                }
+            }
+        }
+        catch
+        {
+            player.select_stage_number = 0;
+        }
+    }
+
 
     public void Texture_Draw_Init()
     {
@@ -90,7 +125,7 @@ public class Select_Draw_Controller : MonoBehaviour
         select_coment_image.sprite = select_coment_sprite[player.select_stage_number];
         load_now_rect = load_now.GetComponent<RectTransform>();
         select_frame_rect = select_frame.GetComponent<RectTransform>();
-        player.select_stage_number = 0;
+        //player.select_stage_number = 0;
     }
 
     // Update is called once per frame
@@ -105,26 +140,10 @@ public class Select_Draw_Controller : MonoBehaviour
         // プレイヤーのシーン遷移
         switch (player.sence)
         {
-            case Select_Player.Character_Sence.NEXT_STAGESELECT:
-            {
-                Draw_LoadNow_FadeIn(Select_Player.Character_Sence.GAME_STAGESELECT);
-                break;
-            }
-            case Select_Player.Character_Sence.GAME_STAGESELECT:
-            {
-                Draw_StageSelect();
-                break;
-            }
-            case Select_Player.Character_Sence.NEXT_GAMEMAIN:
-            {
-                Draw_LoadNow_FadeOut(Select_Player.Character_Sence.NEXT_GAMEMAIN);
-                break;
-            }
-            case Select_Player.Character_Sence.NEXT_GAMETITLE:
-            {
-                Draw_LoadNow_FadeOut(Select_Player.Character_Sence.NEXT_GAMETITLE);
-                break;
-            }
+            case Select_Player.Character_Sence.NEXT_STAGESELECT:{Draw_LoadNow_FadeIn(Select_Player.Character_Sence.GAME_STAGESELECT);break;}
+            case Select_Player.Character_Sence.GAME_STAGESELECT:{Draw_StageSelect();break;}
+            case Select_Player.Character_Sence.NEXT_GAMEMAIN:{Draw_LoadNow_FadeOut(Select_Player.Character_Sence.NEXT_GAMEMAIN);break;}
+            case Select_Player.Character_Sence.NEXT_GAMETITLE:{Draw_LoadNow_FadeOut(Select_Player.Character_Sence.NEXT_GAMETITLE);break;}
         }
     }
 
@@ -202,56 +221,16 @@ public class Select_Draw_Controller : MonoBehaviour
     {
         switch (player.select_stage_number)
         {
-            case 0:
-            {
-                SceneManager.LoadScene("main");
-                break;
-            }
-            case 1:
-            {
-                SceneManager.LoadScene("Stage2_Scene");
-                break;
-            }
-            case 2:
-            {
-                SceneManager.LoadScene("Stage3_Scene");
-                break;
-            }
-            case 3:
-            {
-                SceneManager.LoadScene("Stage4_Scene");
-                break;
-            }
-            case 4:
-            {
-                SceneManager.LoadScene("Stage5_Scene");
-                break;
-            }
-            case 5:
-            {
-                SceneManager.LoadScene("Stage6_Scene");
-                break;
-            }
-            case 6:
-            {
-                SceneManager.LoadScene("Stage7_Scene");
-                break;
-            }
-            case 7:
-            {
-                SceneManager.LoadScene("Stage8_Scene");
-                break;
-            }
-            case 8:
-            {
-                SceneManager.LoadScene("Stage9_Scene");
-                break;
-            }
-            case 9:
-            {
-                SceneManager.LoadScene("Stage10_Scene");
-                break;
-            }
+            case 0:{SceneManager.LoadScene("main");break;}
+            case 1:{SceneManager.LoadScene("Stage2_Scene");break;}
+            case 2:{SceneManager.LoadScene("Stage3_Scene");break;}
+            case 3:{SceneManager.LoadScene("Stage4_Scene");break;}
+            case 4:{SceneManager.LoadScene("Stage5_Scene");break;}
+            case 5:{SceneManager.LoadScene("Stage6_Scene");break;}
+            case 6:{SceneManager.LoadScene("Stage7_Scene");break;}
+            case 7:{SceneManager.LoadScene("Stage8_Scene");break;}
+            case 8:{SceneManager.LoadScene("Stage9_Scene");break;}
+            case 9:{SceneManager.LoadScene("Stage10_Scene");break;}
         }
     }
 }
