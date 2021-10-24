@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
@@ -121,5 +122,10 @@ public class Select_Player : MonoBehaviour
     void Update()
     {
 
+    }
+
+    public static implicit operator int(Select_Player v)
+    {
+        throw new NotImplementedException();
     }
 }
