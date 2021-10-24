@@ -1,3 +1,70 @@
+2021/10/24 15:13
+★不具合修正　ネンチャクモードにて動く壁の挙動不備の修正
+・横向きの壁プレハブのタグ、レイヤー情報の変更
+　親タグ：名無し、親レイヤー：Field
+　子タグ：VerticalWall、子レイヤー：Wall
+main_scene\CalamariTape\Assets\Prefabs\VerticalWall.prefab
+・動く縦向きの壁プレハブのタグ、レイヤー情報の変更
+　親タグ：名無し、親レイヤー：Field
+　子タグ：HorizontalWall、子レイヤー：Wall
+main_scene\CalamariTape\Assets\Prefabs\Gimmicks\MoveHorizontalWall.prefab
+・動く横向きの壁プレハブのタグ、レイヤー情報の変更
+　親タグ：名無し、親レイヤー：Field
+　子タグ：VerticalWall、子レイヤー：Wall
+main_scene\CalamariTape\Assets\Prefabs\Gimmicks\MoveVerticalWall.prefab
+・登る壁オブジェクト情報を変更
+main_scene\CalamariTape\Assets\Scenes\main.unity
+main_scene\CalamariTape\Assets\Scenes\Stage5_Scene.unity
+main_scene\CalamariTape\Assets\Scenes\Stage7_Scene.unity
+main_scene\CalamariTape\Assets\Scenes\Stage8_Scene.unity
+main_scene\CalamariTape\Assets\Scenes\Stage9_Scene.unity
+・横向きの壁判定処理の修正
+main_scene\CalamariTape\Assets\Scripts\NotAttached\AllmodeStateConf.cs
+
+2021/10/24 12:49
+★不具合修正　ポーズ画面、クリア画面にてUI操作不備の修正
+・ゲームに戻るを決定後に操作禁止にするよう修正
+main_scene\CalamariTape\Assets\Scripts\GameBack.cs
+・遊び方の確認を決定後に上下入力を禁止にするよう修正
+main_scene\CalamariTape\Assets\Scripts\GameCheck.cs
+・ゲームを遊びなおす決定後に操作禁止にするよう修正
+main_scene\CalamariTape\Assets\Scripts\GameRedo.cs
+・他のステージを選択する決定後に操作禁止にするよう修正
+main_scene\CalamariTape\Assets\Scripts\GameSelect.cs
+
+2021/10/24 10:34
+★不具合修正　カラマリモードの拡大・縮小、床と壁の移動
+・縦向きの壁プレハブのタグ、レイヤー情報の変更
+　親タグ：名無し、親レイヤー：Field
+　子タグ：HrizontalWall、子レイヤー：Wall
+main_scene\CalamariTape\Assets\Prefabs\HorizontalWall.prefab
+・各ステージにて縦向きの壁オブジェクトの情報変更
+main_scene\CalamariTape\Assets\Scenes\main.unity
+main_scene\CalamariTape\Assets\Scenes\Stage10_Scene.unity
+main_scene\CalamariTape\Assets\Scenes\Stage4_Scene.unity
+main_scene\CalamariTape\Assets\Scenes\Stage7_Scene.unity
+main_scene\CalamariTape\Assets\Scenes\Stage8_Scene.unity
+main_scene\CalamariTape\Assets\Scenes\Stage9_Scene.unity
+・カラマリモード移動処理にて壁移動が一時停止しない不具合を修正
+main_scene\CalamariTape\Assets\Scripts\CalamariMoveController.cs
+・カラマリモード拡大から縮小した際にかかる重力を増やすよう修正
+main_scene\CalamariTape\Assets\Scripts\CalamariScaler.cs
+・カラマリモードにて頂上に登った際に滑る不具合を修正（※降りられない事象は未解決）
+main_scene\CalamariTape\Assets\Scripts\CalamariWallMove.cs
+・縦向きの壁プレハブのタグ、レイヤー情報の変更に伴い、壁判定処理を変更
+main_scene\CalamariTape\Assets\Scripts\NotAttached\AllmodeStateConf.cs
+
+2021/10/23 13:35
+★ステージ10の追加
+・ステージ9にてステージ10への遷移
+main_scene\CalamariTape\Assets\Scenes\Stage9_Scene.unity
+・ステージ10を追加
+　モルモットアニメーション参照エラー解消
+　クリア画面のコングラチュレーション表示
+　ポーズ画面、クリア画面のアイコン画像差し替え
+main_scene\CalamariTape\Assets\Scenes\Stage10_Scene.unity
+main_scene\CalamariTape\Assets\Scenes\Stage10_Scene\*
+
 2021/10/22 21:02
 ★セレクトシーンへシーン名を渡す実装
 ・namespace名の変更による影響
