@@ -63,33 +63,32 @@ public class Select_Draw_Controller : MonoBehaviour
         // マウスカーソル非表示
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
-        // ステージ番号を取得
+        // ステージ番号を取得 (結合時にコメント解除)
         // Set_Player_Number();
     }
 
-    /*
-    public void Set_Player_Number()
-    {
-        var sceneObj = GameObject.FindGameObjectWithTag("ResponseSceneInfo");
-        var info = sceneObj.GetComponent<ResponseSceneInfo>();
-        // ステージ名が取得できます。
-        Debug.Log(info._fromSceneName);
-        // ステージ番号取得
-        switch (info._fromSceneName)
-        {
-            case "Stage2_Scene":{player.select_stage_number = 1;break;}
-            case "Stage3_Scene":{player.select_stage_number = 2;break;}
-            case "Stage4_Scene":{player.select_stage_number = 3;break;}
-            case "Stage5_Scene":{player.select_stage_number = 4;break;}
-            case "Stage6_Scene":{player.select_stage_number = 5;break;}
-            case "Stage7_Scene":{player.select_stage_number = 6;break;}
-            case "Stage8_Scene":{player.select_stage_number = 7;break;}
-            case "Stage9_Scene":{player.select_stage_number = 8;break;}
-            case "Stage10_Scene":{player.select_stage_number = 9;break;}
-            default:{player.select_stage_number = 1;break;}
-        }
-    }
-    */
+    //public void Set_Player_Number()
+    //{
+    //    var sceneObj = GameObject.FindGameObjectWithTag("ResponseSceneInfo");
+    //    var info = sceneObj.GetComponent<ResponseSceneInfo>();
+    //    // ステージ名が取得できます。
+    //    Debug.Log(info._fromSceneName);
+    //    // ステージ番号取得
+    //    switch (info._fromSceneName)
+    //    {
+    //        case "Stage2_Scene": { player.select_stage_number = 1; break; }
+    //        case "Stage3_Scene": { player.select_stage_number = 2; break; }
+    //        case "Stage4_Scene": { player.select_stage_number = 3; break; }
+    //        case "Stage5_Scene": { player.select_stage_number = 4; break; }
+    //        case "Stage6_Scene": { player.select_stage_number = 5; break; }
+    //        case "Stage7_Scene": { player.select_stage_number = 6; break; }
+    //        case "Stage8_Scene": { player.select_stage_number = 7; break; }
+    //        case "Stage9_Scene": { player.select_stage_number = 8; break; }
+    //        case "Stage10_Scene": { player.select_stage_number = 9; break; }
+    //        default: { player.select_stage_number = 0; break; }
+    //    }
+    //}
+
 
     public void Texture_Draw_Init()
     {
