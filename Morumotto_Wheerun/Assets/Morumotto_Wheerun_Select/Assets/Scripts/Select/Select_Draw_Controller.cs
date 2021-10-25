@@ -71,7 +71,7 @@ public class Select_Draw_Controller : MonoBehaviour
     {
         try
         {
-            var sceneObj = GameObject.FindGameObjectWithTag("ResponseSceneInfo");
+            var sceneObj = GameObject.Find("ResponseSceneInfo");
             if (sceneObj != null)
             {
                 var info = sceneObj.GetComponent<ResponseSceneInfo>();
