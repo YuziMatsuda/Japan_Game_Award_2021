@@ -69,23 +69,33 @@ public class Select_Draw_Controller : MonoBehaviour
 
     //public void Set_Player_Number()
     //{
-    //    var sceneObj = GameObject.FindGameObjectWithTag("ResponseSceneInfo");
-    //    var info = sceneObj.GetComponent<ResponseSceneInfo>();
-    //    // ステージ名が取得できます。
-    //    Debug.Log(info._fromSceneName);
-    //    // ステージ番号取得
-    //    switch (info._fromSceneName)
+    //    try
     //    {
-    //        case "Stage2_Scene": { player.select_stage_number = 1; break; }
-    //        case "Stage3_Scene": { player.select_stage_number = 2; break; }
-    //        case "Stage4_Scene": { player.select_stage_number = 3; break; }
-    //        case "Stage5_Scene": { player.select_stage_number = 4; break; }
-    //        case "Stage6_Scene": { player.select_stage_number = 5; break; }
-    //        case "Stage7_Scene": { player.select_stage_number = 6; break; }
-    //        case "Stage8_Scene": { player.select_stage_number = 7; break; }
-    //        case "Stage9_Scene": { player.select_stage_number = 8; break; }
-    //        case "Stage10_Scene": { player.select_stage_number = 9; break; }
-    //        default: { player.select_stage_number = 0; break; }
+    //        var sceneObj = GameObject.Find("ResponseSceneInfo");
+    //        if (sceneObj != null)
+    //        {
+    //            var info = sceneObj.GetComponent<ResponseSceneInfo>();
+    //            // ステージ名が取得できます。
+    //            Debug.Log(info._fromSceneName);
+    //            // ステージ番号取得
+    //            switch (info._fromSceneName)
+    //            {
+    //                case "Stage2_Scene": { player.select_stage_number = 1; break; }
+    //                case "Stage3_Scene": { player.select_stage_number = 2; break; }
+    //                case "Stage4_Scene": { player.select_stage_number = 3; break; }
+    //                case "Stage5_Scene": { player.select_stage_number = 4; break; }
+    //                case "Stage6_Scene": { player.select_stage_number = 5; break; }
+    //                case "Stage7_Scene": { player.select_stage_number = 6; break; }
+    //                case "Stage8_Scene": { player.select_stage_number = 7; break; }
+    //                case "Stage9_Scene": { player.select_stage_number = 8; break; }
+    //                case "Stage10_Scene": { player.select_stage_number = 9; break; }
+    //                default: { player.select_stage_number = 0; break; }
+    //            }
+    //        }
+    //    }
+    //    catch
+    //    {
+    //        player.select_stage_number = 0;
     //    }
     //}
 
@@ -115,6 +125,7 @@ public class Select_Draw_Controller : MonoBehaviour
         select_coment_image.sprite = select_coment_sprite[player.select_stage_number];
         load_now_rect = load_now.GetComponent<RectTransform>();
         select_frame_rect = select_frame.GetComponent<RectTransform>();
+        // ステージ番号を取得 (結合時にコメント追加)
         player.select_stage_number = 0;
     }
 
@@ -139,6 +150,12 @@ public class Select_Draw_Controller : MonoBehaviour
 
     // ステージセレクトシーンの画像描画処理
     public void Draw_StageSelect()
+    {
+        Draw_ScreenImageComent();
+    }
+
+    // ステージセレクトシーンでの画像やコメント、背景等の描画処理
+    public void Draw_ScreenImageComent()
     {
         //  スクショした各種ステージアイコン(大)の切り替えを配列で行う。
         select_stage_image.sprite = select_stage_sprite[player.select_stage_number];
@@ -174,7 +191,10 @@ public class Select_Draw_Controller : MonoBehaviour
         {
             player.setSence(Next_Scene);
         }
+        // 各ステージからステージセレクトへ遷移する際(ロード画面)でステージ１に画像やコメント、赤枠が表示されていた為、処理を追加
+        Draw_ScreenImageComent();
     }
+
 
     // フェードアウト処理
     public void Draw_LoadNow_FadeOut(Select_Player.Character_Sence Next_Scene)
