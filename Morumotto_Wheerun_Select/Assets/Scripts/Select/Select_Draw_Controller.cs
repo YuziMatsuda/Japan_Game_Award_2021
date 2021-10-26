@@ -151,6 +151,12 @@ public class Select_Draw_Controller : MonoBehaviour
     // ステージセレクトシーンの画像描画処理
     public void Draw_StageSelect()
     {
+        Draw_ScreenImageComent();
+    }
+
+    // ステージセレクトシーンでの画像やコメント、背景等の描画処理
+    public void Draw_ScreenImageComent()
+    {
         //  スクショした各種ステージアイコン(大)の切り替えを配列で行う。
         select_stage_image.sprite = select_stage_sprite[player.select_stage_number];
         //　背景の切り替えを配列で行う。
@@ -185,7 +191,10 @@ public class Select_Draw_Controller : MonoBehaviour
         {
             player.setSence(Next_Scene);
         }
+        // 各ステージからステージセレクトへ遷移する際(ロード画面)でステージ１に画像やコメント、赤枠が表示されていた為、処理を追加
+        Draw_ScreenImageComent();
     }
+
 
     // フェードアウト処理
     public void Draw_LoadNow_FadeOut(Select_Player.Character_Sence Next_Scene)
