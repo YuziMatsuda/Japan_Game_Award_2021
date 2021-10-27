@@ -57,11 +57,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\main_scene\Assets\Standard Assets\Editor\CrossPlatformInput\CrossPlatformInputInitialize.cs" />
-    <Compile Include="Assets\Morumotto_Wheerun_Select\Assets\Controller Tester\Scripts\Editor\TestGamepadEditor.cs" />
     <Compile Include="Assets\main_scene\Assets\Standard Assets\Editor\Water\Water4\SpecularLightingEditor.cs" />
     <Compile Include="Assets\main_scene\Assets\Wheel\arktoon Shaders\Editor\ArktoonManager.cs" />
     <Compile Include="Assets\main_scene\Assets\Standard Assets\Editor\Water\Water4\PlanarReflectionEditor.cs" />
     <Compile Include="Assets\main_scene\Assets\Standard Assets\Editor\Water\Water4\GerstnerDisplaceEditor.cs" />
+    <Compile Include="Assets\Morumotto_Wheerun_Select\Assets\Controller Tester\Scripts\Editor\TestGamepadEditor.cs" />
     <Compile Include="Assets\main_scene\Assets\Standard Assets\Editor\Water\Water4\WaterBaseEditor.cs" />
     <Compile Include="Assets\main_scene\Assets\Wheel\arktoon Shaders\Editor\ArktoonInspector.cs" />
     <Compile Include="Assets\main_scene\Assets\Wheel\arktoon Shaders\Editor\ArktoonMigrator.cs" />

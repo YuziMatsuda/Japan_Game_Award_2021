@@ -110,7 +110,6 @@
     <Compile Include="Assets\main_scene\Assets\Scripts\NenchakScaler.cs" />
     <Compile Include="Assets\main_scene\Assets\Scripts\NenchakHealth.cs" />
     <Compile Include="Assets\main_scene\Assets\Standard Assets\ParticleSystems\Scripts\AfterburnerPhysicsForce.cs" />
-    <Compile Include="Assets\Morumotto_Wheerun_Select\Assets\Scripts\Select\Select_Player.cs" />
     <Compile Include="Assets\main_scene\Assets\Standard Assets\Vehicles\Aircraft\Scripts\AeroplaneController.cs" />
     <Compile Include="Assets\main_scene\Assets\Scripts\Rope.cs" />
     <Compile Include="Assets\main_scene\Assets\Scripts\NotAttached\GimmickDifferent.cs" />
@@ -135,6 +134,7 @@
     <Compile Include="Assets\main_scene\Assets\Standard Assets\Utility\CameraRefocus.cs" />
     <Compile Include="Assets\main_scene\Assets\Scripts\ClearVerticalWall.cs" />
     <Compile Include="Assets\main_scene\Assets\Standard Assets\CrossPlatformInput\Scripts\TouchPad.cs" />
+    <Compile Include="Assets\Morumotto_Wheerun_Movie\Assets\Scripts\Movie\Movie_Player.cs" />
     <Compile Include="Assets\main_scene\Assets\Standard Assets\CrossPlatformInput\Scripts\Joystick.cs" />
     <Compile Include="Assets\main_scene\Assets\Standard Assets\Utility\TimedObjectDestructor.cs" />
     <Compile Include="Assets\main_scene\Assets\Scripts\NotAttached\NenchakWallHorizontalDecision.cs" />
@@ -180,6 +180,7 @@
     <Compile Include="Assets\Morumotto_Wheerun_Title\Assets\Scripts\Title\Title_Input_Controller.cs" />
     <Compile Include="Assets\main_scene\Assets\Standard Assets\ParticleSystems\Scripts\ExtinguishableParticleSystem.cs" />
     <Compile Include="Assets\main_scene\Assets\Scripts\BanScaleChange.cs" />
+    <Compile Include="Assets\Morumotto_Wheerun_Select\Assets\Controller Tester\Scripts\DetectUnknownControllerMappings.cs" />
     <Compile Include="Assets\main_scene\Assets\Standard Assets\Utility\ForcedReset.cs" />
     <Compile Include="Assets\main_scene\Assets\Standard Assets\Utility\ParticleSystemDestroyer.cs" />
     <Compile Include="Assets\main_scene\Assets\Scripts\UIController.cs" />
@@ -208,7 +209,6 @@
     <Compile Include="Assets\main_scene\Assets\Scripts\Tarzan.cs" />
     <Compile Include="Assets\main_scene\Assets\Scripts\ClearManager.cs" />
     <Compile Include="Assets\main_scene\Assets\Scripts\CalamariAnimation.cs" />
-    <Compile Include="Assets\Morumotto_Wheerun_Select\Assets\Controller Tester\Scripts\DetectUnknownControllerMappings.cs" />
     <Compile Include="Assets\main_scene\Assets\Scripts\Trampoline.cs" />
     <Compile Include="Assets\main_scene\Assets\Standard Assets\2D\Scripts\Restarter.cs" />
     <Compile Include="Assets\main_scene\Assets\Scripts\Common\StageClearNumber.cs" />
@@ -249,11 +249,11 @@
     <Compile Include="Assets\main_scene\Assets\Scripts\SceneMove.cs" />
     <Compile Include="Assets\main_scene\Assets\Scripts\NotAttached\ConveyorMoveCharacterActiveManager.cs" />
     <Compile Include="Assets\main_scene\Assets\Standard Assets\Vehicles\Car\Scripts\CarAudio.cs" />
+    <Compile Include="Assets\Morumotto_Wheerun_Select\Assets\Scripts\Select\Select_Player.cs" />
     <Compile Include="Assets\Morumotto_Wheerun_Select\Assets\Scripts\Select\Select_Draw_Controller.cs" />
     <Compile Include="Assets\main_scene\Assets\Standard Assets\Characters\RollerBall\Scripts\BallUserControl.cs" />
     <Compile Include="Assets\main_scene\Assets\Standard Assets\CrossPlatformInput\Scripts\AxisTouchButton.cs" />
     <Compile Include="Assets\main_scene\Assets\Scripts\GoalEvent.cs" />
-    <Compile Include="Assets\Morumotto_Wheerun_Movie\Assets\Scripts\Movie\Movie_Player.cs" />
     <Compile Include="Assets\main_scene\Assets\Standard Assets\ParticleSystems\Scripts\Hose.cs" />
     <Compile Include="Assets\main_scene\Assets\Scripts\CalamariState.cs" />
     <Compile Include="Assets\main_scene\Assets\Scripts\VisualizeDebugMode.cs" />
