@@ -126,7 +126,7 @@ public class Select_Draw_Controller : MonoBehaviour
         load_now_rect = load_now.GetComponent<RectTransform>();
         select_frame_rect = select_frame.GetComponent<RectTransform>();
         // ステージ番号を取得 (結合時にコメント追加)
-        // player.select_stage_number = 0;
+        //  player.select_stage_number = 0;
     }
 
     // Update is called once per frame
