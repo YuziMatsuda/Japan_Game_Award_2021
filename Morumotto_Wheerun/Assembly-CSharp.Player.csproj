@@ -85,6 +85,7 @@
     <Compile Include="Assets\main_scene\Assets\Standard Assets\ParticleSystems\Scripts\ExplosionFireAndDebris.cs" />
     <Compile Include="Assets\main_scene\Assets\Standard Assets\Utility\PlatformSpecificContent.cs" />
     <Compile Include="Assets\main_scene\Assets\Scripts\Interface\DebugDemo.cs" />
+    <Compile Include="Assets\Morumotto_Wheerun_Title\Assets\Controller Tester\Scripts\DetectUnknownControllerMappings.cs" />
     <Compile Include="Assets\Morumotto_Wheerun_Title\Assets\Scripts\Title\Title_Draw_Controller.cs" />
     <Compile Include="Assets\main_scene\Assets\Standard Assets\CrossPlatformInput\Scripts\VirtualInput.cs" />
     <Compile Include="Assets\main_scene\Assets\Scripts\CircleRing.cs" />
@@ -105,6 +106,7 @@
     <Compile Include="Assets\main_scene\Assets\Scripts\MessageScrollText.cs" />
     <Compile Include="Assets\main_scene\Assets\Standard Assets\Utility\SmoothFollow.cs" />
     <Compile Include="Assets\main_scene\Assets\Standard Assets\Cameras\Scripts\FreeLookCam.cs" />
+    <Compile Include="Assets\Morumotto_Wheerun_Select\Assets\Scripts\Select\Select_Player.cs" />
     <Compile Include="Assets\Morumotto_Wheerun_Movie\Assets\Scripts\Movie\Movie_Draw_Controller.cs" />
     <Compile Include="Assets\main_scene\Assets\Scripts\DashPanel.cs" />
     <Compile Include="Assets\main_scene\Assets\Scripts\NenchakScaler.cs" />
@@ -153,7 +155,6 @@
     <Compile Include="Assets\main_scene\Assets\Scripts\NotAttached\GimmicksDecision.cs" />
     <Compile Include="Assets\main_scene\Assets\SampleScenes\Menu\Scripts\PauseMenu.cs" />
     <Compile Include="Assets\main_scene\Assets\Standard Assets\2D\Scripts\Platformer2DUserControl.cs" />
-    <Compile Include="Assets\Morumotto_Wheerun_Select\Assets\Scripts\Select\Select_Player.cs" />
     <Compile Include="Assets\main_scene\Assets\Standard Assets\Cameras\Scripts\AutoCam.cs" />
     <Compile Include="Assets\main_scene\Assets\Standard Assets\Vehicles\Car\Scripts\CarAIControl.cs" />
     <Compile Include="Assets\main_scene\Assets\Standard Assets\Utility\WaypointProgressTracker.cs" />
@@ -163,7 +164,6 @@
     <Compile Include="Assets\main_scene\Assets\Standard Assets\Utility\DragRigidbody.cs" />
     <Compile Include="Assets\main_scene\Assets\Standard Assets\CrossPlatformInput\Scripts\PlatformSpecific\StandaloneInput.cs" />
     <Compile Include="Assets\main_scene\Assets\Standard Assets\Vehicles\Aircraft\Scripts\AeroplaneAudio.cs" />
-    <Compile Include="Assets\Morumotto_Wheerun_Movie\Assets\Scripts\Movie\Movie_Player.cs" />
     <Compile Include="Assets\main_scene\Assets\Standard Assets\ParticleSystems\Scripts\FireLight.cs" />
     <Compile Include="Assets\main_scene\Assets\Standard Assets\Vehicles\Car\Scripts\SkidTrail.cs" />
     <Compile Include="Assets\main_scene\Assets\Scripts\PlayerEffectController.cs" />
@@ -223,7 +223,6 @@
     <Compile Include="Assets\main_scene\Assets\Scripts\Common\WallRunHorizontalMode.cs" />
     <Compile Include="Assets\main_scene\Assets\Scripts\NenchakWallMove.cs" />
     <Compile Include="Assets\main_scene\Assets\Standard Assets\CrossPlatformInput\Scripts\CrossPlatformInputManager.cs" />
-    <Compile Include="Assets\Morumotto_Wheerun_Select\Assets\Controller Tester\Scripts\DetectUnknownControllerMappings.cs" />
     <Compile Include="Assets\main_scene\Assets\Standard Assets\CrossPlatformInput\Scripts\InputAxisScrollbar.cs" />
     <Compile Include="Assets\main_scene\Assets\Standard Assets\Utility\EventSystemChecker.cs" />
     <Compile Include="Assets\main_scene\Assets\Scripts\MarmotHealth.cs" />
@@ -260,6 +259,7 @@
     <Compile Include="Assets\main_scene\Assets\Scripts\VisualizeDebugMode.cs" />
     <Compile Include="Assets\main_scene\Assets\Scripts\TippedSaw.cs" />
     <Compile Include="Assets\main_scene\Assets\Scripts\GameBack.cs" />
+    <Compile Include="Assets\Morumotto_Wheerun_Movie\Assets\Scripts\Movie\Movie_Player.cs" />
     <Compile Include="Assets\main_scene\Assets\Scripts\ScreenDirectInOut.cs" />
     <Compile Include="Assets\main_scene\Assets\Scripts\CameraPointMove.cs" />
     <Compile Include="Assets\main_scene\Assets\Standard Assets\2D\Scripts\PlatformerCharacter2D.cs" />

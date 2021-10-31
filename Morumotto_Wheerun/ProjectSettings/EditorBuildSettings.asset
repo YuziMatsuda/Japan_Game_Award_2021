@@ -7,7 +7,7 @@ EditorBuildSettings:
   m_Scenes:
   - enabled: 1
     path: Assets/Morumotto_Wheerun_Movie/Assets/Scenes/Movie_Sence.unity
-    guid: f0b307e648715cf4286c97bdfcba3aa3
+    guid: aa7b02438fb65d246a32f75675aa70dd
   - enabled: 1
     path: Assets/Morumotto_Wheerun_Title/Assets/Scenes/Title_Scene.unity
     guid: 195bce6ee72c8f943be7c33e3bc6e4e0
@@ -16,7 +16,7 @@ EditorBuildSettings:
     guid: 6f5d7186cf3244f48b125147e3ef53d2
   - enabled: 1
     path: Assets/main_scene/Assets/Scenes/main.unity
-    guid: 0f168f0ee0e8a304a8ad78989c2d9140
+    guid: f9f77f81d5e56f440ba8352a4cdae4ec
   - enabled: 1
     path: Assets/main_scene/Assets/Scenes/Stage2_Scene.unity
     guid: 9517b171bdae8fd42bea22414b02266a
